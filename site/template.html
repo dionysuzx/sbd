@@ -15,7 +15,7 @@
 :root{--fg:#1f2937;--mut:#6b7280;--bd:#e5e7eb;--hit:#eff6ff}
 *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--fg);background:#f9fafb;line-height:1.45}
 main{max-width:900px;margin:0 auto;padding:20px 16px 48px}
-h1{font-size:1.6rem;margin:.2em 0 4px}.subtitle{color:var(--mut);margin:0 0 18px;font-size:1.05rem;line-height:1.7;white-space:nowrap;overflow-x:auto;max-width:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans","DejaVu Sans","Sarabun","Noto Sans Thai","Leelawadee UI","Noto Sans Arabic","Noto Naskh Arabic",sans-serif;direction:ltr;unicode-bidi:isolate}h2{font-size:1.15rem;margin:0 0 8px}
+h1{font-size:1.6rem;margin:.2em 0 16px}h2{font-size:1.15rem;margin:0 0 8px}
 .card{background:#fff;border:1px solid var(--bd);border-radius:12px;padding:16px;margin:0 0 16px}
 .chart{position:relative;height:280px}
 .chart-hint{color:var(--mut);font-size:.75rem;margin:8px 0 0}
@@ -45,25 +45,45 @@ details.acc>:not(summary){margin-left:16px;margin-right:16px}details.acc .card{b
 .set .meta{color:#374151}
 .set .notes{color:var(--mut);font-size:.84rem;margin-top:3px;line-height:1.4}
 .session-row{cursor:pointer}.session-row:hover{background:var(--hit)}.session-row:focus{outline:2px solid #93c5fd;outline-offset:-2px}
+.tabs{display:flex;gap:0;margin:0 0 12px;border-bottom:1px solid var(--bd)}
+.tabs [role=tab]{-webkit-appearance:none;appearance:none;flex:1;background:transparent;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;padding:10px 12px;font:inherit;font-weight:650;font-size:.95rem;color:var(--mut);cursor:pointer;min-height:44px}
+.tabs [role=tab][aria-selected=true]{color:var(--fg);border-bottom-color:#111827}
+.tabs [role=tab]:focus-visible{outline:2px solid #93c5fd;outline-offset:-2px}
+#acc_charts{padding-bottom:16px}
 </style></head><body><main>
 <h1>David's Knee &amp; SBD Progress</h1>
-<p class="subtitle" dir="ltr">(ง •̀_•́)ง</p>
 <div id="charts"></div>
 <details id="acc" class="card acc"><summary>Accessories</summary>
 <div id="acc_charts"></div>
-<h2>Accessory sessions</h2><div class="tw"><table><thead><tr>
-<th>Date</th><th>Exercise</th><th>Weight (lb)</th><th>Sets × reps</th><th>RPE</th><th>Variation</th><th>Notes</th></tr></thead><tbody id="acc_tb"></tbody></table></div>
 </details>
-<details id="all" class="card acc"><summary>All sessions</summary><div class="tw"><table><thead><tr>
-<th>Date</th><th>Lift</th><th>Weight (lb)</th><th>Sets × reps</th><th>RPE</th><th>Variation</th><th>Notes</th></tr></thead><tbody id="tb"></tbody></table></div></details>
+<details id="all" class="card acc"><summary>All sessions</summary>
+<div class="tabs" role="tablist" aria-label="Session type">
+<button type="button" role="tab" id="tab-sbd" aria-controls="panel-sbd" aria-selected="true" tabindex="0">SBD</button>
+<button type="button" role="tab" id="tab-acc" aria-controls="panel-acc" aria-selected="false" tabindex="-1">Accessories</button>
+</div>
+<div id="panel-sbd" class="tw" role="tabpanel" aria-labelledby="tab-sbd">
+<table><thead><tr>
+<th>Date</th><th>Lift</th><th>Weight (lb)</th><th>Sets × reps</th><th>RPE</th><th>Variation</th><th>Notes</th></tr></thead><tbody id="tb"></tbody></table>
+</div>
+<div id="panel-acc" class="tw" role="tabpanel" aria-labelledby="tab-acc" hidden>
+<table><thead><tr>
+<th>Date</th><th>Exercise</th><th>Weight (lb)</th><th>Sets × reps</th><th>RPE</th><th>Variation</th><th>Notes</th></tr></thead><tbody id="acc_tb"></tbody></table>
+</div>
+</details>
 </main>
 <script>
 const DATA = __DATA__;
 const ACC = __ACC_DATA__;
 const ACC_NAMES = __ACC_NAMES__;
+const ACTIVE = __ACTIVE_ACCESSORIES__;
 const COLORS={squat:"#2563eb",bench:"#16a34a",deadlift:"#dc2626"};
 const ACC_COLORS=["#0d9488","#9333ea","#ca8a04","#db2777","#4f46e5"];
 const accColor=l=>ACC_COLORS[Object.keys(ACC_NAMES).indexOf(l)%ACC_COLORS.length];
+const LIFT_ORDER=["squat","bench","deadlift"];
+const NAME={squat:"Squat",bench:"Bench",deadlift:"Deadlift"};
+const canHover=window.matchMedia("(hover: hover)").matches;
+const PT_START={date:"2026-09-16",label:"Started PT with Sina"};
+
 const accLoaded=r=>r.weight_lb!==""&&r.weight_lb!=null;
 const accTimed=r=>(r.variation||"").includes("second");
 const accY=r=>accLoaded(r)?Number(r.weight_lb):Number(r.reps);
@@ -74,25 +94,29 @@ const accSetRep=r=>{
   if(r.variation==="reps per side") return `${r.sets} × ${r.reps}/side`;
   return `${r.sets} × ${r.reps}`;
 };
-const accLoadTip=r=>accLoaded(r)?`${r.weight_lb} lb`:(r.variation==="banded"?"band":r.variation==="bodyweight"?"bodyweight":"—");
 const ts=d=>{const[y,m,dd]=d.split("-").map(Number);return Date.UTC(y,m-1,dd)};
 const fmt=t=>new Date(t).toLocaleDateString("en-US",{month:"short",day:"numeric",timeZone:"UTC"});
 const fmtLong=d=>new Date(ts(d)).toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric",year:"numeric",timeZone:"UTC"});
 const xmin=Date.UTC(2026,8,15), xmax=Math.max(...DATA.map(r=>ts(r.date)),...ACC.map(r=>ts(r.date)))+2*864e5;
-const LIFT_ORDER=["squat","bench","deadlift"];
-const NAME={squat:"Squat",bench:"Bench",deadlift:"Deadlift"};
-const canHover=window.matchMedia("(hover: hover)").matches;
-const PT_START={date:"2026-09-16",label:"Started PT with Sina"};
-const ptMarker={id:"ptMarker",afterDatasetsDraw(chart){const xs=chart.scales.x,a=chart.chartArea,x=xs.getPixelForValue(ts(PT_START.date));
-  if(x<a.left||x>a.right)return;const c=chart.ctx;c.save();
-  c.strokeStyle="#eab308";c.lineWidth=1.5;c.setLineDash([4,3]);c.beginPath();c.moveTo(x,a.top);c.lineTo(x,a.bottom);c.stroke();c.setLineDash([]);
-  const R=8,r=3.6,cy=a.bottom-R-2;c.beginPath();for(let i=0;i<10;i++){const ang=-Math.PI/2+i*Math.PI/5,rad=i%2?r:R;c.lineTo(x+rad*Math.cos(ang),cy+rad*Math.sin(ang));}
-  c.closePath();c.fillStyle="#facc15";c.fill();c.strokeStyle="#a16207";c.lineWidth=1;c.stroke();
-  c.font="600 10px -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif";c.fillStyle="#854d0e";c.textAlign="left";c.textBaseline="top";c.fillText(PT_START.label,x+4,a.top+2);
-  c.restore();}};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+const fmtRpe=v=>v==null||v===""?"":v;
+const isWarmup=r=>{
+  const n=(r.notes||"").toLowerCase();
+  return n.includes("warm-up set only")||n.includes("warmup set only")||n.includes("not a working set");
+};
+const sameRow=(a,b)=>a&&b&&a.date===b.date&&a.lift===b.lift&&a.weight_lb===b.weight_lb&&a.sets===b.sets&&a.reps===b.reps&&(a.variation||"")===(b.variation||"");
+const perSide=r=>r.per_side_lb!==""&&r.per_side_lb!=null?` (${r.per_side_lb}/side + 45 bar)`:"";
+function setHeadline(r,lift){
+  if(accLoaded(r)) return `${r.weight_lb} lb${perSide(r)}`;
+  if(LIFT_ORDER.includes(lift||r.lift)) return `${r.weight_lb} lb${perSide(r)}`;
+  if(accTimed(r)) return `${r.reps} sec`;
+  if(r.variation==="banded") return "Band";
+  if(r.variation==="bodyweight") return "Bodyweight";
+  return `${r.reps} reps`;
+}
 
 // Variation is shown by point shape (and a short legend), not by splitting charts.
-// Series color is reserved for rep count. Display names are mapped here; stored values stay as logged.
+// Series color is reserved for rep count on main lifts. Display names are mapped here; stored values stay as logged.
 const VAR_STYLES={
   squat:{"high-bar":{style:"circle",name:"High-bar"},"low-bar with belt":{style:"triangle",name:"Low-bar (belted)"}},
   bench:{"":{style:"circle",name:"Comp standard"},"touch-and-go":{style:"rectRot",name:"Touch-and-go"}},
@@ -104,10 +128,8 @@ const VAR_STYLES={
 const vs=(r,lift)=>(VAR_STYLES[lift]||{})[r.variation??""]||null;
 const glyph=s=>s==="rectRot"?'<svg width="12" height="12" viewBox="0 0 12 12"><polygon points="6,0.5 11.5,6 6,11.5 0.5,6"/></svg>':s==="triangle"?'<svg width="12" height="12" viewBox="0 0 12 12"><polygon points="6,1 11,11 1,11"/></svg>':s==="rect"?'<svg width="12" height="12" viewBox="0 0 12 12"><rect x="2" y="2" width="8" height="8"/></svg>':'<svg width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/></svg>';
 function displayVar(r,lift){
-  const L=lift||r.lift;
-  const S=vs(r,L);
-  if(S) return S.name;
-  return r.variation||"";
+  const S=vs(r,lift||r.lift);
+  return S?S.name:(r.variation||"");
 }
 
 const REP_COLORS={5:"#0072B2",6:"#56B4E9",8:"#009E73",10:"#E69F00",12:"#CC79A7",15:"#D55E00"};
@@ -117,58 +139,148 @@ function repColor(reps){
   if(REP_COLORS[reps]) return REP_COLORS[reps];
   return REP_FALLBACK[Math.abs(Number(reps))%REP_FALLBACK.length];
 }
-const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
-const fmtRpe=v=>v==null||v===""?"":v;
-const isWarmup=r=>{
-  const n=(r.notes||"").toLowerCase();
-  return n.includes("warm-up set only")||n.includes("warmup set only")||n.includes("not a working set");
-};
-function sameRow(a,b){
-  return a&&b&&a.date===b.date&&a.lift===b.lift&&a.weight_lb===b.weight_lb&&a.sets===b.sets&&a.reps===b.reps&&(a.variation||"")===(b.variation||"");
+
+const ptMarker={id:"ptMarker",afterDatasetsDraw(chart){const xs=chart.scales.x,a=chart.chartArea,x=xs.getPixelForValue(ts(PT_START.date));
+  if(x<a.left||x>a.right)return;const c=chart.ctx;c.save();
+  c.strokeStyle="#eab308";c.lineWidth=1.5;c.setLineDash([4,3]);c.beginPath();c.moveTo(x,a.top);c.lineTo(x,a.bottom);c.stroke();c.setLineDash([]);
+  const R=8,r=3.6,cy=a.bottom-R-2;c.beginPath();for(let i=0;i<10;i++){const ang=-Math.PI/2+i*Math.PI/5,rad=i%2?r:R;c.lineTo(x+rad*Math.cos(ang),cy+rad*Math.sin(ang));}
+  c.closePath();c.fillStyle="#facc15";c.fill();c.strokeStyle="#a16207";c.lineWidth=1;c.stroke();
+  c.font="600 10px -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif";c.fillStyle="#854d0e";c.textAlign="left";c.textBaseline="top";c.fillText(PT_START.label,x+4,a.top+2);
+  c.restore();}};
+
+// --- session points: raw rows -> one point per day (accessories) or per day+rep count (main lifts) ---
+function setOrd(r, fallback){
+  const m=(r.notes||"").match(/\bsets?\s+(\d+)/i);
+  return m?Number(m[1]):fallback;
 }
-function perSide(r){
-  return r.per_side_lb!==""&&r.per_side_lb!=null?` (${r.per_side_lb}/side + 45 bar)`:"";
+function inSetOrder(rows){
+  const numbered=rows.some(r=>/\bsets?\s+\d+/i.test(r.notes||""));
+  return rows
+    .map((r,i)=>({r,i,ord:numbered?setOrd(r,1000+i):i}))
+    .sort((a,b)=>a.ord-b.ord||a.i-b.i)
+    .map(x=>x.r);
 }
-function setHeadline(r,lift){
-  if(accLoaded(r)) return `${r.weight_lb} lb${perSide(r)}`;
-  if(["squat","bench","deadlift"].includes(lift||r.lift)) return `${r.weight_lb} lb${perSide(r)}`;
-  if(accTimed(r)) return `${r.reps} sec`;
-  if(r.variation==="banded") return "Band";
-  if(r.variation==="bodyweight") return "Bodyweight";
-  return `${r.reps} reps`;
+function expandReps(rows){
+  const reps=[];
+  for(const r of inSetOrder(rows)){
+    const n=Math.max(1,Number(r.sets)||1);
+    for(let i=0;i<n;i++) reps.push(r.reps);
+  }
+  return reps;
+}
+function pickTop(sets, yfn){
+  return sets.reduce((best,r)=>yfn(r)>yfn(best)?r:best);
+}
+function daysOf(rows){
+  const byDate=new Map();
+  for(const r of rows){
+    if(isWarmup(r)) continue;
+    if(!byDate.has(r.date)) byDate.set(r.date,[]);
+    byDate.get(r.date).push(r);
+  }
+  return [...byDate.entries()]
+    .sort((a,b)=>a[0].localeCompare(b[0]))
+    .map(([date,sets])=>({date,sets:inSetOrder(sets)}));
+}
+function point(top, daySets, y){
+  return {date:top.date, lift:top.lift, y, top, sets:daySets, variation:top.variation??""};
+}
+// Main lifts: one series per rep count; each point is the heaviest working set at that rep count that day.
+function mainSeries(rows){
+  const byReps=new Map();
+  for(const day of daysOf(rows)){
+    const atRep=new Map();
+    for(const r of day.sets){
+      if(!atRep.has(r.reps)) atRep.set(r.reps,[]);
+      atRep.get(r.reps).push(r);
+    }
+    for(const [reps, group] of atRep){
+      const top=pickTop(group, r=>Number(r.weight_lb));
+      if(!byReps.has(reps)) byReps.set(reps,[]);
+      byReps.get(reps).push(point(top, day.sets, Number(top.weight_lb)));
+    }
+  }
+  return [...byReps.entries()].sort((a,b)=>a[0]-b[0]).map(([reps,points])=>({
+    reps, label:`${reps} reps`, points
+  }));
+}
+// Accessories: one series for the exercise; each point is that day's heaviest working weight
+// (or longest hold / most reps when the exercise has no load).
+function accessorySeries(rows){
+  const working=rows.filter(r=>!isWarmup(r));
+  if(!working.length) return [];
+  const unloaded=working.every(r=>!accLoaded(r));
+  const yfn=unloaded?accY:r=>Number(r.weight_lb);
+  const points=daysOf(rows).map(day=>{
+    const top=pickTop(day.sets, yfn);
+    return point(top, day.sets, yfn(top));
+  });
+  return [{
+    reps:null,
+    label:unloaded?(working.some(accTimed)?"Hold":"Reps"):"Weight",
+    points
+  }];
 }
 
-// Loaded lifts: one series per rep count; each point is the heaviest working set at that rep count that day.
-// Unloaded / timed accessories: y is reps or seconds, so one series (splitting by rep count would be a horizontal line).
-function seriesFor(rows){
-  const working=rows.filter(r=>!isWarmup(r));
-  const unloaded=working.length>0&&working.every(r=>!accLoaded(r));
-  if(unloaded){
-    const byDate=new Map();
-    for(const r of working){
-      const prev=byDate.get(r.date);
-      if(!prev||accY(r)>accY(prev)) byDate.set(r.date,r);
+// --- tooltip (shared) and session panel (shared) ---
+function accTooltipLine(top, daySets){
+  const loaded=accLoaded(top);
+  const topW=loaded?Number(top.weight_lb):null;
+  const atTop=loaded?daySets.filter(r=>Number(r.weight_lb)===topW):daySets;
+  const reps=expandReps(atTop);
+  let line;
+  if(accTimed(top)){
+    const per=(top.variation||"").includes("per side")?" per side":"";
+    line=reps.map(n=>`${n}s`).join(", ")+per;
+  }else{
+    const unit=(top.variation==="reps per side")?" reps per side":" reps";
+    const head=loaded?`${top.weight_lb} lb`
+      : top.variation==="bodyweight"?"Bodyweight"
+      : top.variation==="banded"?"Band"
+      : "";
+    line=head?`${head} · ${reps.join(", ")}${unit}`:`${reps.join(", ")}${unit}`;
+  }
+  const extra=[];
+  const rpes=[...new Set(atTop.map(r=>fmtRpe(r.rpe)).filter(s=>s!==""))];
+  if(rpes.length) extra.push(`RPE ${rpes.join(", ")}`);
+  if(loaded){
+    const lighter=new Map();
+    for(const r of daySets){
+      if(Number(r.weight_lb)<topW){
+        const w=r.weight_lb;
+        lighter.set(w,(lighter.get(w)||0)+Math.max(1,Number(r.sets)||1));
+      }
     }
-    return [{
-      reps:null,
-      label:working.some(accTimed)?"Hold":"Reps",
-      y:accY,
-      rows:[...byDate.values()].sort((a,b)=>a.date.localeCompare(b.date))
-    }];
+    if(lighter.size){
+      const bits=[...lighter.entries()]
+        .sort((a,b)=>Number(b[0])-Number(a[0]))
+        .map(([w,n])=>`${n} set${n===1?"":"s"} at ${w} lb`);
+      extra.push("+ "+bits.join(", "));
+    }
   }
-  const byReps=new Map();
-  for(const r of working){
-    if(!byReps.has(r.reps)) byReps.set(r.reps,new Map());
-    const byDate=byReps.get(r.reps);
-    const prev=byDate.get(r.date);
-    if(!prev||r.weight_lb>prev.weight_lb) byDate.set(r.date,r);
+  return {line, extra};
+}
+function mainTooltipLines(top, daySets, lift){
+  const same=inSetOrder(daySets.filter(r=>r.weight_lb===top.weight_lb));
+  const rows=same.length?same:[top];
+  const lines=[setHeadline(top,lift)];
+  const seen=new Set();
+  const bits=[];
+  for(const r of rows){
+    const b=accSetRep(r);
+    if(!seen.has(b)){ seen.add(b); bits.push(b); }
   }
-  return [...byReps.entries()].sort((a,b)=>a[0]-b[0]).map(([reps,map])=>({
-    reps,
-    label:`${reps} reps`,
-    y:r=>r.weight_lb,
-    rows:[...map.values()].sort((a,b)=>a.date.localeCompare(b.date))
-  }));
+  if(bits.length) lines.push(bits.join(" · "));
+  const rpes=[...new Set(rows.map(r=>fmtRpe(r.rpe)).filter(s=>s!==""))];
+  if(rpes.length) lines.push(`RPE ${rpes.join(", ")}`);
+  return lines;
+}
+function tooltipFor(pt, mode, lift){
+  if(mode==="accessory"){
+    const t=accTooltipLine(pt.top, pt.sets);
+    return {title:fmtLong(pt.date), label:t.line, extra:t.extra, colors:false};
+  }
+  return {title:fmtLong(pt.date), label:mainTooltipLines(pt.top, pt.sets, lift), extra:[], colors:true};
 }
 
 function renderSession(panel, lift, date, hitRow, allRows, onClose){
@@ -191,30 +303,29 @@ function renderSession(panel, lift, date, hitRow, allRows, onClose){
   panel.querySelector(".close").onclick=ev=>{ev.preventDefault();ev.stopPropagation();onClose&&onClose();};
 }
 
-function tipLines(r,lift){
-  const lines=[setHeadline(r,lift),accSetRep(r)];
-  if(fmtRpe(r.rpe)!=="") lines.push(`RPE ${fmtRpe(r.rpe)}`);
-  return lines;
-}
-
-function buildChart(host, {lift, name, color, rows, allRows, id}){
-  const series=seriesFor(rows);
+// --- chart renderer (shared; mode chooses series shape, colors, and tooltip) ---
+function buildChart(host, {lift, name, color, rows, allRows, id, mode}){
+  const isMain=mode==="main";
+  const series=isMain?mainSeries(rows):accessorySeries(rows);
   const card=document.createElement("div");
   card.className="card";
   card.dataset.lift=lift;
   if(id) card.id=id;
-  const hasPoints=series.some(s=>s.rows.length);
+  const hasPoints=series.some(s=>s.points.length);
   if(!hasPoints){
     card.innerHTML=`<h2><span class="dot" style="background:${color}"></span>${esc(name)}</h2><p class="accnote">No entries yet. The chart appears here once the first set is logged.</p>`;
     host.appendChild(card);
     return null;
   }
+
   const legends=document.createElement("div");
   legends.className="legends";
-  const rLeg=document.createElement("div");
-  rLeg.className="vlegend";
-  rLeg.innerHTML=series.map(s=>`<span style="color:${repColor(s.reps)}"><i class="swatch"></i> ${esc(s.label)}</span>`).join("");
-  legends.appendChild(rLeg);
+  if(isMain){
+    const rLeg=document.createElement("div");
+    rLeg.className="vlegend";
+    rLeg.innerHTML=series.map(s=>`<span style="color:${repColor(s.reps)}"><i class="swatch"></i> ${esc(s.label)}</span>`).join("");
+    legends.appendChild(rLeg);
+  }
   const usedVars=[];
   const seen=new Set();
   for(const r of rows){
@@ -229,6 +340,7 @@ function buildChart(host, {lift, name, color, rows, allRows, id}){
     vLeg.innerHTML=usedVars.map(S=>`<span style="fill:#374151">${glyph(S.style)} ${esc(S.name)}</span>`).join("");
     legends.appendChild(vLeg);
   }
+
   const canvasWrap=document.createElement("div");
   canvasWrap.className="chart";
   canvasWrap.innerHTML=`<canvas></canvas>`;
@@ -238,19 +350,16 @@ function buildChart(host, {lift, name, color, rows, allRows, id}){
   const panel=document.createElement("div");
   panel.className="session";
   card.innerHTML=`<h2><span class="dot" style="background:${color}"></span>${esc(name)}</h2>`;
-  card.appendChild(legends);
+  if(legends.childElementCount) card.appendChild(legends);
   card.appendChild(canvasWrap);
   card.appendChild(hint);
   card.appendChild(panel);
   host.appendChild(card);
 
-  const yOf=r=>{
-    const s=series.find(ss=>ss.rows.includes(r));
-    return s?s.y(r):(accLoaded(r)?r.weight_lb:accY(r));
-  };
-  const allY=series.flatMap(s=>s.rows.map(s.y));
-  const unloaded=rows.length>0&&rows.every(r=>!accLoaded(r));
-  const yPad=unloaded?2: (["squat","bench","deadlift"].includes(lift)?20:10);
+  const seriesColor=s=>isMain?repColor(s.reps):color;
+  const unloaded=!isMain&&rows.length>0&&rows.every(r=>!accLoaded(r));
+  const allY=series.flatMap(s=>s.points.map(p=>p.y));
+  const yPad=unloaded?2:(isMain?20:10);
   const yLabel=unloaded?accYLabel(rows):"Weight (lb)";
   const isSel=r=>sameRow(card._selected,r);
   const baseRadius=(row,n)=>{
@@ -259,24 +368,24 @@ function buildChart(host, {lift, name, color, rows, allRows, id}){
   };
   const datasets=series.map(s=>({
     label:s.label,
-    data:s.rows.map(r=>({x:ts(r.date),y:s.y(r),row:r})),
-    borderColor:repColor(s.reps),
-    backgroundColor:repColor(s.reps),
-    pointBackgroundColor:repColor(s.reps),
-    pointBorderColor:c=>isSel(s.rows[c.dataIndex])?"#111827":repColor(s.reps),
-    pointBorderWidth:c=>isSel(s.rows[c.dataIndex])?3:1,
-    pointStyle:c=>(vs(s.rows[c.dataIndex]||{},lift)||{style:"circle"}).style,
+    data:s.points.map(p=>({x:ts(p.date),y:p.y,pt:p})),
+    borderColor:seriesColor(s),
+    backgroundColor:seriesColor(s),
+    pointBackgroundColor:seriesColor(s),
+    pointBorderColor:c=>isSel(s.points[c.dataIndex].top)?"#111827":seriesColor(s),
+    pointBorderWidth:c=>isSel(s.points[c.dataIndex].top)?3:1,
+    pointStyle:c=>(vs(s.points[c.dataIndex].top||{},lift)||{style:"circle"}).style,
     pointRadius:c=>{
-      const row=s.rows[c.dataIndex], base=baseRadius(row,s.rows.length);
-      return isSel(row)?base+2:base;
+      const p=s.points[c.dataIndex], base=baseRadius(p.top,s.points.length);
+      return isSel(p.top)?base+2:base;
     },
     pointHoverRadius:c=>{
-      const row=s.rows[c.dataIndex], base=baseRadius(row,s.rows.length);
-      return (isSel(row)?base+2:base)+2;
+      const p=s.points[c.dataIndex], base=baseRadius(p.top,s.points.length);
+      return (isSel(p.top)?base+2:base)+2;
     },
-    pointHoverBorderColor:c=>isSel(s.rows[c.dataIndex])?"#111827":repColor(s.reps),
-    pointHoverBorderWidth:c=>isSel(s.rows[c.dataIndex])?3:1,
-    pointHitRadius:18,
+    pointHoverBorderColor:c=>isSel(s.points[c.dataIndex].top)?"#111827":seriesColor(s),
+    pointHoverBorderWidth:c=>isSel(s.points[c.dataIndex].top)?3:1,
+    pointHitRadius:16,
     borderWidth:2,
     tension:0
   }));
@@ -310,9 +419,23 @@ function buildChart(host, {lift, name, color, rows, allRows, id}){
         tooltip:{
           enabled:canHover,
           events:canHover?["mousemove","mouseout"]:[],
+          displayColors:isMain,
+          filter(item,index,items){
+            const t=items[0];
+            if(!t) return false;
+            if(item.parsed.x!==t.parsed.x||item.parsed.y!==t.parsed.y) return false;
+            return items.findIndex(i=>i.parsed.x===t.parsed.x&&i.parsed.y===t.parsed.y)===index;
+          },
           callbacks:{
-            title:items=>fmtLong(items[0].raw.row.date),
-            label:item=>tipLines(item.raw.row,lift)
+            title(items){
+              return tooltipFor(items[0].raw.pt, mode, lift).title;
+            },
+            label(item){
+              return tooltipFor(item.raw.pt, mode, lift).label;
+            },
+            afterBody(items){
+              return tooltipFor(items[0].raw.pt, mode, lift).extra;
+            }
           }
         }
       },
@@ -321,7 +444,7 @@ function buildChart(host, {lift, name, color, rows, allRows, id}){
       },
       onClick(evt,els){
         if(!els.length){ closePanel(); return; }
-        const row=datasets[els[0].datasetIndex].data[els[0].index].row;
+        const row=datasets[els[0].datasetIndex].data[els[0].index].pt.top;
         if(panel.classList.contains("open")&&sameRow(card._selected,row)){ closePanel(); return; }
         openPanel(row);
       },
@@ -331,9 +454,9 @@ function buildChart(host, {lift, name, color, rows, allRows, id}){
       }
     }});
   card._openSession=(date)=>{
-    const plotted=series.flatMap(s=>s.rows).filter(r=>r.date===date).sort((a,b)=>yOf(b)-yOf(a));
+    const plotted=series.flatMap(s=>s.points).filter(p=>p.date===date).sort((a,b)=>b.y-a.y);
     const day=allRows.filter(r=>r.lift===lift&&r.date===date);
-    const hit=plotted[0]||day[0];
+    const hit=(plotted[0]&&plotted[0].top)||day[0];
     if(hit) openPanel(hit);
   };
   return chart;
@@ -347,10 +470,14 @@ document.addEventListener("keydown",e=>{
 const host=document.getElementById("charts");
 for(const lift of LIFT_ORDER){
   const rows=DATA.filter(r=>r.lift===lift);
-  buildChart(host,{lift,name:NAME[lift],color:COLORS[lift],rows,allRows:DATA,id:`chart-${lift}`});
+  buildChart(host,{lift,name:NAME[lift],color:COLORS[lift],rows,allRows:DATA,id:`chart-${lift}`,mode:"main"});
 }
 
+function hasChart(lift){
+  return LIFT_ORDER.includes(lift)||ACTIVE.includes(lift);
+}
 function bindSessionRow(tr,r){
+  if(!hasChart(r.lift)) return;
   tr.className="session-row";
   tr.tabIndex=0;
   const go=()=>{
@@ -365,6 +492,33 @@ function bindSessionRow(tr,r){
   tr.addEventListener("click",go);
   tr.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go();}});
 }
+function setupTabs(root){
+  const tabs=[...root.querySelectorAll("[role=tab]")];
+  const select=(tab,focus)=>{
+    tabs.forEach(t=>{
+      const on=t===tab;
+      t.setAttribute("aria-selected",on?"true":"false");
+      t.tabIndex=on?0:-1;
+      const panel=document.getElementById(t.getAttribute("aria-controls"));
+      if(panel) panel.hidden=!on;
+    });
+    if(focus) tab.focus();
+  };
+  tabs.forEach((tab,i)=>{
+    tab.addEventListener("click",()=>select(tab,false));
+    tab.addEventListener("keydown",e=>{
+      const next=e.key==="ArrowRight"||e.key==="ArrowDown"?tabs[(i+1)%tabs.length]
+        :e.key==="ArrowLeft"||e.key==="ArrowUp"?tabs[(i-1+tabs.length)%tabs.length]
+        :e.key==="Home"?tabs[0]
+        :e.key==="End"?tabs[tabs.length-1]
+        :null;
+      if(!next) return;
+      e.preventDefault();
+      select(next,true);
+    });
+  });
+}
+setupTabs(document.getElementById("all"));
 const tb=document.getElementById("tb");
 for(const r of [...DATA].sort((a,b)=>b.date.localeCompare(a.date)||String(b.lift).localeCompare(String(a.lift)))){
   const tr=document.createElement("tr");
@@ -379,9 +533,9 @@ let accCharts=null;
 function buildAccCharts(){
   accCharts=[];
   const accHost=document.getElementById("acc_charts");
-  for(const lift of Object.keys(ACC_NAMES)){
+  for(const lift of ACTIVE){
     const rows=ACC.filter(r=>r.lift===lift);
-    const chart=buildChart(accHost,{lift,name:ACC_NAMES[lift],color:accColor(lift),rows,allRows:ACC,id:`chart-${lift}`});
+    const chart=buildChart(accHost,{lift,name:ACC_NAMES[lift],color:accColor(lift),rows,allRows:ACC,id:`chart-${lift}`,mode:"accessory"});
     if(chart) accCharts.push(chart);
   }
 }
@@ -402,7 +556,7 @@ document.getElementById("acc").addEventListener("toggle",e=>{
 
 window.openSession=(lift,date)=>{
   const accRoot=document.getElementById("acc");
-  if(ACC_NAMES[lift]&&accRoot&&!accRoot.open){accRoot.open=true;if(!accCharts)buildAccCharts();}
+  if(ACC_NAMES[lift]&&ACTIVE.includes(lift)&&accRoot&&!accRoot.open){accRoot.open=true;if(!accCharts)buildAccCharts();}
   const card=document.querySelector(`[data-lift="${lift}"]`);
   if(!card) return false;
   if(card._openSession){ card._openSession(date); return true; }

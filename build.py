@@ -59,8 +59,39 @@ for r in sorted(rows,key=lambda r:(r[0],r[1])):
     data.append(d)
 # Accessories: source of truth is accessories_data.csv (same columns as final_data.csv).
 # To add an accessory: add rows to accessories_data.csv and a display name here.
-ACC_NAMES={"rfe_lunge":"RFE lunge","lat_pullover":"DB lat pullover (glute bridge)","cs_row":"Chest-supported row","bird_dog_row":"Bird dog row","ham_curl":"Seated hamstring curl","seated_cable_row":"Seated cable row","triceps_pressdown":"Cable triceps pressdown","straight_arm_pulldown":"Straight-arm pulldown","lat_pulldown":"Lat pulldown","reverse_nordic":"Reverse Nordic","copenhagen":"Modified Copenhagen","ir_pull_apart":"Banded IR pull-apart"}
-assert set(ACC_NAMES)==set(ACC_VARIATIONS), "ACC_NAMES and schema.ACC_VARIATIONS must list the same accessories"
+ACC_NAMES = {
+    "rfe_lunge": "RFE lunge",
+    "lat_pullover": "DB lat pullover (glute bridge)",
+    "cs_row": "Chest-supported row",
+    "bird_dog_row": "Bird dog row",
+    "ham_curl": "Seated hamstring curl",
+    "seated_cable_row": "Seated cable row",
+    "triceps_pressdown": "Cable triceps pressdown",
+    "straight_arm_pulldown": "Straight-arm pulldown",
+    "lat_pulldown": "Lat pulldown",
+    "reverse_nordic": "Reverse Nordic",
+    "copenhagen": "Copenhagen",
+    "ir_pull_apart": "Banded IR pull-apart",
+}
+# Charts are shown only for the current program. Every logged accessory still
+# validates and still appears in the Accessory sessions table.
+# Source: program_meet_dec12.md "Accessories" (Mon / Wed / Sat). David, Nov 10:
+# lat pulldown and straight-arm pulldown are not active.
+ACTIVE_ACCESSORIES = [
+    "rfe_lunge",
+    "lat_pullover",
+    "reverse_nordic",
+    "copenhagen",
+    "seated_cable_row",
+    "triceps_pressdown",
+    "bird_dog_row",
+    "cs_row",
+    "ham_curl",
+    "ir_pull_apart",
+]
+assert set(ACC_NAMES) == set(ACC_VARIATIONS), "ACC_NAMES and schema.ACC_VARIATIONS must list the same accessories"
+assert len(ACTIVE_ACCESSORIES) == len(set(ACTIVE_ACCESSORIES)), "ACTIVE_ACCESSORIES has duplicates"
+assert set(ACTIVE_ACCESSORIES) <= set(ACC_NAMES), "ACTIVE_ACCESSORIES contains an unknown lift"
 def num(v):
     if v is None: return ""
     s=str(v).strip()
@@ -79,7 +110,9 @@ for r in csv.DictReader(open("accessories_data.csv")):
     acc.append(r)
 acc.sort(key=lambda r:(r["date"],r["lift"]))
 html=(open("site/template.html").read().replace("__DATA__",json.dumps(data))
-      .replace("__ACC_DATA__",json.dumps(acc)).replace("__ACC_NAMES__",json.dumps(ACC_NAMES)))
+      .replace("__ACC_DATA__",json.dumps(acc))
+      .replace("__ACC_NAMES__",json.dumps(ACC_NAMES))
+      .replace("__ACTIVE_ACCESSORIES__",json.dumps(ACTIVE_ACCESSORIES)))
 open("site/index.html","w").write(html)
 js=open("site/chart.umd.min.js").read().replace("</script","<\\/script")
 src='<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>'
