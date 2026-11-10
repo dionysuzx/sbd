@@ -21,7 +21,7 @@ rows = [
 ("2026-10-21","bench",210,"",3,5,None,"","Paused (default). First paused 3x5; previous 3x5 was 205 touch-and-go on Sep 21. Short on sleep.","trainer_log"),
 ("2026-10-21","bench",185,"",3,8,None,"touch-and-go","","trainer_log"),
 ("2026-10-24","deadlift",275,"",3,8,None,"not recorded","Difficult, form not perfect (slammed the weights down). Hook grip on set 1, straps on the follow sets.","trainer_log"),
-("2026-10-31","squat",190,72.5,3,10,None,"low-bar with belt","First session back after missing the NYC trip week (Oct 26-30). Up from 185; 3x10 assumed. Accessories not reported.","trainer_log"),
+("2026-10-31","squat",190,72.5,3,10,None,"low-bar with belt","First session back after missing the NYC trip week (Oct 26-30). Up from 185; 3x10 assumed.","trainer_log"),
 ("2026-11-02","bench",205,"",2,5,None,"","Paused (default). Sets 1 and 3 (set 2 was 210). Set 1 felt good.","trainer_log"),
 ("2026-11-02","bench",210,"",1,5,None,"","Paused (default). Set 2. Really hard; got the last rep but the pause was subpar.","trainer_log"),
 ("2026-11-04","deadlift",275,"",3,5,7.5,"conventional","hook grip, last set RPE 7.5","trainer_log"),
@@ -30,12 +30,13 @@ rows = [
 ("2026-11-05","squat",190,72.5,2,10,8,"low-bar with belt","back-offs ~90% of top; first set RPE 7-8; second set ~RPE 8","trainer_log"),
 ("2026-11-06","bench",205,"",1,5,5.5,"","Paused (default). Working set before the final top set (215); RPE 5.5 per David.","trainer_log"),
 ("2026-11-06","bench",215,"",1,5,7,"","Paused (default). Final top set; RPE 7 per David.","trainer_log"),
+("2026-11-06","bench",190,"",3,8,None,"","Paused (default). Back-offs after 215x5 top. Done as prescribed per David; exact RPE not reported.","trainer_log"),
 ("2026-11-07","deadlift",285,"",1,5,6,"conventional","Top set, hook grip; RPE 5.5-6 per David (call it 6). Thumbs sore from hook grip (familiar, nothing abnormal per David).","trainer_log"),
 ("2026-11-07","deadlift",255,"",2,8,None,"conventional","Back-offs after 285x5 top set; belted, hook grip (double overhand not enough, switched to hook). First set felt good. RPE not reported.","trainer_log"),
 ("2026-11-09","squat",235,95,1,5,5,"low-bar with belt","Working top set RPE 5. Belt from 185; knee sleeves from ~165/185 warm-ups (first time in a while). Coach then approved a second top.","trainer_log"),
 ("2026-11-09","squat",245,100,1,5,6,"low-bar with belt","Final top set RPE 6 (coach-approved small-step after 235x5 @5). Belted, knee sleeves.","trainer_log"),
 ("2026-11-09","squat",215,85,1,8,6.5,"low-bar with belt","Back-off set 1 after final top 245. RPE 6.5. Belted, knee sleeves.","trainer_log"),
-("2026-11-09","squat",225,90,1,8,7.5,"low-bar with belt","Back-off set 2. RPE 7.5 ('gun to head'). Assumed full 8 reps (user to correct if not). Belted, knee sleeves.","trainer_log"),
+("2026-11-09","squat",225,90,1,8,7.5,"low-bar with belt","Back-off set 2. RPE 7.5 ('gun to head'). Full 8 reps confirmed. Belted, knee sleeves.","trainer_log"),
 ]
 cols=COLUMNS
 # Validate everything before writing anything (fail loudly on a bad row).
@@ -58,7 +59,7 @@ for r in sorted(rows,key=lambda r:(r[0],r[1])):
     data.append(d)
 # Accessories: source of truth is accessories_data.csv (same columns as final_data.csv).
 # To add an accessory: add rows to accessories_data.csv and a display name here.
-ACC_NAMES={"rfe_lunge":"RFE lunge","lat_pullover":"DB lat pullover (glute bridge)","cs_row":"Chest-supported row","bird_dog_row":"Bird dog row","ham_curl":"Seated hamstring curl","seated_cable_row":"Seated cable row","triceps_pressdown":"Cable triceps pressdown"}
+ACC_NAMES={"rfe_lunge":"RFE lunge","lat_pullover":"DB lat pullover (glute bridge)","cs_row":"Chest-supported row","bird_dog_row":"Bird dog row","ham_curl":"Seated hamstring curl","seated_cable_row":"Seated cable row","triceps_pressdown":"Cable triceps pressdown","straight_arm_pulldown":"Straight-arm pulldown","lat_pulldown":"Lat pulldown","reverse_nordic":"Reverse Nordic","copenhagen":"Modified Copenhagen","ir_pull_apart":"Banded IR pull-apart"}
 assert set(ACC_NAMES)==set(ACC_VARIATIONS), "ACC_NAMES and schema.ACC_VARIATIONS must list the same accessories"
 def num(v):
     if v is None: return ""

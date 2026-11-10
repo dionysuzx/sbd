@@ -92,12 +92,23 @@ const ACC = __ACC_DATA__;
 const ACC_NAMES = __ACC_NAMES__;
 const ACC_COLORS=["#0d9488","#9333ea","#ca8a04","#db2777","#4f46e5"];
 const accColor=l=>ACC_COLORS[Object.keys(ACC_NAMES).indexOf(l)%ACC_COLORS.length];
+const accLoaded=r=>r.weight_lb!==""&&r.weight_lb!=null;
+const accY=r=>accLoaded(r)?Number(r.weight_lb):Number(r.reps);
+const accYLabel=rows=>rows.some(accLoaded)?"Weight (lb)":((rows[0].variation||"").includes("second")?"Hold (sec)":"Reps");
+const accWeightCell=r=>accLoaded(r)?r.weight_lb:(r.variation==="banded"?"band":r.variation==="bodyweight"?"BW":"—");
+const accSetRep=r=>{
+  if((r.variation||"").includes("second")) return `${r.sets} × ${r.reps}s`;
+  if(r.variation==="reps per side") return `${r.sets} × ${r.reps}/side`;
+  return `${r.sets} × ${r.reps}`;
+};
+const accScheme=r=>(r.variation||"").includes("second")?`${r.sets}x${r.reps}s`:`${r.sets}x${r.reps}`;
+const accLoadTip=r=>accLoaded(r)?`${r.weight_lb} lb`:(r.variation==="banded"?"band":r.variation==="bodyweight"?"bodyweight":"—");
 let accCharts=null;
 function buildAccCharts(){
   accCharts=[];const host=document.getElementById("acc_charts");
   for(const lift of Object.keys(ACC_NAMES)){
     const seen=new Map();
-    for(const r of ACC.filter(r=>r.lift===lift)){const k=`${r.sets}x${r.reps}`;if(!seen.has(k))seen.set(k,[]);seen.get(k).push(r);}
+    for(const r of ACC.filter(r=>r.lift===lift)){const k=accScheme(r);if(!seen.has(k))seen.set(k,[]);seen.get(k).push(r);}
     if(!seen.size){ // accessory in config with no entries yet: placeholder card, real chart appears on the first logged row
       const card=document.createElement("div");card.className="card acc-empty";card.dataset.lift=lift;
       card.innerHTML=`<h2><span class="dot" style="background:${accColor(lift)}"></span>${ACC_NAMES[lift]}</h2><p class="accnote">No entries yet. The chart appears here once the first set is logged.</p>`;
@@ -107,21 +118,21 @@ function buildAccCharts(){
       const card=document.createElement("div");card.className="card";card.dataset.lift=lift;card.dataset.scheme=k;
       card.innerHTML=`<h2><span class="dot" style="background:${col}"></span>${ACC_NAMES[lift]}: ${k}</h2><div class="chart"><canvas id="a_${lift}_${k}"></canvas></div>`;
       host.appendChild(card);
-      const ws=rows.map(r=>r.weight_lb);
+      const ys=rows.map(accY), pad=rows.some(accLoaded)?10:2;
       accCharts.push(new Chart(card.querySelector("canvas"),{type:"line",plugins:[ptMarker],
-        data:{datasets:[{label:lift,data:rows.map(r=>({x:ts(r.date),y:r.weight_lb,row:r})),
+        data:{datasets:[{label:lift,data:rows.map(r=>({x:ts(r.date),y:accY(r),row:r})),
           borderColor:col,backgroundColor:col,pointRadius:rows.length===1?7:5,pointHoverRadius:8,tension:0}]},
         options:{maintainAspectRatio:false,animation:false,plugins:{legend:{display:false},
           tooltip:{callbacks:{title:c=>fmtLong(c[0].raw.row.date),
-            label:c=>{const r=c.raw.row;return [`${r.weight_lb} lb`,`${r.sets} × ${r.reps}`,...(r.rpe!=null&&r.rpe!==""?[`RPE ${r.rpe}`]:[]),`Variation: ${r.variation}`];}}}},
+            label:c=>{const r=c.raw.row;return [accLoadTip(r),accSetRep(r),...(r.rpe!=null&&r.rpe!==""?[`RPE ${r.rpe}`]:[]),`Variation: ${r.variation}`];}}}},
           scales:{x:{type:"linear",min:xmin,max:xmax,ticks:{stepSize:7*864e5,callback:v=>fmt(v)},title:{display:true,text:"Date"}},
-            y:{suggestedMin:Math.min(...ws)-10,suggestedMax:Math.max(...ws)+10,title:{display:true,text:"Weight (lb)"}}}}}));
+            y:{suggestedMin:Math.min(...ys)-pad,suggestedMax:Math.max(...ys)+pad,title:{display:true,text:accYLabel(rows)}}}}}));
     }
   }
 }
 const atb=document.getElementById("acc_tb");
 for(const r of [...ACC].sort((a,b)=>b.date.localeCompare(a.date)||String(b.lift).localeCompare(String(a.lift)))){const tr=document.createElement("tr");
-  [fmtLong(r.date),ACC_NAMES[r.lift]||r.lift,r.weight_lb,`${r.sets} × ${r.reps}`,fmtRpe(r.rpe),r.variation,r.notes||"-"].forEach((v,i)=>{const td=document.createElement("td");td.textContent=v;if(i<5)td.className="n";if(i===6)td.className="notes";tr.appendChild(td)});
+  [fmtLong(r.date),ACC_NAMES[r.lift]||r.lift,accWeightCell(r),accSetRep(r),fmtRpe(r.rpe),r.variation,r.notes||"-"].forEach((v,i)=>{const td=document.createElement("td");td.textContent=v;if(i<5)td.className="n";if(i===6)td.className="notes";tr.appendChild(td)});
   atb.appendChild(tr);}
 // Charts are built on first open (a collapsed <details> has zero size), and resized on every open.
 document.getElementById("acc").addEventListener("toggle",e=>{if(!e.target.open)return;if(!accCharts)buildAccCharts();else accCharts.forEach(c=>c.resize());});

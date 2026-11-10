@@ -30,7 +30,15 @@ ACC_VARIATIONS = {
     "ham_curl": {"seated", "not recorded"},
     "seated_cable_row": {"narrow neutral V-handle", "not recorded"},
     "triceps_pressdown": {"straight bar", "not recorded"},
+    "straight_arm_pulldown": {"straight bar", "not recorded"},
+    "lat_pulldown": {"not recorded"},
+    "reverse_nordic": {"bodyweight", "banded", "not recorded"},
+    "copenhagen": {"seconds per side", "not recorded"},
+    "ir_pull_apart": {"banded", "not recorded"},
 }
+# Bodyweight, banded, or timed-hold accessories may leave weight_lb blank.
+# For copenhagen, reps is the hold in seconds (variation "seconds per side").
+UNLOADED_ACCESSORIES = {"reverse_nordic", "copenhagen", "ir_pull_apart"}
 SOURCES = {"pre_trainer_csv", "pre_trainer_log_pdf", "trainer_log"}
 SQUAT_BAR_LB = 45  # squat total = 2 x per_side + bar
 RPE_MIN = 1.0
@@ -47,7 +55,7 @@ class SchemaError(ValueError):
 class Row:
     date: str
     lift: str
-    weight_lb: Num
+    weight_lb: Union[Num, str]  # "" for unloaded accessories
     per_side_lb: Union[Num, str]  # "" when not applicable
     sets: int
     reps: int
@@ -109,7 +117,14 @@ def validate_row(r: dict, kind: str) -> Row:
     lift = r["lift"]
     if lift not in allowed:
         raise ValueError(f"lift: {lift!r} not in allowed {kind} set {sorted(allowed)}")
-    w = _num(r["weight_lb"], "weight_lb")
+    raw_w = r["weight_lb"]
+    if raw_w in ("", None) or (isinstance(raw_w, str) and not str(raw_w).strip()):
+        if kind == "acc" and lift in UNLOADED_ACCESSORIES:
+            w = ""
+        else:
+            raise ValueError("weight_lb: required (bodyweight/band/timed accessories may leave this blank)")
+    else:
+        w = _num(raw_w, "weight_lb")
     ps = r["per_side_lb"]
     if ps in ("", None):
         ps = ""
