@@ -1,0 +1,28 @@
+date,lift,weight_lb,per_side_lb,sets,reps,rpe,variation,notes,source
+2026-09-20,rfe_lunge,13,,3,12,,not recorded,Weight from '13lbs for lunges' in the Sun entry; 3x12 taken from the 3x-a-week program block in the same entry (no reps written next to the weight).,pre_trainer_log_pdf
+2026-09-22,rfe_lunge,15,,3,12,,not recorded,"Same entry: 'had to do some stretching elevated lunges for 20lbs, wasn't painful enough' (unclear, not plotted). Left glute felt underactive on single-leg work.",pre_trainer_log_pdf
+2026-10-04,rfe_lunge,18,,3,12,,with hand support (UE support),,pre_trainer_log_pdf
+2026-10-08,rfe_lunge,25,,3,12,,with hand support (UE support),,pre_trainer_log_pdf
+2026-10-14,rfe_lunge,25,,3,12,,with hand support (UE support),,pre_trainer_log_pdf
+2026-10-19,rfe_lunge,35,,3,12,,with hand support (UE support),,trainer_log
+2026-10-14,lat_pullover,25,,3,10,,in glute bridge,,pre_trainer_log_pdf
+2026-10-19,lat_pullover,30,,3,10,,in glute bridge,3x10 assumed (not stated),trainer_log
+2026-09-24,cs_row,30,,3,12,,with dumbbells,"Logged as '30 lb dumbbells' with no sets/reps; 3x12 assumed (matches the next sessions). Later sessions don't say dumbbells, so 30 may not be the same setup.",pre_trainer_log_pdf
+2026-09-26,cs_row,45,,3,12,,not recorded,,pre_trainer_log_pdf
+2026-10-05,cs_row,50,,3,12,,not recorded,,pre_trainer_log_pdf
+2026-10-10,cs_row,55,,3,12,,not recorded,,pre_trainer_log_pdf
+2026-10-16,cs_row,60,,3,12,,not recorded,"Top working weight plotted. Set 2 x10 at 60 (hard), set 3 dropped to 55 (reps not reported), set 1 not reported. 3x12 assumed from the bench-day plan.",trainer_log
+2026-10-21,cs_row,55,,3,12,,with dumbbells,"Dropped from 60 to 55 on purpose (poor sleep, after heavy bench). 3x12 assumed.",trainer_log
+2026-10-21,bird_dog_row,20,,3,8,,reps per side,"First session; did 8-10 reps per side, logged as 8 (low end).",trainer_log
+2026-11-04,cs_row,55,,3,12,,not recorded,Stalling at 55; next target 60 with 3x8-12 near failure.,trainer_log
+2026-11-04,ham_curl,90,,3,12,,seated,Last set 15 reps (a struggle). Burnout 1x12 @ ~50-60 (unsure). Next target 95.,trainer_log
+2026-11-05,rfe_lunge,40,,3,12,,with hand support (UE support),Bumped from 35; Sina wants progressive overload on rehab. Painful as expected.,trainer_log
+2026-11-05,lat_pullover,35,,3,10,,in glute bridge,Bumped from 30.,trainer_log
+2026-11-06,seated_cable_row,140,,1,12,,narrow neutral V-handle,"Seated low cable row (not chest-supported row). One set of 12 confirmed; other sets not reported. RPE not given.",trainer_log
+2026-11-06,triceps_pressdown,65,,3,12,,straight bar,"Cable triceps pushdown/pressdown (not straight-arm lat pulldown). RPE not given.",trainer_log
+2026-11-07,cs_row,60,,1,12,,with dumbbells,"60 lb dumbbells, 30-degree bench. Set 1 (reps 1-11 full; rep 12 ~1 cm short, no jerk or chest lift). RPE not reported; further sets not confirmed.",trainer_log
+2026-11-07,ham_curl,50,,1,10,,seated,"WARM-UP set only, not a working set. Felt fine. Stopped curls after: hamstrings very fatigued (also tight after Nov 4 curls). 75x5 not done; working sets (90-95) not done. RPE not reported.",trainer_log
+2026-11-09,rfe_lunge,40,,3,12,,with hand support (UE support),"Felt good; stayed at 40 (David chose not to bump). Try 45 next if it still feels good. RPE not reported.",trainer_log
+2026-11-09,lat_pullover,35,,1,10,,in glute bridge,"Set 1 before bump to 40. Reps assumed from plan (10). RPE not reported.",trainer_log
+2026-11-09,lat_pullover,40,,1,12,,in glute bridge,"Set 2 after bump from 35. RPE not reported.",trainer_log
+2026-11-09,lat_pullover,40,,1,10,,in glute bridge,"Set 3, slow controlled tempo. RPE not reported.",trainer_log

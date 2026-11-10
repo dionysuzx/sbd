@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Knee + SBD progress</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root{--fg:#1f2937;--mut:#6b7280;--bd:#e5e7eb}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--fg);background:#f9fafb;line-height:1.45}
+main{max-width:900px;margin:0 auto;padding:20px 16px 48px}
+h1{font-size:1.6rem;margin:.2em 0}h2{font-size:1.15rem;margin:0 0 8px}
+.sub{color:var(--mut);margin:0 0 18px}
+.card{background:#fff;border:1px solid var(--bd);border-radius:12px;padding:16px;margin:0 0 16px}
+.chart{position:relative;height:260px}
+.note{background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:10px 14px;font-size:.92rem;margin:0 0 16px}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:.88rem}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--bd);vertical-align:top}
+th{background:#f3f4f6;white-space:nowrap}td.n{white-space:nowrap}td.notes{min-width:220px}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
+.note.pt{background:#fefce8;border-color:#fde68a}.star{color:#eab308;font-size:1.1em}
+.vlegend{display:flex;gap:14px;font-size:.85rem;color:#374151;margin:-2px 0 6px}.vlegend span{display:inline-flex;align-items:center;gap:5px}
+details.acc{padding:0}details.acc>summary{cursor:pointer;padding:14px 16px;font-weight:700;font-size:1.15rem;list-style:none;display:flex;align-items:center;gap:8px}
+details.acc>summary::-webkit-details-marker{display:none}details.acc>summary::before{content:"▸";color:#6b7280;transition:transform .15s}details.acc[open]>summary::before{transform:rotate(90deg)}
+details.acc>:not(summary){margin-left:16px;margin-right:16px}details.acc .card{border-color:#eef0f3}details.acc .tw{margin-bottom:16px}
+.accnote{color:#6b7280;font-size:.9rem;margin-top:0}
+footer{color:var(--mut);font-size:.8rem;margin-top:12px}
+</style></head><body><main>
+<h1>Knee + SBD progress</h1>
+<p class="sub">Top working sets. Hover or tap a point for details.</p>
+<div id="charts"></div>
+<details id="acc" class="card acc"><summary>Accessories</summary>
+<div id="acc_charts"></div>
+<h2>Accessory sessions</h2><div class="tw"><table><thead><tr>
+<th>Date</th><th>Exercise</th><th>Weight (lb)</th><th>Sets × reps</th><th>RPE</th><th>Variation</th><th>Notes</th></tr></thead><tbody id="acc_tb"></tbody></table></div>
+</details>
+<div class="card"><h2>All sessions</h2><div class="tw"><table><thead><tr>
+<th>Date</th><th>Lift</th><th>Weight (lb)</th><th>Sets × reps</th><th>RPE</th><th>Variation</th><th>Notes</th></tr></thead><tbody id="tb"></tbody></table></div></div>
+</main>
+<script>
+const DATA = __DATA__;
+const COLORS={squat:"#2563eb",bench:"#16a34a",deadlift:"#dc2626"};
+const ts=d=>{const[y,m,dd]=d.split("-").map(Number);return Date.UTC(y,m-1,dd)};
+const fmt=t=>new Date(t).toLocaleDateString("en-US",{month:"short",day:"numeric",timeZone:"UTC"});
+const fmtLong=d=>new Date(ts(d)).toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric",year:"numeric",timeZone:"UTC"});
+const xmin=Date.UTC(2026,8,15), xmax=Math.max(...DATA.map(r=>ts(r.date)),...__ACC_DATA__.map(r=>ts(r.date)))+2*864e5;
+const LIFT_ORDER=["squat","bench","deadlift"];
+const NAME={squat:"Squat",bench:"Bench",deadlift:"Deadlift"};
+// Auto-group: one chart per lift per sets x reps scheme (lift order fixed, schemes in order of first appearance)
+const GROUPS=[];
+for(const lift of LIFT_ORDER){
+  const seen=new Map();
+  for(const r of DATA.filter(r=>r.lift===lift)){const k=`${r.sets}x${r.reps}`;if(!seen.has(k))seen.set(k,[]);seen.get(k).push(r);}
+  for(const [k,rows] of seen) GROUPS.push({lift,scheme:k,rows});
+}
+const PT_START={date:"2026-09-16",label:"Started PT with Sina"};
+const ptMarker={id:"ptMarker",afterDatasetsDraw(chart){const xs=chart.scales.x,a=chart.chartArea,x=xs.getPixelForValue(ts(PT_START.date));
+  if(x<a.left||x>a.right)return;const c=chart.ctx;c.save();
+  c.strokeStyle="#eab308";c.lineWidth=1.5;c.setLineDash([4,3]);c.beginPath();c.moveTo(x,a.top);c.lineTo(x,a.bottom);c.stroke();c.setLineDash([]);
+  const R=8,r=3.6,cy=a.bottom-R-2;c.beginPath();for(let i=0;i<10;i++){const ang=-Math.PI/2+i*Math.PI/5,rad=i%2?r:R;c.lineTo(x+rad*Math.cos(ang),cy+rad*Math.sin(ang));}
+  c.closePath();c.fillStyle="#facc15";c.fill();c.strokeStyle="#a16207";c.lineWidth=1;c.stroke();
+  c.font="600 10px -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif";c.fillStyle="#854d0e";c.textAlign="left";c.textBaseline="top";c.fillText(PT_START.label,x+4,a.top+2);
+  c.restore();}};
+// Squat bar position: different point style/color per variation (line stays one series)
+const VAR_STYLES={squat:{"high-bar":{color:"#2563eb",style:"circle",name:"High-bar"},"low-bar with belt":{color:"#7c3aed",style:"triangle",name:"Low-bar (belt)"}},
+  // Bench: default (blank variation) = paused competition-style bench, normal style. Only touch-and-go is marked; solo:true shows its legend even alone.
+  bench:{"touch-and-go":{color:"#ea580c",style:"rectRot",name:"Touch-and-go",solo:true}}};
+const vs=(r,lift)=>(VAR_STYLES[lift]||{})[r.variation]||null;
+const glyph=s=>s==="rectRot"?'<svg width="12" height="12" viewBox="0 0 12 12"><polygon points="6,0.5 11.5,6 6,11.5 0.5,6"/></svg>':s==="triangle"?'<svg width="12" height="12" viewBox="0 0 12 12"><polygon points="6,1 11,11 1,11"/></svg>':'<svg width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/></svg>';
+const host=document.getElementById("charts");
+GROUPS.forEach((G,gi)=>{
+  const card=document.createElement("div");card.className="card";card.dataset.lift=G.lift;card.dataset.scheme=G.scheme;
+  card.innerHTML=`<h2><span class="dot" style="background:${COLORS[G.lift]}"></span>${NAME[G.lift]}: ${G.scheme}</h2><div class="chart"><canvas id="c_${G.lift}_${G.scheme}"></canvas></div>`;
+  const vk=[...new Set(G.rows.map(r=>r.variation))].filter(v=>vs({variation:v},G.lift));
+  if(vk.length>1||vk.some(v=>vs({variation:v},G.lift).solo)){const lg=document.createElement("div");lg.className="vlegend";lg.innerHTML=vk.map(v=>{const S=vs({variation:v},G.lift);return `<span style="fill:${S.color}">${glyph(S.style)} ${S.name}</span>`;}).join("");card.insertBefore(lg,card.querySelector(".chart"));}
+  host.appendChild(card);
+  const rows=G.rows, ws=rows.map(r=>r.weight_lb), lift=G.lift;
+  new Chart(card.querySelector("canvas"),{type:"line",plugins:[ptMarker],
+    data:{datasets:[{label:lift,data:rows.map(r=>({x:ts(r.date),y:r.weight_lb,row:r})),
+      borderColor:COLORS[lift],backgroundColor:c=>(vs(rows[c.dataIndex]||{},lift)||{color:COLORS[lift]}).color,pointBorderColor:c=>(vs(rows[c.dataIndex]||{},lift)||{color:COLORS[lift]}).color,pointStyle:c=>(vs(rows[c.dataIndex]||{},lift)||{style:"circle"}).style,pointRadius:c=>{const s=vs(rows[c.dataIndex]||{},lift);return rows.length===1?7:(s&&s.style!=="circle"?7:5);},pointHoverRadius:8,tension:0}]},
+    options:{maintainAspectRatio:false,animation:false,plugins:{legend:{display:false},
+      tooltip:{callbacks:{title:c=>fmtLong(c[0].raw.row.date),
+        label:c=>{const r=c.raw.row;const a=[`${r.weight_lb} lb`+(r.per_side_lb!==""?` (${r.per_side_lb}/side + 45 bar)`:""),`${r.sets} × ${r.reps}`,...(r.rpe!=null&&r.rpe!==""?[`RPE ${r.rpe}`]:[]),...(r.variation?[`Variation: ${r.variation}`]:[])];return a;}}}},
+      scales:{x:{type:"linear",min:xmin,max:xmax,ticks:{stepSize:7*864e5,callback:v=>fmt(v)},title:{display:true,text:"Date"}},
+        y:{suggestedMin:Math.min(...ws)-20,suggestedMax:Math.max(...ws)+20,title:{display:true,text:"Weight (lb)"}}}}});
+});
+const tb=document.getElementById("tb");
+const fmtRpe=v=>v==null||v===""?"":v;
+for(const r of [...DATA].sort((a,b)=>b.date.localeCompare(a.date)||String(b.lift).localeCompare(String(a.lift)))){const tr=document.createElement("tr");
+  [fmtLong(r.date),r.lift,r.weight_lb,`${r.sets} × ${r.reps}`,fmtRpe(r.rpe),r.variation||"-",r.notes||"-"].forEach((v,i)=>{const td=document.createElement("td");td.textContent=v;if(i<5)td.className="n";if(i===6)td.className="notes";tr.appendChild(td)});
+  tb.appendChild(tr);}
+// ---- Accessories (collapsed section). One chart per accessory per sets x reps, same style/tooltips/PT star as SBD.
+const ACC = __ACC_DATA__;
+const ACC_NAMES = __ACC_NAMES__;
+const ACC_COLORS=["#0d9488","#9333ea","#ca8a04","#db2777","#4f46e5"];
+const accColor=l=>ACC_COLORS[Object.keys(ACC_NAMES).indexOf(l)%ACC_COLORS.length];
+let accCharts=null;
+function buildAccCharts(){
+  accCharts=[];const host=document.getElementById("acc_charts");
+  for(const lift of Object.keys(ACC_NAMES)){
+    const seen=new Map();
+    for(const r of ACC.filter(r=>r.lift===lift)){const k=`${r.sets}x${r.reps}`;if(!seen.has(k))seen.set(k,[]);seen.get(k).push(r);}
+    if(!seen.size){ // accessory in config with no entries yet: placeholder card, real chart appears on the first logged row
+      const card=document.createElement("div");card.className="card acc-empty";card.dataset.lift=lift;
+      card.innerHTML=`<h2><span class="dot" style="background:${accColor(lift)}"></span>${ACC_NAMES[lift]}</h2><p class="accnote">No entries yet. The chart appears here once the first set is logged.</p>`;
+      host.appendChild(card);continue;}
+    for(const [k,rows] of seen){
+      const col=accColor(lift);
+      const card=document.createElement("div");card.className="card";card.dataset.lift=lift;card.dataset.scheme=k;
+      card.innerHTML=`<h2><span class="dot" style="background:${col}"></span>${ACC_NAMES[lift]}: ${k}</h2><div class="chart"><canvas id="a_${lift}_${k}"></canvas></div>`;
+      host.appendChild(card);
+      const ws=rows.map(r=>r.weight_lb);
+      accCharts.push(new Chart(card.querySelector("canvas"),{type:"line",plugins:[ptMarker],
+        data:{datasets:[{label:lift,data:rows.map(r=>({x:ts(r.date),y:r.weight_lb,row:r})),
+          borderColor:col,backgroundColor:col,pointRadius:rows.length===1?7:5,pointHoverRadius:8,tension:0}]},
+        options:{maintainAspectRatio:false,animation:false,plugins:{legend:{display:false},
+          tooltip:{callbacks:{title:c=>fmtLong(c[0].raw.row.date),
+            label:c=>{const r=c.raw.row;return [`${r.weight_lb} lb`,`${r.sets} × ${r.reps}`,...(r.rpe!=null&&r.rpe!==""?[`RPE ${r.rpe}`]:[]),`Variation: ${r.variation}`];}}}},
+          scales:{x:{type:"linear",min:xmin,max:xmax,ticks:{stepSize:7*864e5,callback:v=>fmt(v)},title:{display:true,text:"Date"}},
+            y:{suggestedMin:Math.min(...ws)-10,suggestedMax:Math.max(...ws)+10,title:{display:true,text:"Weight (lb)"}}}}}));
+    }
+  }
+}
+const atb=document.getElementById("acc_tb");
+for(const r of [...ACC].sort((a,b)=>b.date.localeCompare(a.date)||String(b.lift).localeCompare(String(a.lift)))){const tr=document.createElement("tr");
+  [fmtLong(r.date),ACC_NAMES[r.lift]||r.lift,r.weight_lb,`${r.sets} × ${r.reps}`,fmtRpe(r.rpe),r.variation,r.notes||"-"].forEach((v,i)=>{const td=document.createElement("td");td.textContent=v;if(i<5)td.className="n";if(i===6)td.className="notes";tr.appendChild(td)});
+  atb.appendChild(tr);}
+// Charts are built on first open (a collapsed <details> has zero size), and resized on every open.
+document.getElementById("acc").addEventListener("toggle",e=>{if(!e.target.open)return;if(!accCharts)buildAccCharts();else accCharts.forEach(c=>c.resize());});
+</script></body></html>
