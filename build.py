@@ -15,7 +15,7 @@ rows = [
 ("2026-10-10","bench",185,"",3,8,None,"touch-and-go","note to try pausing","pre_trainer_csv"),
 ("2026-10-12","deadlift",205,"",3,8,None,"conventional","Done Mon morning after skipping Sun Oct 11; weight not written on Monday, 205 taken from the planned Sunday entry.","pre_trainer_csv"),
 ("2026-10-14","squat",165,60,3,10,None,"low-bar with belt","60 lb/side; first low-bar session; minor wrist pain; total assumes 45 lb bar","pre_trainer_csv"),
-("2026-10-16","bench",185,"",3,8,None,"","","trainer_log"),
+("2026-10-16","bench",185,"",3,8,None,"","Paused (default). First comp-standard session; earlier benches were touch-and-go (David, Oct 19).","trainer_log"),
 ("2026-10-17","deadlift",255,"",3,8,8,"conventional","RPE 8; planned 225. Stance confirmed conventional by David Nov 10.","trainer_log"),
 ("2026-10-19","squat",185,70,3,10,8,"low-bar with belt","RPE 8. Wrists better with slightly wider grip; asking Sina about thumb position.","trainer_log"),
 ("2026-10-21","bench",210,"",3,5,None,"","Paused (default). First paused 3x5; previous 3x5 was 205 touch-and-go on Sep 21. Short on sleep.","trainer_log"),

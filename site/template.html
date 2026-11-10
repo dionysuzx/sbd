@@ -2,21 +2,27 @@
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>David's Knee &amp; SBD Progress</title>
+<meta name="description" content="David's squat, bench, deadlift, and knee-rehab training log.">
+<meta property="og:title" content="David's Knee &amp; SBD Progress">
+<meta property="og:description" content="David's squat, bench, deadlift, and knee-rehab training log.">
+<meta property="og:url" content="https://sbd.wtf">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="David's Knee &amp; SBD Progress">
+<meta name="twitter:description" content="David's squat, bench, deadlift, and knee-rehab training log.">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
 :root{--fg:#1f2937;--mut:#6b7280;--bd:#e5e7eb;--hit:#eff6ff}
 *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--fg);background:#f9fafb;line-height:1.45}
 main{max-width:900px;margin:0 auto;padding:20px 16px 48px}
-h1{font-size:1.6rem;margin:.2em 0 4px}.subtitle{color:var(--mut);margin:0 0 18px;font-size:1.05rem}h2{font-size:1.15rem;margin:0 0 8px}
+h1{font-size:1.6rem;margin:.2em 0 4px}.subtitle{color:var(--mut);margin:0 0 18px;font-size:1.05rem;line-height:1.7;white-space:nowrap;overflow-x:auto;max-width:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans","DejaVu Sans","Sarabun","Noto Sans Thai","Leelawadee UI","Noto Sans Arabic","Noto Naskh Arabic",sans-serif;direction:ltr;unicode-bidi:isolate}h2{font-size:1.15rem;margin:0 0 8px}
 .card{background:#fff;border:1px solid var(--bd);border-radius:12px;padding:16px;margin:0 0 16px}
 .chart{position:relative;height:280px}
 .chart-hint{color:var(--mut);font-size:.75rem;margin:8px 0 0}
-.note{background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:10px 14px;font-size:.92rem;margin:0 0 16px}
 .tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:.88rem}
 th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--bd);vertical-align:top}
 th{background:#f3f4f6;white-space:nowrap}td.n{white-space:nowrap}td.notes{min-width:220px}
 .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
-.note.pt{background:#fefce8;border-color:#fde68a}.star{color:#eab308;font-size:1.1em}
 .legends{display:flex;flex-direction:column;gap:6px;margin:-2px 0 8px}
 .vlegend{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:.85rem;color:#374151}
 .vlegend span{display:inline-flex;align-items:center;gap:5px}
@@ -38,10 +44,10 @@ details.acc>:not(summary){margin-left:16px;margin-right:16px}details.acc .card{b
 .set .top{font-weight:650}
 .set .meta{color:#374151}
 .set .notes{color:var(--mut);font-size:.84rem;margin-top:3px;line-height:1.4}
-footer{color:var(--mut);font-size:.8rem;margin-top:12px}
+.session-row{cursor:pointer}.session-row:hover{background:var(--hit)}.session-row:focus{outline:2px solid #93c5fd;outline-offset:-2px}
 </style></head><body><main>
 <h1>David's Knee &amp; SBD Progress</h1>
-<p class="subtitle">(ง •̀_•́)ง</p>
+<p class="subtitle" dir="ltr">(ง •̀_•́)ง ฅ^•ﻌ•^ฅ</p>
 <div id="charts"></div>
 <details id="acc" class="card acc"><summary>Accessories</summary>
 <div id="acc_charts"></div>
@@ -284,13 +290,17 @@ function buildChart(host, {lift, name, color, rows, allRows, id}){
     chart&&chart.update("none");
   };
   const openPanel=row=>{
+    document.querySelectorAll(".card").forEach(c=>{if(c!==card&&c._closeSession)c._closeSession();});
     card._selected=row;
     renderSession(panel,lift,row.date,row,allRows,closePanel);
     chart&&chart.update("none");
   };
   card._closeSession=closePanel;
 
-  chart=new Chart(canvasWrap.querySelector("canvas"),{type:"line",plugins:[ptMarker],
+  const canvas=canvasWrap.querySelector("canvas");
+  canvas.setAttribute("role","img");
+  canvas.setAttribute("aria-label", name+" progress chart");
+  chart=new Chart(canvas,{type:"line",plugins:[ptMarker],
     data:{datasets},
     options:{
       maintainAspectRatio:false,animation:false,
@@ -340,12 +350,28 @@ for(const lift of LIFT_ORDER){
   buildChart(host,{lift,name:NAME[lift],color:COLORS[lift],rows,allRows:DATA,id:`chart-${lift}`});
 }
 
+function bindSessionRow(tr,r){
+  tr.className="session-row";
+  tr.tabIndex=0;
+  const go=()=>{
+    const accRoot=document.getElementById("acc");
+    if(ACC_NAMES[r.lift]&&accRoot&&!accRoot.open){accRoot.open=true;if(!accCharts)buildAccCharts();}
+    const card=document.querySelector(`[data-lift="${r.lift}"]`);
+    if(card&&card._openSession){
+      card._openSession(r.date);
+      card.scrollIntoView({behavior:"smooth",block:"nearest"});
+    }
+  };
+  tr.addEventListener("click",go);
+  tr.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go();}});
+}
 const tb=document.getElementById("tb");
 for(const r of [...DATA].sort((a,b)=>b.date.localeCompare(a.date)||String(b.lift).localeCompare(String(a.lift)))){
   const tr=document.createElement("tr");
   [fmtLong(r.date),r.lift,r.weight_lb,`${r.sets} × ${r.reps}`,fmtRpe(r.rpe),displayVar(r)||"-",r.notes||"-"].forEach((v,i)=>{
     const td=document.createElement("td");td.textContent=v;if(i<5)td.className="n";if(i===6)td.className="notes";tr.appendChild(td);
   });
+  bindSessionRow(tr,r);
   tb.appendChild(tr);
 }
 
@@ -365,6 +391,7 @@ for(const r of [...ACC].sort((a,b)=>b.date.localeCompare(a.date)||String(b.lift)
   [fmtLong(r.date),ACC_NAMES[r.lift]||r.lift,accWeightCell(r),accSetRep(r),fmtRpe(r.rpe),displayVar(r),r.notes||"-"].forEach((v,i)=>{
     const td=document.createElement("td");td.textContent=v;if(i<5)td.className="n";if(i===6)td.className="notes";tr.appendChild(td);
   });
+  bindSessionRow(tr,r);
   atb.appendChild(tr);
 }
 document.getElementById("acc").addEventListener("toggle",e=>{
