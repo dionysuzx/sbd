@@ -2,20 +2,20 @@ date,lift,weight_lb,per_side_lb,sets,reps,rpe,variation,notes,source
 2026-09-20,rfe_lunge,13,,3,12,,not recorded,Weight from '13lbs for lunges' in the Sun entry; 3x12 taken from the 3x-a-week program block in the same entry (no reps written next to the weight).,pre_trainer_log_pdf
 2026-09-22,copenhagen,,,3,30,,seconds per side,From David's pre-Trainer log (3x30s/side).,pre_trainer_log_pdf
 2026-09-22,rfe_lunge,15,,3,12,,not recorded,"Same entry: 'had to do some stretching elevated lunges for 20lbs, wasn't painful enough' (unclear, not plotted). Left glute felt underactive on single-leg work.",pre_trainer_log_pdf
-2026-09-24,cs_row,30,,3,12,,with dumbbells,"Logged as '30 lb dumbbells' with no sets/reps; 3x12 assumed (matches the next sessions). Later sessions don't say dumbbells, so 30 may not be the same setup.",pre_trainer_log_pdf
-2026-09-26,cs_row,45,,3,12,,not recorded,,pre_trainer_log_pdf
+2026-09-24,cs_row,30,,3,12,,with dumbbells,Logged as '30 lb dumbbells' with no sets/reps; 3x12 assumed (matches the next sessions).,pre_trainer_log_pdf
+2026-09-26,cs_row,45,,3,12,,with dumbbells,,pre_trainer_log_pdf
 2026-09-29,ir_pull_apart,,,3,15,,banded,From David's pre-Trainer log (travel day).,pre_trainer_log_pdf
 2026-10-04,copenhagen,,,3,30,,seconds per side,From David's pre-Trainer log (3x30s/side).,pre_trainer_log_pdf
 2026-10-04,rfe_lunge,18,,3,12,,with hand support (UE support),,pre_trainer_log_pdf
-2026-10-05,cs_row,50,,3,12,,not recorded,,pre_trainer_log_pdf
+2026-10-05,cs_row,50,,3,12,,with dumbbells,,pre_trainer_log_pdf
 2026-10-08,copenhagen,,,3,30,,seconds per side,From David's pre-Trainer log (3x30s/side).,pre_trainer_log_pdf
 2026-10-08,rfe_lunge,25,,3,12,,with hand support (UE support),,pre_trainer_log_pdf
-2026-10-10,cs_row,55,,3,12,,not recorded,,pre_trainer_log_pdf
+2026-10-10,cs_row,55,,3,12,,with dumbbells,,pre_trainer_log_pdf
 2026-10-12,ir_pull_apart,,,3,12,,banded,From the Mon Oct 12 morning deadlift entry.,pre_trainer_log_pdf
 2026-10-14,copenhagen,,,3,30,,seconds per side,From David's pre-Trainer log (3x30s/side).,pre_trainer_log_pdf
 2026-10-14,lat_pullover,25,,3,10,,in glute bridge,,pre_trainer_log_pdf
 2026-10-14,rfe_lunge,25,,3,12,,with hand support (UE support),,pre_trainer_log_pdf
-2026-10-16,cs_row,60,,1,10,,not recorded,"Set 2 confirmed: 60 × 10 (hard). Set 1 not reported. Set 3 dropped to 55 (reps not reported), so only the confirmed set is plotted.",trainer_log
+2026-10-16,cs_row,60,,1,10,,with dumbbells,"Set 2 confirmed: 60 × 10 (hard). Set 1 not reported. Set 3 dropped to 55 (reps not reported), so only the confirmed set is plotted.",trainer_log
 2026-10-17,ir_pull_apart,,,3,12,,banded,Prescribed 3x12 this session (rows skipped). Done as prescribed per David; exact reps/RPE not reported.,trainer_log
 2026-10-17,lat_pulldown,145,,3,10,,not recorded,145 lb and 10-12 reps reported; set count not given. Logged 3x10 from same-day prescription (3x10-12). Done as prescribed per David; exact sets/reps not reported.,trainer_log
 2026-10-17,straight_arm_pulldown,50,,3,12,,straight bar,"Weight 50 lb reported (straight bar). Prescribed 3x12-15; exact reps not reported, logged at low end. Done as prescribed per David.",trainer_log
@@ -24,16 +24,16 @@ date,lift,weight_lb,per_side_lb,sets,reps,rpe,variation,notes,source
 2026-10-19,reverse_nordic,,,3,5,,bodyweight,Prescribed 3x5 bodyweight. Done as prescribed per David; exact reps/RPE not reported.,trainer_log
 2026-10-19,rfe_lunge,35,,3,12,,with hand support (UE support),,trainer_log
 2026-10-21,bird_dog_row,20,,3,8,,reps per side,"First session; did 8-10 reps per side, logged as 8 (low end).",trainer_log
-2026-10-21,cs_row,55,,3,12,,not recorded,"Dropped from 60 to 55 on purpose (poor sleep, after heavy bench). 3x12 assumed.",trainer_log
-2026-10-24,cs_row,60,,3,10,,not recorded,Prescribed 3x10-12 @ 60 (55 if beat up). Logged at 60 / low-end reps. Done as prescribed per David; exact reps/RPE not reported.,trainer_log
+2026-10-21,cs_row,55,,3,12,,with dumbbells,"Dropped from 60 to 55 on purpose (poor sleep, after heavy bench). 3x12 assumed.",trainer_log
+2026-10-24,cs_row,60,,3,10,,with dumbbells,Prescribed 3x10-12 @ 60 (55 if beat up). Logged at 60 / low-end reps. Done as prescribed per David; exact reps/RPE not reported.,trainer_log
 2026-10-24,ir_pull_apart,,,3,12,,banded,Prescribed 3x12. Done as prescribed per David; exact reps/RPE not reported.,trainer_log
 2026-10-31,copenhagen,,,3,30,,seconds per side,Prescribed 3x30s/side. Done as prescribed per David; hold times not re-reported.,trainer_log
 2026-10-31,lat_pullover,30,,3,10,,in glute bridge,Done as prescribed per David; exact reps/RPE not reported.,trainer_log
 2026-10-31,reverse_nordic,,,3,5,,bodyweight,Prescribed 3x5. Done as prescribed per David; exact reps/RPE not reported.,trainer_log
 2026-10-31,rfe_lunge,35,,3,12,,with hand support (UE support),Done as prescribed per David; exact reps/RPE not reported.,trainer_log
 2026-11-02,bird_dog_row,20,,3,8,,reps per side,Prescribed 3x8-10/side @ 20; logged at low end. Done as prescribed per David; exact reps/RPE not reported.,trainer_log
-2026-11-02,cs_row,55,,3,12,,not recorded,Prescribed 3x12 @ 55 (same as last bench day). Done as prescribed per David; exact reps/RPE not reported.,trainer_log
-2026-11-04,cs_row,55,,3,12,,not recorded,Stalling at 55; next target 60 with 3x8-12 near failure.,trainer_log
+2026-11-02,cs_row,55,,3,12,,with dumbbells,Prescribed 3x12 @ 55 (same as last bench day). Done as prescribed per David; exact reps/RPE not reported.,trainer_log
+2026-11-04,cs_row,55,,3,12,,with dumbbells,Stalling at 55; next target 60 with 3x8-12 near failure.,trainer_log
 2026-11-04,ham_curl,90,,2,12,,seated,Sets 1 and 2 of 12. Last set was 15 (see 15-rep row).,trainer_log
 2026-11-04,ham_curl,90,,1,15,,seated,"Last set, a struggle. Burnout 1x12 @ ~50-60 (unsure) not plotted. Next target held at 90 after Nov 7 skipped working sets.",trainer_log
 2026-11-04,ir_pull_apart,,,3,12,,banded,"Prescribed 3x12 (after ham curls, or after bench if not already done). Done as prescribed per David; exact reps/RPE not reported.",trainer_log

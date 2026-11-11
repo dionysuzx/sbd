@@ -29,7 +29,7 @@ SBD_VARIATIONS = {
 ACC_VARIATIONS = {
     "rfe_lunge": ("with hand support (UE support)", "not recorded"),
     "lat_pullover": ("in glute bridge", "not recorded"),
-    "cs_row": ("with dumbbells", "not recorded"),
+    "cs_row": ("with dumbbells",),
     "bird_dog_row": ("reps per side", "not recorded"),
     "ham_curl": ("seated", "not recorded"),
     "seated_cable_row": ("narrow neutral V-handle", "wide grip", "not recorded"),
