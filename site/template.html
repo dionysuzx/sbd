@@ -78,6 +78,8 @@ const DATA = __DATA__;
 const ACC = __ACC_DATA__;
 const ACC_NAMES = __ACC_NAMES__;
 const ACTIVE = __ACTIVE_ACCESSORIES__;
+const VARIATIONS = __VARIATIONS__;
+const VARIATION_LABELS = __VARIATION_LABELS__;
 const COLORS={squat:"#2563eb",bench:"#16a34a",deadlift:"#dc2626"};
 const ACC_COLORS=["#0d9488","#9333ea","#ca8a04","#db2777","#4f46e5"];
 const accColor=l=>ACC_COLORS[Object.keys(ACC_NAMES).indexOf(l)%ACC_COLORS.length];
@@ -118,21 +120,34 @@ function setHeadline(r,lift){
 }
 
 // Variation is shown by point shape (and a short legend), not by splitting charts.
-// Series color is reserved for rep count on main lifts. Display names are mapped here; stored values stay as logged.
-const VAR_STYLES={
-  squat:{"high-bar":{style:"circle",name:"High-bar"},"low-bar with belt":{style:"triangle",name:"Low-bar (belted)"}},
-  bench:{"":{style:"circle",name:"Comp standard"},"touch-and-go":{style:"rectRot",name:"Touch-and-go"}},
-  deadlift:{"conventional":{style:"circle",name:"Conventional"},"not recorded":{style:"rect",name:"Stance not recorded"}},
-  reverse_nordic:{"bodyweight":{style:"circle",name:"Bodyweight"},"banded":{style:"triangle",name:"Banded"},"not recorded":{style:"rect",name:"Not recorded"}},
-  copenhagen:{"seconds per side":{style:"circle",name:"Seconds per side"}},
-  ir_pull_apart:{"banded":{style:"circle",name:"Banded"}}
-};
-const vs=(r,lift)=>(VAR_STYLES[lift]||{})[r.variation??""]||null;
-const glyph=s=>s==="rectRot"?'<svg width="12" height="12" viewBox="0 0 12 12"><polygon points="6,0.5 11.5,6 6,11.5 0.5,6"/></svg>':s==="triangle"?'<svg width="12" height="12" viewBox="0 0 12 12"><polygon points="6,1 11,11 1,11"/></svg>':s==="rect"?'<svg width="12" height="12" viewBox="0 0 12 12"><rect x="2" y="2" width="8" height="8"/></svg>':'<svg width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/></svg>';
-function displayVar(r,lift){
-  const S=vs(r,lift||r.lift);
-  return S?S.name:(r.variation||"");
+// Series color is reserved for rep count on main lifts. Shapes are assigned
+// automatically from this palette in schema variation-list order (index 0 = default).
+const SHAPES=["circle","triangle","rectRot","rect","star","rectRounded"];
+function varStyle(lift, variation){
+  const list=VARIATIONS[lift]||[];
+  const i=list.indexOf(variation??"");
+  return SHAPES[(i<0?0:i)%SHAPES.length];
 }
+function displayVar(r,lift){
+  const v=r.variation??"";
+  const labels=VARIATION_LABELS[lift||r.lift]||{};
+  return Object.prototype.hasOwnProperty.call(labels,v)?labels[v]:v;
+}
+function usedVariations(lift, rows){
+  const seen=new Set(rows.map(r=>r.variation??""));
+  const listed=(VARIATIONS[lift]||[]).filter(v=>seen.has(v));
+  for(const v of seen) if(!listed.includes(v)) listed.push(v);
+  return listed;
+}
+const GLYPH={
+  circle:'<svg width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/></svg>',
+  triangle:'<svg width="12" height="12" viewBox="0 0 12 12"><polygon points="6,1 11,11 1,11"/></svg>',
+  rectRot:'<svg width="12" height="12" viewBox="0 0 12 12"><polygon points="6,0.5 11.5,6 6,11.5 0.5,6"/></svg>',
+  rect:'<svg width="12" height="12" viewBox="0 0 12 12"><rect x="2" y="2" width="8" height="8"/></svg>',
+  star:'<svg width="12" height="12" viewBox="0 0 12 12"><polygon points="6,0.6 7.4,4.2 11.4,4.5 8.3,7.1 9.3,11 6,9 2.7,11 3.7,7.1 0.6,4.5 4.6,4.2"/></svg>',
+  rectRounded:'<svg width="12" height="12" viewBox="0 0 12 12"><rect x="2" y="2" width="8" height="8" rx="2"/></svg>'
+};
+const glyph=s=>GLYPH[s]||GLYPH.circle;
 
 const REP_COLORS={5:"#0072B2",6:"#56B4E9",8:"#009E73",10:"#E69F00",12:"#CC79A7",15:"#D55E00"};
 const REP_FALLBACK=["#332288","#88CCEE","#117733","#DDCC77","#AA4499","#44AA99"];
@@ -333,6 +348,8 @@ function accTooltipLine(top, daySets){
       extra.push("+ "+bits.join(", "));
     }
   }
+  const vars=[...new Set(daySets.map(r=>displayVar(r,r.lift)).filter(Boolean))];
+  if(vars.length) extra.push(vars.join(", "));
   return {line, extra};
 }
 function mainTooltipLines(top, daySets, lift){
@@ -401,18 +418,13 @@ function buildChart(host, {lift, name, color, rows, allRows, id, mode}){
     rLeg.innerHTML=series.map(s=>`<span data-ink="${esc(repColor(s.reps))}" style="color:${repColor(s.reps)}"><i class="swatch"></i> ${esc(s.label)}</span>`).join("");
     legends.appendChild(rLeg);
   }
-  const usedVars=[];
-  const seen=new Set();
-  for(const r of rows){
-    const S=vs(r,lift);
-    if(!S||seen.has(r.variation??"")) continue;
-    seen.add(r.variation??"");
-    usedVars.push(S);
-  }
-  if(usedVars.length){
+  const usedVars=usedVariations(lift, rows);
+  // Main lifts always show the variation legend (e.g. Comp standard).
+  // Accessories show it only when more than one variation appears.
+  if(usedVars.length && (isMain || usedVars.length>1)){
     const vLeg=document.createElement("div");
     vLeg.className="vlegend";
-    vLeg.innerHTML=usedVars.map(S=>`<span style="fill:#374151">${glyph(S.style)} ${esc(S.name)}</span>`).join("");
+    vLeg.innerHTML=usedVars.map(v=>`<span style="fill:#374151">${glyph(varStyle(lift,v))} ${esc(displayVar({variation:v},lift))}</span>`).join("");
     legends.appendChild(vLeg);
   }
 
@@ -440,7 +452,7 @@ function buildChart(host, {lift, name, color, rows, allRows, id, mode}){
   const yLabel=unloaded?accYLabel(rows):"Weight (lb)";
   const isSel=r=>sameRow(card._selected,r);
   const baseRadius=(row,n)=>{
-    const st=(vs(row||{},lift)||{style:"circle"}).style;
+    const st=varStyle(lift,(row||{}).variation);
     const r=n===1?7:(st!=="circle"?7:5);
     return r*inkOf().point;
   };
@@ -456,7 +468,7 @@ function buildChart(host, {lift, name, color, rows, allRows, id, mode}){
       const ink=inkOf();
       return isSel(s.points[c.dataIndex].top)?Math.max(3,ink.line+0.4):Math.max(1,ink.line*0.45);
     },
-    pointStyle:c=>(vs(s.points[c.dataIndex].top||{},lift)||{style:"circle"}).style,
+    pointStyle:c=>varStyle(lift,(s.points[c.dataIndex].top||{}).variation),
     pointRadius:c=>{
       const p=s.points[c.dataIndex], base=baseRadius(p.top,s.points.length);
       return isSel(p.top)?base+2*inkOf().point:base;

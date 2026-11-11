@@ -1,5 +1,5 @@
 import csv, json, sys
-from schema import COLUMNS, ACC_VARIATIONS, validate_rows, SchemaError
+from schema import COLUMNS, ACC_VARIATIONS, all_variations, variation_label_map, validate_rows, SchemaError
 rows = [
 # date, lift, weight, per_side, sets, reps, rpe, variation, notes, source
 ("2026-09-17","deadlift",145,"",4,5,7,"conventional","RPE 7 (form/bracing); very minor left coccyx feeling on set 4","pre_trainer_csv"),
@@ -37,6 +37,8 @@ rows = [
 ("2026-11-09","squat",245,100,1,5,6,"low-bar with belt","Final top set RPE 6 (coach-approved small-step after 235x5 @5). Belted, knee sleeves.","trainer_log"),
 ("2026-11-09","squat",215,85,1,8,6.5,"low-bar with belt","Back-off set 1 after final top 245. RPE 6.5. Belted, knee sleeves.","trainer_log"),
 ("2026-11-09","squat",225,90,1,8,7.5,"low-bar with belt","Back-off set 2. RPE 7.5 ('gun to head'). Full 8 reps confirmed. Belted, knee sleeves.","trainer_log"),
+("2026-11-10","bench",221,"",1,5,7,"","Paused (default). Top set RPE 7. 100 kg plates on 45 lb Texas bar, ~221.3 lb.","trainer_log"),
+("2026-11-10","bench",199,"",3,8,8.5,"","Paused (default). Back-offs after 221x5 top, 3x8 @ RPE 8.5 (David: maybe 8 but I think 8.5). Red 25 kg + green 10 kg per side on 45 lb Texas bar, ~199.3 lb. Set 1 ring finger on the smooth ring, set 2 pinky on ring, set 3 ring finger; very minor wrist pain, possibly new wider grip.","trainer_log"),
 ]
 cols=COLUMNS
 # Validate everything before writing anything (fail loudly on a bad row).
@@ -112,7 +114,9 @@ acc.sort(key=lambda r:(r["date"],r["lift"]))
 html=(open("site/template.html").read().replace("__DATA__",json.dumps(data))
       .replace("__ACC_DATA__",json.dumps(acc))
       .replace("__ACC_NAMES__",json.dumps(ACC_NAMES))
-      .replace("__ACTIVE_ACCESSORIES__",json.dumps(ACTIVE_ACCESSORIES)))
+      .replace("__ACTIVE_ACCESSORIES__",json.dumps(ACTIVE_ACCESSORIES))
+      .replace("__VARIATIONS__",json.dumps(all_variations()))
+      .replace("__VARIATION_LABELS__",json.dumps(variation_label_map())))
 open("site/index.html","w").write(html)
 js=open("site/chart.umd.min.js").read().replace("</script","<\\/script")
 src='<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>'
