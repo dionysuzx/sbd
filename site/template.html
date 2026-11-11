@@ -149,7 +149,7 @@ const GLYPH={
 };
 const glyph=s=>GLYPH[s]||GLYPH.circle;
 
-const REP_COLORS={5:"#0072B2",6:"#56B4E9",8:"#009E73",10:"#E69F00",12:"#CC79A7",15:"#D55E00"};
+const REP_COLORS={5:"#0072B2",6:"#56B4E9",8:"#009E73",10:"#E69F00",12:"#CC79A7",14:"#332288",15:"#D55E00",16:"#AA4499",30:"#44AA99"};
 const REP_FALLBACK=["#332288","#88CCEE","#117733","#DDCC77","#AA4499","#44AA99"];
 function repColor(reps){
   if(reps==null) return "#0072B2";
@@ -250,14 +250,6 @@ function inSetOrder(rows){
     .sort((a,b)=>a.ord-b.ord||a.i-b.i)
     .map(x=>x.r);
 }
-function expandReps(rows){
-  const reps=[];
-  for(const r of inSetOrder(rows)){
-    const n=Math.max(1,Number(r.sets)||1);
-    for(let i=0;i<n;i++) reps.push(r.reps);
-  }
-  return reps;
-}
 function pickTop(sets, yfn){
   return sets.reduce((best,r)=>yfn(r)>yfn(best)?r:best);
 }
@@ -275,8 +267,17 @@ function daysOf(rows){
 function point(top, daySets, y){
   return {date:top.date, lift:top.lift, y, top, sets:daySets, variation:top.variation??""};
 }
-// Main lifts: one series per rep count; each point is the heaviest working set at that rep count that day.
-function mainSeries(rows){
+// One series per rep count (main lifts and accessories). Each point is the
+// heaviest working set at that rep count that day, or the longest hold / most
+// reps when the exercise has no load.
+function repLabel(reps, rows){
+  return rows.some(accTimed)?`${reps} sec`:`${reps} reps`;
+}
+function seriesByReps(rows){
+  const working=rows.filter(r=>!isWarmup(r));
+  if(!working.length) return [];
+  const unloaded=working.every(r=>!accLoaded(r));
+  const yfn=r=>unloaded?accY(r):Number(r.weight_lb);
   const byReps=new Map();
   for(const day of daysOf(rows)){
     const atRep=new Map();
@@ -285,94 +286,51 @@ function mainSeries(rows){
       atRep.get(r.reps).push(r);
     }
     for(const [reps, group] of atRep){
-      const top=pickTop(group, r=>Number(r.weight_lb));
+      const top=pickTop(group, yfn);
       if(!byReps.has(reps)) byReps.set(reps,[]);
-      byReps.get(reps).push(point(top, day.sets, Number(top.weight_lb)));
+      byReps.get(reps).push(point(top, group, yfn(top)));
     }
   }
   return [...byReps.entries()].sort((a,b)=>a[0]-b[0]).map(([reps,points])=>({
-    reps, label:`${reps} reps`, points
+    reps, label:repLabel(reps, working), points
   }));
-}
-// Accessories: one series for the exercise; each point is that day's heaviest working weight
-// (or longest hold / most reps when the exercise has no load).
-function accessorySeries(rows){
-  const working=rows.filter(r=>!isWarmup(r));
-  if(!working.length) return [];
-  const unloaded=working.every(r=>!accLoaded(r));
-  const yfn=unloaded?accY:r=>Number(r.weight_lb);
-  const points=daysOf(rows).map(day=>{
-    const top=pickTop(day.sets, yfn);
-    return point(top, day.sets, yfn(top));
-  });
-  return [{
-    reps:null,
-    label:unloaded?(working.some(accTimed)?"Hold":"Reps"):"Weight",
-    points
-  }];
 }
 
 // --- tooltip (shared) and session panel (shared) ---
-function accTooltipLine(top, daySets){
-  const loaded=accLoaded(top);
-  const topW=loaded?Number(top.weight_lb):null;
-  const atTop=loaded?daySets.filter(r=>Number(r.weight_lb)===topW):daySets;
-  const reps=expandReps(atTop);
-  let line;
-  if(accTimed(top)){
-    const per=(top.variation||"").includes("per side")?" per side":"";
-    line=reps.map(n=>`${n}s`).join(", ")+per;
-  }else{
-    const unit=(top.variation==="reps per side")?" reps per side":" reps";
-    const head=loaded?`${top.weight_lb} lb`
-      : top.variation==="bodyweight"?"Bodyweight"
-      : top.variation==="banded"?"Band"
-      : "";
-    line=head?`${head} · ${reps.join(", ")}${unit}`:`${reps.join(", ")}${unit}`;
-  }
-  const extra=[];
-  const rpes=[...new Set(atTop.map(r=>fmtRpe(r.rpe)).filter(s=>s!==""))];
-  if(rpes.length) extra.push(`RPE ${rpes.join(", ")}`);
-  if(loaded){
-    const lighter=new Map();
-    for(const r of daySets){
-      if(Number(r.weight_lb)<topW){
-        const w=r.weight_lb;
-        lighter.set(w,(lighter.get(w)||0)+Math.max(1,Number(r.sets)||1));
-      }
-    }
-    if(lighter.size){
-      const bits=[...lighter.entries()]
-        .sort((a,b)=>Number(b[0])-Number(a[0]))
-        .map(([w,n])=>`${n} set${n===1?"":"s"} at ${w} lb`);
-      extra.push("+ "+bits.join(", "));
-    }
-  }
-  const vars=[...new Set(daySets.map(r=>displayVar(r,r.lift)).filter(Boolean))];
-  if(vars.length) extra.push(vars.join(", "));
-  return {line, extra};
-}
-function mainTooltipLines(top, daySets, lift){
-  const same=inSetOrder(daySets.filter(r=>r.weight_lb===top.weight_lb));
-  const rows=same.length?same:[top];
-  const lines=[setHeadline(top,lift)];
+function tooltipFor(pt, mode, lift){
+  const top=pt.top, group=pt.sets||[top];
+  const loaded=accLoaded(top)||LIFT_ORDER.includes(lift||top.lift);
+  const sameW=inSetOrder(group.filter(r=>loaded?r.weight_lb===top.weight_lb:true));
+  const rows=sameW.length?sameW:[top];
+  const label=[setHeadline(top,lift)];
   const seen=new Set();
   const bits=[];
   for(const r of rows){
     const b=accSetRep(r);
     if(!seen.has(b)){ seen.add(b); bits.push(b); }
   }
-  if(bits.length) lines.push(bits.join(" · "));
+  if(bits.length) label.push(bits.join(" · "));
+  const extra=[];
   const rpes=[...new Set(rows.map(r=>fmtRpe(r.rpe)).filter(s=>s!==""))];
-  if(rpes.length) lines.push(`RPE ${rpes.join(", ")}`);
-  return lines;
-}
-function tooltipFor(pt, mode, lift){
-  if(mode==="accessory"){
-    const t=accTooltipLine(pt.top, pt.sets);
-    return {title:fmtLong(pt.date), label:t.line, extra:t.extra, colors:false};
+  if(rpes.length) extra.push(`RPE ${rpes.join(", ")}`);
+  if(loaded){
+    const topW=Number(top.weight_lb);
+    const lighter=new Map();
+    for(const r of group){
+      if(Number(r.weight_lb)<topW){
+        const w=r.weight_lb;
+        lighter.set(w,(lighter.get(w)||0)+Math.max(1,Number(r.sets)||1));
+      }
+    }
+    if(lighter.size){
+      extra.push("+ "+[...lighter.entries()]
+        .sort((a,b)=>Number(b[0])-Number(a[0]))
+        .map(([w,n])=>`${n} set${n===1?"":"s"} at ${w} lb`).join(", "));
+    }
   }
-  return {title:fmtLong(pt.date), label:mainTooltipLines(pt.top, pt.sets, lift), extra:[], colors:true};
+  const vars=[...new Set(group.map(r=>displayVar(r,lift||r.lift)).filter(Boolean))];
+  if(vars.length) extra.push(vars.join(", "));
+  return {title:fmtLong(pt.date), label, extra};
 }
 
 function renderSession(panel, lift, date, hitRow, allRows, onClose){
@@ -398,7 +356,7 @@ function renderSession(panel, lift, date, hitRow, allRows, onClose){
 // --- chart renderer (shared; mode chooses series shape, colors, and tooltip) ---
 function buildChart(host, {lift, name, color, rows, allRows, id, mode}){
   const isMain=mode==="main";
-  const series=isMain?mainSeries(rows):accessorySeries(rows);
+  const series=seriesByReps(rows);
   const card=document.createElement("div");
   card.className="card";
   card.dataset.lift=lift;
@@ -412,15 +370,13 @@ function buildChart(host, {lift, name, color, rows, allRows, id, mode}){
 
   const legends=document.createElement("div");
   legends.className="legends";
-  if(isMain){
-    const rLeg=document.createElement("div");
-    rLeg.className="vlegend";
-    rLeg.innerHTML=series.map(s=>`<span data-ink="${esc(repColor(s.reps))}" style="color:${repColor(s.reps)}"><i class="swatch"></i> ${esc(s.label)}</span>`).join("");
-    legends.appendChild(rLeg);
-  }
+  const rLeg=document.createElement("div");
+  rLeg.className="vlegend";
+  rLeg.innerHTML=series.map(s=>`<span data-ink="${esc(repColor(s.reps))}" style="color:${repColor(s.reps)}"><i class="swatch"></i> ${esc(s.label)}</span>`).join("");
+  legends.appendChild(rLeg);
   const usedVars=usedVariations(lift, rows);
   // Main lifts always show the variation legend (e.g. Comp standard).
-  // Accessories show it only when more than one variation appears.
+  // Accessories show the shape legend only when more than one variation appears.
   if(usedVars.length && (isMain || usedVars.length>1)){
     const vLeg=document.createElement("div");
     vLeg.className="vlegend";
@@ -444,7 +400,7 @@ function buildChart(host, {lift, name, color, rows, allRows, id, mode}){
   host.appendChild(card);
 
   const inkOf=()=>(canvasWrap._ink||inkFor(canvasWrap.clientWidth));
-  const baseColor=s=>isMain?repColor(s.reps):color;
+  const baseColor=s=>repColor(s.reps);
   const seriesColor=s=>punch(baseColor(s),inkOf().punch);
   const unloaded=!isMain&&rows.length>0&&rows.every(r=>!accLoaded(r));
   const allY=series.flatMap(s=>s.points.map(p=>p.y));
@@ -516,7 +472,7 @@ function buildChart(host, {lift, name, color, rows, allRows, id, mode}){
         tooltip:{
           enabled:canHover,
           events:canHover?["mousemove","mouseout"]:[],
-          displayColors:isMain,
+          displayColors:true,
           filter(item,index,items){
             const t=items[0];
             if(!t) return false;
