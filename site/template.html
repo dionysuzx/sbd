@@ -149,8 +149,22 @@ const GLYPH={
 };
 const glyph=s=>GLYPH[s]||GLYPH.circle;
 
-const REP_COLORS={5:"#0072B2",6:"#56B4E9",8:"#009E73",10:"#E69F00",12:"#CC79A7",14:"#332288",15:"#D55E00",16:"#AA4499",30:"#44AA99"};
-const REP_FALLBACK=["#332288","#88CCEE","#117733","#DDCC77","#AA4499","#44AA99"];
+// Shared main-lift and accessory palette. In-use rep counts are 5, 6, 8, 10,
+// 12, 14, 15, 16, 30. Colors are Okabe-Ito, Paul Tol, and Tableau hues, picked
+// so counts that share a chart (especially 12/14/16) stay clearly distinct on
+// white and remain separable under common color-vision deficiencies.
+const REP_COLORS={
+  5:"#0072B2",
+  6:"#56B4E9",
+  8:"#009E73",
+  10:"#E69F00",
+  12:"#332288",
+  14:"#F28E2B",
+  15:"#D55E00",
+  16:"#44AA99",
+  30:"#882255"
+};
+const REP_FALLBACK=["#9C755F","#88CCEE","#117733","#CC6677","#AA4499","#999933"];
 function repColor(reps){
   if(reps==null) return "#0072B2";
   if(REP_COLORS[reps]) return REP_COLORS[reps];
