@@ -27,7 +27,7 @@ SBD_VARIATIONS = {
     "deadlift": ("conventional", "not recorded"),
 }
 ACC_VARIATIONS = {
-    "rfe_lunge": ("with hand support (UE support)", "not recorded"),
+    "rfe_lunge": ("with hand support (UE support)", "no hand support"),
     "lat_pullover": ("in glute bridge", "not recorded"),
     "cs_row": ("with dumbbells",),
     "bird_dog_row": ("reps per side", "not recorded"),

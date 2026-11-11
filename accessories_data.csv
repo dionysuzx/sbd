@@ -1,7 +1,7 @@
 date,lift,weight_lb,per_side_lb,sets,reps,rpe,variation,notes,source
-2026-09-20,rfe_lunge,13,,3,12,,not recorded,Weight from '13lbs for lunges' in the Sun entry; 3x12 taken from the 3x-a-week program block in the same entry (no reps written next to the weight).,pre_trainer_log_pdf
+2026-09-20,rfe_lunge,13,,3,12,,no hand support,Weight from '13lbs for lunges' in the Sun entry; 3x12 taken from the 3x-a-week program block in the same entry (no reps written next to the weight).,pre_trainer_log_pdf
 2026-09-22,copenhagen,,,3,30,,seconds per side,From David's pre-Trainer log (3x30s/side).,pre_trainer_log_pdf
-2026-09-22,rfe_lunge,15,,3,12,,not recorded,"Same entry: 'had to do some stretching elevated lunges for 20lbs, wasn't painful enough' (unclear, not plotted). Left glute felt underactive on single-leg work.",pre_trainer_log_pdf
+2026-09-22,rfe_lunge,15,,3,12,,no hand support,"Same entry: 'had to do some stretching elevated lunges for 20lbs, wasn't painful enough' (unclear, not plotted). Left glute felt underactive on single-leg work.",pre_trainer_log_pdf
 2026-09-24,cs_row,30,,3,12,,with dumbbells,Logged as '30 lb dumbbells' with no sets/reps; 3x12 assumed (matches the next sessions).,pre_trainer_log_pdf
 2026-09-26,cs_row,45,,3,12,,with dumbbells,,pre_trainer_log_pdf
 2026-09-29,ir_pull_apart,,,3,15,,banded,From David's pre-Trainer log (travel day).,pre_trainer_log_pdf
