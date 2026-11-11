@@ -24,9 +24,10 @@ th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--bd);vertical
 th{background:#f3f4f6;white-space:nowrap}td.n{white-space:nowrap}td.notes{min-width:220px}
 .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
 .legends{display:flex;flex-direction:column;gap:6px;margin:-2px 0 8px}
-.vlegend{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:.85rem;color:#374151}
+.vlegend{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:var(--chart-legend-size,.85rem);color:#374151}
 .vlegend span{display:inline-flex;align-items:center;gap:5px}
-.swatch{display:inline-block;width:16px;height:3px;border-radius:1px;background:currentColor}
+.vlegend svg{width:var(--chart-glyph,12px);height:var(--chart-glyph,12px);display:block}
+.swatch{display:inline-block;width:var(--chart-swatch-w,16px);height:var(--chart-swatch-h,3px);border-radius:1px;background:currentColor}
 details.acc{padding:0}details.acc>summary{cursor:pointer;padding:14px 16px;font-weight:700;font-size:1.15rem;list-style:none;display:flex;align-items:center;gap:8px}
 details.acc>summary::-webkit-details-marker{display:none}details.acc>summary::before{content:"▸";color:#6b7280;transition:transform .15s}details.acc[open]>summary::before{transform:rotate(90deg)}
 details.acc>:not(summary){margin-left:16px;margin-right:16px}details.acc .card{border-color:#eef0f3}details.acc .tw{margin-bottom:16px}
@@ -141,12 +142,85 @@ function repColor(reps){
   return REP_FALLBACK[Math.abs(Number(reps))%REP_FALLBACK.length];
 }
 
+// Line weight, markers, type, and color punch scale with chart width so
+// desktop reads closer to the phone, while a ~360px chart stays as-is.
+const INK_FONT='-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif';
+function inkFor(width){
+  const t=Math.max(0,Math.min(1,(width-360)/(840-360)));
+  const lerp=(a,b)=>a+(b-a)*t;
+  return {
+    t,
+    line:lerp(2,2.8),
+    point:lerp(1,1.75),
+    font:lerp(12,15),
+    titleFont:lerp(12,15),
+    labelFont:lerp(10,13),
+    legendPx:lerp(13.6,17.6),
+    glyph:lerp(12,21),
+    swatchW:lerp(16,24),
+    swatchH:lerp(3,5),
+    starR:lerp(8,14),
+    starInner:lerp(3.6,6.3),
+    markLine:lerp(1.5,2.2),
+    punch:lerp(0,0.28)
+  };
+}
+function punch(hex, amount){
+  if(!amount||!hex||hex[0]!=="#") return hex;
+  const n=hex.length===4?hex.slice(1).split("").map(c=>c+c).join(""):hex.slice(1);
+  if(n.length!==6) return hex;
+  const [R,G,B]=[0,2,4].map(i=>parseInt(n.slice(i,i+2),16)/255);
+  const max=Math.max(R,G,B),min=Math.min(R,G,B),l=(max+min)/2,d=max-min;
+  let h=0,s=0;
+  if(d){
+    s=l>0.5?d/(2-max-min):d/(max+min);
+    h=max===R?((G-B)/d+(G<B?6:0)):max===G?(B-R)/d+2:(R-G)/d+4;
+    h/=6;
+  }
+  s+=(1-s)*amount*0.55;
+  const L=l*(1-amount*0.12);
+  const q=L<0.5?L*(1+s):L+s-L*s,p=2*L-q;
+  const f=t=>{t=(t%1+1)%1;return t<1/6?p+(q-p)*6*t:t<1/2?q:t<2/3?p+(q-p)*(2/3-t)*6:p;};
+  const hex2=v=>Math.round(v*255).toString(16).padStart(2,"0");
+  return "#"+[f(h+1/3),f(h),f(h-1/3)].map(hex2).join("");
+}
+function applyChartInk(chart){
+  const wrap=chart.canvas.parentElement;
+  const ink=inkFor(chart.canvas.clientWidth||(wrap&&wrap.clientWidth)||360);
+  chart.$ink=ink;
+  if(wrap) wrap._ink=ink;
+  const card=chart.canvas.closest(".card");
+  if(card){
+    card.style.setProperty("--chart-legend-size",ink.legendPx+"px");
+    card.style.setProperty("--chart-glyph",ink.glyph+"px");
+    card.style.setProperty("--chart-swatch-w",ink.swatchW+"px");
+    card.style.setProperty("--chart-swatch-h",ink.swatchH+"px");
+    card.querySelectorAll("[data-ink]").forEach(el=>{
+      el.style.color=punch(el.dataset.ink,ink.punch);
+    });
+  }
+  const tickFont={family:INK_FONT,size:ink.font};
+  const titleFont={family:INK_FONT,size:ink.titleFont,weight:"500"};
+  const x=chart.options.scales.x,y=chart.options.scales.y;
+  x.ticks.font=tickFont;x.title.font=titleFont;
+  y.ticks.font=tickFont;y.title.font=titleFont;
+  for(const ds of chart.data.datasets){
+    if(ds._baseColor){
+      const c=punch(ds._baseColor,ink.punch);
+      ds.borderColor=c;
+      ds.backgroundColor=c;
+      ds.pointBackgroundColor=c;
+    }
+    ds.borderWidth=ink.line;
+  }
+}
+const chartInk={id:"chartInk",beforeUpdate:applyChartInk};
 const ptMarker={id:"ptMarker",afterDatasetsDraw(chart){const xs=chart.scales.x,a=chart.chartArea,x=xs.getPixelForValue(ts(PT_START.date));
-  if(x<a.left||x>a.right)return;const c=chart.ctx;c.save();
-  c.strokeStyle="#eab308";c.lineWidth=1.5;c.setLineDash([4,3]);c.beginPath();c.moveTo(x,a.top);c.lineTo(x,a.bottom);c.stroke();c.setLineDash([]);
-  const R=8,r=3.6,cy=a.bottom-R-2;c.beginPath();for(let i=0;i<10;i++){const ang=-Math.PI/2+i*Math.PI/5,rad=i%2?r:R;c.lineTo(x+rad*Math.cos(ang),cy+rad*Math.sin(ang));}
-  c.closePath();c.fillStyle="#facc15";c.fill();c.strokeStyle="#a16207";c.lineWidth=1;c.stroke();
-  c.font="600 10px -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif";c.fillStyle="#854d0e";c.textAlign="left";c.textBaseline="top";c.fillText(PT_START.label,x+4,a.top+2);
+  if(x<a.left||x>a.right)return;const ink=chart.$ink||inkFor(chart.canvas.clientWidth),c=chart.ctx;c.save();
+  c.strokeStyle=punch("#eab308",ink.punch);c.lineWidth=ink.markLine;c.setLineDash([4,3]);c.beginPath();c.moveTo(x,a.top);c.lineTo(x,a.bottom);c.stroke();c.setLineDash([]);
+  const R=ink.starR,r=ink.starInner,cy=a.bottom-R-2;c.beginPath();for(let i=0;i<10;i++){const ang=-Math.PI/2+i*Math.PI/5,rad=i%2?r:R;c.lineTo(x+rad*Math.cos(ang),cy+rad*Math.sin(ang));}
+  c.closePath();c.fillStyle=punch("#facc15",ink.punch);c.fill();c.strokeStyle=punch("#a16207",ink.punch);c.lineWidth=Math.max(1,ink.markLine*0.7);c.stroke();
+  c.font=`600 ${ink.labelFont}px ${INK_FONT}`;c.fillStyle=punch("#854d0e",ink.punch);c.textAlign="left";c.textBaseline="top";c.fillText(PT_START.label,x+4,a.top+2);
   c.restore();}};
 
 // --- session points: raw rows -> one point per day (accessories) or per day+rep count (main lifts) ---
@@ -324,7 +398,7 @@ function buildChart(host, {lift, name, color, rows, allRows, id, mode}){
   if(isMain){
     const rLeg=document.createElement("div");
     rLeg.className="vlegend";
-    rLeg.innerHTML=series.map(s=>`<span style="color:${repColor(s.reps)}"><i class="swatch"></i> ${esc(s.label)}</span>`).join("");
+    rLeg.innerHTML=series.map(s=>`<span data-ink="${esc(repColor(s.reps))}" style="color:${repColor(s.reps)}"><i class="swatch"></i> ${esc(s.label)}</span>`).join("");
     legends.appendChild(rLeg);
   }
   const usedVars=[];
@@ -357,7 +431,9 @@ function buildChart(host, {lift, name, color, rows, allRows, id, mode}){
   card.appendChild(panel);
   host.appendChild(card);
 
-  const seriesColor=s=>isMain?repColor(s.reps):color;
+  const inkOf=()=>(canvasWrap._ink||inkFor(canvasWrap.clientWidth));
+  const baseColor=s=>isMain?repColor(s.reps):color;
+  const seriesColor=s=>punch(baseColor(s),inkOf().punch);
   const unloaded=!isMain&&rows.length>0&&rows.every(r=>!accLoaded(r));
   const allY=series.flatMap(s=>s.points.map(p=>p.y));
   const yPad=unloaded?2:(isMain?20:10);
@@ -365,29 +441,37 @@ function buildChart(host, {lift, name, color, rows, allRows, id, mode}){
   const isSel=r=>sameRow(card._selected,r);
   const baseRadius=(row,n)=>{
     const st=(vs(row||{},lift)||{style:"circle"}).style;
-    return n===1?7:(st!=="circle"?7:5);
+    const r=n===1?7:(st!=="circle"?7:5);
+    return r*inkOf().point;
   };
   const datasets=series.map(s=>({
     label:s.label,
     data:s.points.map(p=>({x:ts(p.date),y:p.y,pt:p})),
+    _baseColor:baseColor(s),
     borderColor:seriesColor(s),
     backgroundColor:seriesColor(s),
     pointBackgroundColor:seriesColor(s),
     pointBorderColor:c=>isSel(s.points[c.dataIndex].top)?"#111827":seriesColor(s),
-    pointBorderWidth:c=>isSel(s.points[c.dataIndex].top)?3:1,
+    pointBorderWidth:c=>{
+      const ink=inkOf();
+      return isSel(s.points[c.dataIndex].top)?Math.max(3,ink.line+0.4):Math.max(1,ink.line*0.45);
+    },
     pointStyle:c=>(vs(s.points[c.dataIndex].top||{},lift)||{style:"circle"}).style,
     pointRadius:c=>{
       const p=s.points[c.dataIndex], base=baseRadius(p.top,s.points.length);
-      return isSel(p.top)?base+2:base;
+      return isSel(p.top)?base+2*inkOf().point:base;
     },
     pointHoverRadius:c=>{
       const p=s.points[c.dataIndex], base=baseRadius(p.top,s.points.length);
-      return (isSel(p.top)?base+2:base)+2;
+      return (isSel(p.top)?base+2*inkOf().point:base)+2*inkOf().point;
     },
     pointHoverBorderColor:c=>isSel(s.points[c.dataIndex].top)?"#111827":seriesColor(s),
-    pointHoverBorderWidth:c=>isSel(s.points[c.dataIndex].top)?3:1,
+    pointHoverBorderWidth:c=>{
+      const ink=inkOf();
+      return isSel(s.points[c.dataIndex].top)?Math.max(3,ink.line+0.4):Math.max(1,ink.line*0.45);
+    },
     pointHitRadius:16,
-    borderWidth:2,
+    borderWidth:()=>inkOf().line,
     tension:0
   }));
 
@@ -410,7 +494,7 @@ function buildChart(host, {lift, name, color, rows, allRows, id, mode}){
   const canvas=canvasWrap.querySelector("canvas");
   canvas.setAttribute("role","img");
   canvas.setAttribute("aria-label", name+" progress chart");
-  chart=new Chart(canvas,{type:"line",plugins:[ptMarker],
+  chart=new Chart(canvas,{type:"line",plugins:[chartInk,ptMarker],
     data:{datasets},
     options:{
       maintainAspectRatio:false,animation:false,
