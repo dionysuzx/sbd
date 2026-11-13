@@ -1,0 +1,20 @@
+{
+	"therapyStart": { "date": "2026-09-16", "label": "Started PT with Sina" },
+	"meet": { "name": "King Prime Classic", "date": "2026-12-12" },
+	"weightClasses": { "target": 93, "next": 105 },
+	"currentAccessories": [
+		"rfe-lunge",
+		"lat-pullover",
+		"reverse-nordic",
+		"copenhagen",
+		"seated-cable-row",
+		"triceps-pressdown",
+		"bird-dog-row",
+		"chest-supported-row",
+		"hamstring-curl",
+		"ir-pull-apart",
+		"dip",
+		"pull-up",
+		"back-extension"
+	]
+}

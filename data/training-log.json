@@ -1,0 +1,1317 @@
+[
+	{
+		"date": "2026-09-17",
+		"exercise": "deadlift",
+		"source": "pre-trainer-csv",
+		"setGroups": [
+			{
+				"sets": 4,
+				"reps": 5,
+				"load": 145,
+				"rpe": 7,
+				"variation": "conventional",
+				"note": "RPE 7 (form/bracing); very minor left coccyx feeling on set 4"
+			}
+		]
+	},
+	{
+		"date": "2026-09-19",
+		"exercise": "bench",
+		"source": "pre-trainer-csv",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 5,
+				"load": 205,
+				"variation": "touch-and-go"
+			}
+		]
+	},
+	{
+		"date": "2026-09-20",
+		"exercise": "rfe-lunge",
+		"source": "pre-trainer-log-pdf",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 12,
+				"load": 13,
+				"variation": "no-hand-support",
+				"note": "Weight from '13lbs for lunges' in the Sun entry; 3x12 taken from the 3x-a-week program block in the same entry (no reps written next to the weight)."
+			}
+		]
+	},
+	{
+		"date": "2026-09-21",
+		"exercise": "bench",
+		"source": "pre-trainer-csv",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 5,
+				"load": 205,
+				"variation": "touch-and-go",
+				"note": "held weight from last week, focus on form; gym bench felt low/narrow"
+			}
+		]
+	},
+	{
+		"date": "2026-09-22",
+		"exercise": "copenhagen",
+		"source": "pre-trainer-log-pdf",
+		"setGroups": [
+			{
+				"sets": 3,
+				"seconds": 30,
+				"note": "From David's pre-Trainer log (3x30s/side)."
+			}
+		]
+	},
+	{
+		"date": "2026-09-22",
+		"exercise": "rfe-lunge",
+		"source": "pre-trainer-log-pdf",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 12,
+				"load": 15,
+				"variation": "no-hand-support",
+				"note": "Same entry: 'had to do some stretching elevated lunges for 20lbs, wasn't painful enough' (unclear, not plotted). Left glute felt underactive on single-leg work."
+			}
+		]
+	},
+	{
+		"date": "2026-09-22",
+		"exercise": "squat",
+		"source": "pre-trainer-csv",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 10,
+				"load": 115,
+				"variation": "high-bar",
+				"note": "35 lb/side; emphasizing technique; total assumes 45 lb bar"
+			}
+		]
+	},
+	{
+		"date": "2026-09-24",
+		"exercise": "chest-supported-row",
+		"source": "pre-trainer-log-pdf",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 12,
+				"load": 30,
+				"variation": "dumbbells",
+				"note": "Logged as '30 lb dumbbells' with no sets/reps; 3x12 assumed (matches the next sessions)."
+			}
+		]
+	},
+	{
+		"date": "2026-09-24",
+		"exercise": "deadlift",
+		"source": "pre-trainer-csv",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 8,
+				"load": 185,
+				"variation": "conventional"
+			}
+		]
+	},
+	{
+		"date": "2026-09-26",
+		"exercise": "bench",
+		"source": "pre-trainer-csv",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 8,
+				"load": 185,
+				"variation": "touch-and-go"
+			}
+		]
+	},
+	{
+		"date": "2026-09-26",
+		"exercise": "chest-supported-row",
+		"source": "pre-trainer-log-pdf",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 12,
+				"load": 45,
+				"variation": "dumbbells"
+			}
+		]
+	},
+	{
+		"date": "2026-09-29",
+		"exercise": "ir-pull-apart",
+		"source": "pre-trainer-log-pdf",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 15,
+				"note": "From David's pre-Trainer log (travel day)."
+			}
+		]
+	},
+	{
+		"date": "2026-10-04",
+		"exercise": "copenhagen",
+		"source": "pre-trainer-log-pdf",
+		"setGroups": [
+			{
+				"sets": 3,
+				"seconds": 30,
+				"note": "From David's pre-Trainer log (3x30s/side)."
+			}
+		]
+	},
+	{
+		"date": "2026-10-04",
+		"exercise": "rfe-lunge",
+		"source": "pre-trainer-log-pdf",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 12,
+				"load": 18,
+				"variation": "hand-support"
+			}
+		]
+	},
+	{
+		"date": "2026-10-04",
+		"exercise": "squat",
+		"source": "pre-trainer-csv",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 10,
+				"load": 125,
+				"variation": "high-bar",
+				"note": "40 lb/side; total assumes 45 lb bar"
+			}
+		]
+	},
+	{
+		"date": "2026-10-05",
+		"exercise": "bench",
+		"source": "pre-trainer-csv",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 8,
+				"load": 185,
+				"variation": "touch-and-go"
+			}
+		]
+	},
+	{
+		"date": "2026-10-05",
+		"exercise": "chest-supported-row",
+		"source": "pre-trainer-log-pdf",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 12,
+				"load": 50,
+				"variation": "dumbbells"
+			}
+		]
+	},
+	{
+		"date": "2026-10-06",
+		"exercise": "deadlift",
+		"source": "pre-trainer-csv",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 8,
+				"load": 205,
+				"variation": "conventional"
+			}
+		]
+	},
+	{
+		"date": "2026-10-08",
+		"exercise": "copenhagen",
+		"source": "pre-trainer-log-pdf",
+		"setGroups": [
+			{
+				"sets": 3,
+				"seconds": 30,
+				"note": "From David's pre-Trainer log (3x30s/side)."
+			}
+		]
+	},
+	{
+		"date": "2026-10-08",
+		"exercise": "rfe-lunge",
+		"source": "pre-trainer-log-pdf",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 12,
+				"load": 25,
+				"variation": "hand-support"
+			}
+		]
+	},
+	{
+		"date": "2026-10-08",
+		"exercise": "squat",
+		"source": "pre-trainer-csv",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 10,
+				"load": 135,
+				"variation": "high-bar",
+				"note": "45 lb/side; total assumes 45 lb bar"
+			}
+		]
+	},
+	{
+		"date": "2026-10-10",
+		"exercise": "bench",
+		"source": "pre-trainer-csv",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 8,
+				"load": 185,
+				"variation": "touch-and-go",
+				"note": "note to try pausing"
+			}
+		]
+	},
+	{
+		"date": "2026-10-10",
+		"exercise": "chest-supported-row",
+		"source": "pre-trainer-log-pdf",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 12,
+				"load": 55,
+				"variation": "dumbbells"
+			}
+		]
+	},
+	{
+		"date": "2026-10-12",
+		"exercise": "deadlift",
+		"source": "pre-trainer-csv",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 8,
+				"load": 205,
+				"variation": "conventional",
+				"note": "Done Mon morning after skipping Sun Oct 11; weight not written on Monday, 205 taken from the planned Sunday entry."
+			}
+		]
+	},
+	{
+		"date": "2026-10-12",
+		"exercise": "ir-pull-apart",
+		"source": "pre-trainer-log-pdf",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 12,
+				"note": "From the Mon Oct 12 morning deadlift entry."
+			}
+		]
+	},
+	{
+		"date": "2026-10-14",
+		"exercise": "copenhagen",
+		"source": "pre-trainer-log-pdf",
+		"setGroups": [
+			{
+				"sets": 3,
+				"seconds": 30,
+				"note": "From David's pre-Trainer log (3x30s/side)."
+			}
+		]
+	},
+	{
+		"date": "2026-10-14",
+		"exercise": "lat-pullover",
+		"source": "pre-trainer-log-pdf",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 10,
+				"load": 25,
+				"variation": "glute-bridge"
+			}
+		]
+	},
+	{
+		"date": "2026-10-14",
+		"exercise": "rfe-lunge",
+		"source": "pre-trainer-log-pdf",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 12,
+				"load": 25,
+				"variation": "hand-support"
+			}
+		]
+	},
+	{
+		"date": "2026-10-14",
+		"exercise": "squat",
+		"source": "pre-trainer-csv",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 10,
+				"load": 165,
+				"variation": "low-bar-belted",
+				"note": "60 lb/side; first low-bar session; minor wrist pain; total assumes 45 lb bar"
+			}
+		]
+	},
+	{
+		"date": "2026-10-16",
+		"exercise": "bench",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 8,
+				"load": 185,
+				"variation": "paused",
+				"note": "First comp-standard session; earlier benches were touch-and-go (David, Oct 19)."
+			}
+		]
+	},
+	{
+		"date": "2026-10-16",
+		"exercise": "chest-supported-row",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 10,
+				"load": 60,
+				"variation": "dumbbells",
+				"note": "Set 2 confirmed: 60 × 10 (hard). Set 1 not reported. Set 3 dropped to 55 (reps not reported), so only the confirmed set is plotted."
+			}
+		]
+	},
+	{
+		"date": "2026-10-17",
+		"exercise": "deadlift",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 8,
+				"load": 255,
+				"rpe": 8,
+				"variation": "conventional",
+				"note": "RPE 8; planned 225. Stance confirmed conventional by David Nov 10."
+			}
+		]
+	},
+	{
+		"date": "2026-10-17",
+		"exercise": "ir-pull-apart",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 12,
+				"note": "Prescribed 3x12 this session (rows skipped). Done as prescribed per David; exact reps/RPE not reported."
+			}
+		]
+	},
+	{
+		"date": "2026-10-17",
+		"exercise": "lat-pulldown",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 10,
+				"load": 145,
+				"note": "145 lb and 10-12 reps reported; set count not given. Logged 3x10 from same-day prescription (3x10-12). Done as prescribed per David; exact sets/reps not reported."
+			}
+		]
+	},
+	{
+		"date": "2026-10-17",
+		"exercise": "straight-arm-pulldown",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 12,
+				"load": 50,
+				"variation": "straight-bar",
+				"note": "Weight 50 lb reported (straight bar). Prescribed 3x12-15; exact reps not reported, logged at low end. Done as prescribed per David."
+			}
+		]
+	},
+	{
+		"date": "2026-10-19",
+		"exercise": "copenhagen",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"seconds": 30,
+				"note": "Prescribed 3x30s/side. Done as prescribed per David; hold times not re-reported."
+			}
+		]
+	},
+	{
+		"date": "2026-10-19",
+		"exercise": "lat-pullover",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 10,
+				"load": 30,
+				"variation": "glute-bridge",
+				"note": "3x10 assumed (not stated)"
+			}
+		]
+	},
+	{
+		"date": "2026-10-19",
+		"exercise": "reverse-nordic",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 5,
+				"variation": "unassisted",
+				"note": "Prescribed 3x5 bodyweight. Done as prescribed per David; exact reps/RPE not reported."
+			}
+		]
+	},
+	{
+		"date": "2026-10-19",
+		"exercise": "rfe-lunge",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 12,
+				"load": 35,
+				"variation": "hand-support"
+			}
+		]
+	},
+	{
+		"date": "2026-10-19",
+		"exercise": "squat",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 10,
+				"load": 185,
+				"rpe": 8,
+				"variation": "low-bar-belted",
+				"note": "RPE 8. Wrists better with slightly wider grip; asking Sina about thumb position."
+			}
+		]
+	},
+	{
+		"date": "2026-10-21",
+		"exercise": "bench",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 5,
+				"load": 210,
+				"variation": "paused",
+				"note": "First paused 3x5; previous 3x5 was 205 touch-and-go on Sep 21. Short on sleep."
+			},
+			{
+				"sets": 3,
+				"reps": 8,
+				"load": 185,
+				"variation": "touch-and-go"
+			}
+		]
+	},
+	{
+		"date": "2026-10-21",
+		"exercise": "bird-dog-row",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 8,
+				"load": 20,
+				"note": "First session; did 8-10 reps per side, logged as 8 (low end)."
+			}
+		]
+	},
+	{
+		"date": "2026-10-21",
+		"exercise": "chest-supported-row",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 12,
+				"load": 55,
+				"variation": "dumbbells",
+				"note": "Dropped from 60 to 55 on purpose (poor sleep, after heavy bench). 3x12 assumed."
+			}
+		]
+	},
+	{
+		"date": "2026-10-24",
+		"exercise": "chest-supported-row",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 10,
+				"load": 60,
+				"variation": "dumbbells",
+				"note": "Prescribed 3x10-12 @ 60 (55 if beat up). Logged at 60 / low-end reps. Done as prescribed per David; exact reps/RPE not reported."
+			}
+		]
+	},
+	{
+		"date": "2026-10-24",
+		"exercise": "deadlift",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 8,
+				"load": 275,
+				"variation": "conventional",
+				"note": "Difficult, form not perfect (slammed the weights down). Hook grip on set 1, straps on the follow sets. Stance confirmed conventional by David Nov 10."
+			}
+		]
+	},
+	{
+		"date": "2026-10-24",
+		"exercise": "ir-pull-apart",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 12,
+				"note": "Prescribed 3x12. Done as prescribed per David; exact reps/RPE not reported."
+			}
+		]
+	},
+	{
+		"date": "2026-10-31",
+		"exercise": "copenhagen",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"seconds": 30,
+				"note": "Prescribed 3x30s/side. Done as prescribed per David; hold times not re-reported."
+			}
+		]
+	},
+	{
+		"date": "2026-10-31",
+		"exercise": "lat-pullover",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 10,
+				"load": 30,
+				"variation": "glute-bridge",
+				"note": "Done as prescribed per David; exact reps/RPE not reported."
+			}
+		]
+	},
+	{
+		"date": "2026-10-31",
+		"exercise": "reverse-nordic",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 5,
+				"variation": "unassisted",
+				"note": "Prescribed 3x5. Done as prescribed per David; exact reps/RPE not reported."
+			}
+		]
+	},
+	{
+		"date": "2026-10-31",
+		"exercise": "rfe-lunge",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 12,
+				"load": 35,
+				"variation": "hand-support",
+				"note": "Done as prescribed per David; exact reps/RPE not reported."
+			}
+		]
+	},
+	{
+		"date": "2026-10-31",
+		"exercise": "squat",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 10,
+				"load": 190,
+				"variation": "low-bar-belted",
+				"note": "First session back after missing the NYC trip week (Oct 26-30). Up from 185; 3x10 assumed."
+			}
+		]
+	},
+	{
+		"date": "2026-11-02",
+		"exercise": "bench",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 205,
+				"variation": "paused",
+				"note": "Set 1. Felt good."
+			},
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 210,
+				"variation": "paused",
+				"note": "Set 2. Really hard; got the last rep but the pause was subpar."
+			},
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 205,
+				"variation": "paused",
+				"note": "Set 3."
+			}
+		]
+	},
+	{
+		"date": "2026-11-02",
+		"exercise": "bird-dog-row",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 8,
+				"load": 20,
+				"note": "Prescribed 3x8-10/side @ 20; logged at low end. Done as prescribed per David; exact reps/RPE not reported."
+			}
+		]
+	},
+	{
+		"date": "2026-11-02",
+		"exercise": "chest-supported-row",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 12,
+				"load": 55,
+				"variation": "dumbbells",
+				"note": "Prescribed 3x12 @ 55 (same as last bench day). Done as prescribed per David; exact reps/RPE not reported."
+			}
+		]
+	},
+	{
+		"date": "2026-11-04",
+		"exercise": "bench",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 5,
+				"load": 165,
+				"rpe": 5,
+				"variation": "paused",
+				"note": "Block 1 light second bench day; warm-up 135x5. Last set RPE 5."
+			}
+		]
+	},
+	{
+		"date": "2026-11-04",
+		"exercise": "chest-supported-row",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 12,
+				"load": 55,
+				"variation": "dumbbells",
+				"note": "Stalling at 55; next target 60 with 3x8-12 near failure."
+			}
+		]
+	},
+	{
+		"date": "2026-11-04",
+		"exercise": "deadlift",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 5,
+				"load": 275,
+				"rpe": 7.5,
+				"variation": "conventional",
+				"note": "hook grip, last set RPE 7.5"
+			}
+		]
+	},
+	{
+		"date": "2026-11-04",
+		"exercise": "hamstring-curl",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 2,
+				"reps": 12,
+				"load": 90,
+				"variation": "seated",
+				"note": "Sets 1 and 2 of 12. Last set was 15 (see 15-rep row)."
+			},
+			{
+				"sets": 1,
+				"reps": 15,
+				"load": 90,
+				"variation": "seated",
+				"note": "Last set, a struggle. Burnout 1x12 @ ~50-60 (unsure) not plotted. Next target held at 90 after Nov 7 skipped working sets."
+			}
+		]
+	},
+	{
+		"date": "2026-11-04",
+		"exercise": "ir-pull-apart",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 12,
+				"note": "Prescribed 3x12 (after ham curls, or after bench if not already done). Done as prescribed per David; exact reps/RPE not reported."
+			}
+		]
+	},
+	{
+		"date": "2026-11-05",
+		"exercise": "copenhagen",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"seconds": 30,
+				"note": "Confirmed ('i did all that'). Prescribed 3x30s/side. Mild opposite-hip joint feel when bracing soft, fine when bracing hard."
+			}
+		]
+	},
+	{
+		"date": "2026-11-05",
+		"exercise": "lat-pullover",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 10,
+				"load": 35,
+				"variation": "glute-bridge",
+				"note": "Bumped from 30."
+			}
+		]
+	},
+	{
+		"date": "2026-11-05",
+		"exercise": "reverse-nordic",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 5,
+				"variation": "unassisted",
+				"note": "Confirmed ('i did all that'). Prescribed 3x5 bodyweight."
+			}
+		]
+	},
+	{
+		"date": "2026-11-05",
+		"exercise": "rfe-lunge",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 12,
+				"load": 40,
+				"variation": "hand-support",
+				"note": "Bumped from 35; Sina wants progressive overload on rehab. Painful as expected."
+			}
+		]
+	},
+	{
+		"date": "2026-11-05",
+		"exercise": "squat",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 215,
+				"rpe": 5.5,
+				"variation": "low-bar-belted",
+				"note": "top set RPE 5.5-6"
+			},
+			{
+				"sets": 2,
+				"reps": 10,
+				"load": 190,
+				"rpe": 8,
+				"variation": "low-bar-belted",
+				"note": "back-offs ~90% of top; first set RPE 7-8; second set ~RPE 8"
+			}
+		]
+	},
+	{
+		"date": "2026-11-06",
+		"exercise": "bench",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 205,
+				"rpe": 5.5,
+				"variation": "paused",
+				"note": "Working set before the final top set (215); RPE 5.5 per David."
+			},
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 215,
+				"rpe": 7,
+				"variation": "paused",
+				"note": "Final top set; RPE 7 per David."
+			},
+			{
+				"sets": 3,
+				"reps": 8,
+				"load": 190,
+				"variation": "paused",
+				"note": "Back-offs after 215x5 top. Done as prescribed per David; exact RPE not reported."
+			}
+		]
+	},
+	{
+		"date": "2026-11-06",
+		"exercise": "seated-cable-row",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 12,
+				"load": 140,
+				"variation": "narrow-v-handle",
+				"note": "Seated low cable row (not chest-supported row). Set 1 of prescribed 3x10-12; 140x12 confirmed. RPE not given."
+			},
+			{
+				"sets": 2,
+				"reps": 10,
+				"load": 140,
+				"variation": "narrow-v-handle",
+				"note": "Remaining 2 sets of prescribed 3x10-12. Per prescription, weight not confirmed (session working weight was 140). Done as prescribed per David; exact reps/RPE not reported, logged at low end (10)."
+			}
+		]
+	},
+	{
+		"date": "2026-11-06",
+		"exercise": "triceps-pressdown",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 12,
+				"load": 65,
+				"variation": "straight-bar",
+				"note": "Cable triceps pushdown/pressdown (not straight-arm lat pulldown). RPE not given."
+			}
+		]
+	},
+	{
+		"date": "2026-11-07",
+		"exercise": "bird-dog-row",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 6,
+				"load": 20,
+				"note": "Weight approx (David thinks 20 lb). Prescribed 3x6-8/side and reported done; exact reps not confirmed, logged at low end. Felt too easy so he went excessively slow; a little torso rotation, so no bump yet (drop to 15 if rotation persists). RPE not reported."
+			}
+		]
+	},
+	{
+		"date": "2026-11-07",
+		"exercise": "chest-supported-row",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 12,
+				"load": 60,
+				"variation": "dumbbells",
+				"note": "60 lb dumbbells, 30-degree bench. Set 1 of prescribed 3x8-12 (reps 1-11 full; rep 12 ~1 cm short, no jerk or chest lift). RPE not reported."
+			},
+			{
+				"sets": 2,
+				"reps": 8,
+				"load": 60,
+				"variation": "dumbbells",
+				"note": "Remaining sets of prescribed 3x8-12 @ 60 lb DBs, 30-degree bench. Done as prescribed per David; exact reps not reported, logged at low end."
+			}
+		]
+	},
+	{
+		"date": "2026-11-07",
+		"exercise": "deadlift",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 285,
+				"rpe": 6,
+				"variation": "conventional",
+				"note": "Top set, hook grip; RPE 5.5-6 per David (call it 6). Thumbs sore from hook grip (familiar, nothing abnormal per David)."
+			},
+			{
+				"sets": 2,
+				"reps": 8,
+				"load": 255,
+				"variation": "conventional",
+				"note": "Back-offs after 285x5 top set; belted, hook grip (double overhand not enough, switched to hook). First set felt good. RPE not reported."
+			}
+		]
+	},
+	{
+		"date": "2026-11-07",
+		"exercise": "hamstring-curl",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 10,
+				"load": 50,
+				"variation": "seated",
+				"warmup": true,
+				"note": "Felt fine. Stopped curls after: hamstrings very fatigued (also tight after Nov 4 curls). 75x5 not done; working sets (90-95) not done. RPE not reported."
+			}
+		]
+	},
+	{
+		"date": "2026-11-07",
+		"exercise": "ir-pull-apart",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 12,
+				"note": "Prescribed 3x12 after bird dog rows. Done as prescribed per David; exact reps/RPE not reported."
+			}
+		]
+	},
+	{
+		"date": "2026-11-09",
+		"exercise": "copenhagen",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"seconds": 30,
+				"note": "3x30s/side confirmed (David, Nov 10: he did them as prescribed)."
+			}
+		]
+	},
+	{
+		"date": "2026-11-09",
+		"exercise": "lat-pullover",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 10,
+				"load": 35,
+				"variation": "glute-bridge",
+				"note": "Set 1 at 35 confirmed (David, Nov 10). Reps from prescription (10). RPE not reported."
+			},
+			{
+				"sets": 1,
+				"reps": 12,
+				"load": 40,
+				"variation": "glute-bridge",
+				"note": "Set 2 after bump from 35. RPE not reported."
+			},
+			{
+				"sets": 1,
+				"reps": 10,
+				"load": 40,
+				"variation": "glute-bridge",
+				"note": "Set 3, slow controlled tempo. RPE not reported."
+			}
+		]
+	},
+	{
+		"date": "2026-11-09",
+		"exercise": "reverse-nordic",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 5,
+				"variation": "band-assisted",
+				"note": "3 sets confirmed. Band used but not recorded (Sina's sheet is 3x5; no band named)."
+			}
+		]
+	},
+	{
+		"date": "2026-11-09",
+		"exercise": "rfe-lunge",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 12,
+				"load": 40,
+				"variation": "hand-support",
+				"note": "Felt good; stayed at 40 (David chose not to bump). Try 45 next if it still feels good. RPE not reported."
+			}
+		]
+	},
+	{
+		"date": "2026-11-09",
+		"exercise": "squat",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 235,
+				"rpe": 5,
+				"variation": "low-bar-belted",
+				"note": "Working top set RPE 5. Belt from 185; knee sleeves from ~165/185 warm-ups (first time in a while). Coach then approved a second top."
+			},
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 245,
+				"rpe": 6,
+				"variation": "low-bar-belted",
+				"note": "Final top set RPE 6 (coach-approved small-step after 235x5 @5). Belted, knee sleeves."
+			},
+			{
+				"sets": 1,
+				"reps": 8,
+				"load": 215,
+				"rpe": 6.5,
+				"variation": "low-bar-belted",
+				"note": "Back-off set 1 after final top 245. RPE 6.5. Belted, knee sleeves."
+			},
+			{
+				"sets": 1,
+				"reps": 8,
+				"load": 225,
+				"rpe": 7.5,
+				"variation": "low-bar-belted",
+				"note": "Back-off set 2. RPE 7.5 ('gun to head'). Full 8 reps confirmed. Belted, knee sleeves."
+			}
+		]
+	},
+	{
+		"date": "2026-11-10",
+		"exercise": "bench",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 221,
+				"rpe": 7,
+				"variation": "paused",
+				"note": "Top set RPE 7. 100 kg plates on 45 lb Texas bar, ~221.3 lb."
+			},
+			{
+				"sets": 3,
+				"reps": 8,
+				"load": 199,
+				"rpe": 8.5,
+				"variation": "paused",
+				"note": "Back-offs after 221x5 top, 3x8 @ RPE 8.5 (David: maybe 8 but I think 8.5). Red 25 kg + green 10 kg per side on 45 lb Texas bar, ~199.3 lb. Set 1 ring finger on the smooth ring, set 2 pinky on ring, set 3 ring finger; very minor wrist pain, possibly new wider grip."
+			}
+		]
+	},
+	{
+		"date": "2026-11-10",
+		"exercise": "bird-dog-row",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 8,
+				"load": 20,
+				"note": "20 lb 3x8 per side."
+			}
+		]
+	},
+	{
+		"date": "2026-11-10",
+		"exercise": "seated-cable-row",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 12,
+				"load": 145,
+				"variation": "wide-grip",
+				"note": "Wide grip (about shoulder width, mimics comp bench grip). Set 1; 145x12. Felt good. RPE not given."
+			},
+			{
+				"sets": 2,
+				"reps": 12,
+				"load": 160,
+				"variation": "wide-grip",
+				"note": "Wide grip (about shoulder width, mimics comp bench grip). Remaining 2 sets at 160x12. Felt good. RPE not given."
+			}
+		]
+	},
+	{
+		"date": "2026-11-10",
+		"exercise": "triceps-pressdown",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 14,
+				"load": 100,
+				"variation": "straight-bar",
+				"note": "Set 1."
+			},
+			{
+				"sets": 1,
+				"reps": 16,
+				"load": 100,
+				"variation": "straight-bar",
+				"note": "Set 2."
+			},
+			{
+				"sets": 1,
+				"reps": 16,
+				"load": 110,
+				"variation": "straight-bar",
+				"note": "Set 3."
+			}
+		]
+	},
+	{
+		"date": "2026-11-12",
+		"exercise": "back-extension",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 11,
+				"load": 10,
+				"note": "Set 1 at 10 lb x11. Makeup for Monday Nov 9 (missed). Cued competition lower brace on all sets. RPE not reported."
+			},
+			{
+				"sets": 2,
+				"reps": 12,
+				"load": 10,
+				"note": "Sets 2 and 3 at 10 lb x12. Cued competition lower brace on all sets. RPE not reported."
+			}
+		]
+	},
+	{
+		"date": "2026-11-12",
+		"exercise": "bench",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 4,
+				"load": 210,
+				"rpe": 6.5,
+				"variation": "paused",
+				"note": "Friday volume session done Thursday. Set 1 of 4x4 @ RPE 6.5. 95.4 kg: red 25 + green 10 + black 2.5 each side on 45 lb Texas bar (~210.4 lb). Finder at 85 kg x4 @ RPE 3.5-4 not logged (too light, did not count)."
+			},
+			{
+				"sets": 2,
+				"reps": 4,
+				"load": 210,
+				"rpe": 7,
+				"variation": "paused",
+				"note": "Sets 2 and 3 of the 4x4 at 210, RPE 7."
+			},
+			{
+				"sets": 1,
+				"reps": 4,
+				"load": 210,
+				"rpe": 7.5,
+				"variation": "paused",
+				"note": "Set 4 of the 4x4 at 210, RPE 7.5."
+			}
+		]
+	},
+	{
+		"date": "2026-11-12",
+		"exercise": "dip",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 10,
+				"load": 45,
+				"rpe": 7,
+				"note": "Top set. 45 lb plate added. RPE 7 (a little light vs the RPE 8 target). First weighted dip session; last confirmed was BW 3x15 on Oct 16."
+			},
+			{
+				"sets": 1,
+				"reps": 12,
+				"load": 35,
+				"note": "Back-off after 45x10. 35 lb added for 12. RPE not reported."
+			}
+		]
+	},
+	{
+		"date": "2026-11-12",
+		"exercise": "pull-up",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 4,
+				"reps": 8,
+				"note": "Unassisted 4x8, solid. First logged unassisted session. RPE not reported."
+			}
+		]
+	}
+]

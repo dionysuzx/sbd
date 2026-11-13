@@ -1,17 +1,7 @@
-# Secrets and private files
-deploy_response.json
-workout_log.pdf
-
-# Scratch / generated
-__pycache__/
-*.pyc
-*.bak
-*_v*.py
-*_v*.csv
-live*.html
-dom_*.html
-*.png
-final_data.csv
-site/index.html
-site/index_deploy.html
-_site/
+node_modules
+/.svelte-kit
+/build
+.DS_Store
+.env
+.env.*
+vite.config.ts.timestamp-*
