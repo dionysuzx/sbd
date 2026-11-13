@@ -249,7 +249,7 @@ class Row:
     kind: str  # "sbd" or "acc" (not a column)
 
     def key(self):
-        return (self.date, self.lift, self.weight_lb, self.sets, self.reps, self.variation)
+        return (self.date, self.lift, self.weight_lb, self.sets, self.reps, self.rpe, self.variation)
 
     @classmethod
     def parse(cls, raw: Any, kind: str) -> "Row":
@@ -301,7 +301,7 @@ def validate_rows(rows, kind, label):
         if row.key() in seen:
             errs.append(
                 f"  {label} row {i}: duplicate of row {seen[row.key()]} "
-                f"(date, lift, weight, sets x reps, variation) = {row.key()}"
+                f"(date, lift, weight, sets x reps, rpe, variation) = {row.key()}"
             )
         else:
             seen[row.key()] = i

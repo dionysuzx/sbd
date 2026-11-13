@@ -108,7 +108,7 @@ const isWarmup=r=>{
   const n=(r.notes||"").toLowerCase();
   return n.includes("warm-up set only")||n.includes("warmup set only")||n.includes("not a working set");
 };
-const sameRow=(a,b)=>a&&b&&a.date===b.date&&a.lift===b.lift&&a.weight_lb===b.weight_lb&&a.sets===b.sets&&a.reps===b.reps&&(a.variation||"")===(b.variation||"");
+const sameRow=(a,b)=>a&&b&&a.date===b.date&&a.lift===b.lift&&a.weight_lb===b.weight_lb&&a.sets===b.sets&&a.reps===b.reps&&a.rpe===b.rpe&&(a.variation||"")===(b.variation||"");
 const perSide=r=>r.per_side_lb!==""&&r.per_side_lb!=null?` (${r.per_side_lb}/side + 45 bar)`:"";
 function setHeadline(r,lift){
   if(accLoaded(r)) return `${r.weight_lb} lb${perSide(r)}`;

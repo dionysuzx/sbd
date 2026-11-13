@@ -40,7 +40,8 @@ rows = [
 ("2026-11-10","bench",221,"",1,5,7,"","Paused (default). Top set RPE 7. 100 kg plates on 45 lb Texas bar, ~221.3 lb.","trainer_log"),
 ("2026-11-10","bench",199,"",3,8,8.5,"","Paused (default). Back-offs after 221x5 top, 3x8 @ RPE 8.5 (David: maybe 8 but I think 8.5). Red 25 kg + green 10 kg per side on 45 lb Texas bar, ~199.3 lb. Set 1 ring finger on the smooth ring, set 2 pinky on ring, set 3 ring finger; very minor wrist pain, possibly new wider grip.","trainer_log"),
 ("2026-11-12","bench",210,"",1,4,6.5,"","Paused (default). Friday volume session done Thursday. Set 1 of 4x4 @ RPE 6.5. 95.4 kg: red 25 + green 10 + black 2.5 each side on 45 lb Texas bar (~210.4 lb). Finder at 85 kg x4 @ RPE 3.5-4 not logged (too light, did not count).","trainer_log"),
-("2026-11-12","bench",210,"",3,4,None,"","Paused (default). Remaining 3 sets of the 4x4 at 210. Done as prescribed (stay at 210 unless RPE 8 or pause sloppy). Exact RPE not reported.","trainer_log"),
+("2026-11-12","bench",210,"",2,4,7,"","Paused (default). Sets 2 and 3 of the 4x4 at 210, RPE 7.","trainer_log"),
+("2026-11-12","bench",210,"",1,4,7.5,"","Paused (default). Set 4 of the 4x4 at 210, RPE 7.5.","trainer_log"),
 ]
 cols=COLUMNS
 # Validate everything before writing anything (fail loudly on a bad row).
