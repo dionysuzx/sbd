@@ -1,5 +1,5 @@
 import csv, json, sys
-from schema import COLUMNS, ACC_VARIATIONS, all_variations, variation_label_map, validate_rows, SchemaError
+from schema import COLUMNS, BW_COLUMNS, ACC_VARIATIONS, all_variations, variation_label_map, validate_rows, validate_bodyweight_rows, SchemaError
 rows = [
 # date, lift, weight, per_side, sets, reps, rpe, variation, notes, source
 ("2026-09-17","deadlift",145,"",4,5,7,"conventional","RPE 7 (form/bracing); very minor left coccyx feeling on set 4","pre_trainer_csv"),
@@ -50,6 +50,11 @@ try:
     _acc_raw=list(csv.DictReader(open("accessories_data.csv")))
     assert list(_acc_raw[0].keys())==cols if _acc_raw else True, "accessories_data.csv header mismatch"
     validate_rows(_acc_raw,"acc","accessories_data.csv")
+    with open("bodyweight_data.csv") as _bwf:
+        _bw_reader=csv.DictReader(_bwf)
+        assert _bw_reader.fieldnames==BW_COLUMNS, "bodyweight_data.csv header mismatch"
+        _bw_raw=list(_bw_reader)
+    validate_bodyweight_rows(_bw_raw,"bodyweight_data.csv")
 except SchemaError as e:
     sys.exit("BUILD FAILED - schema check:\n"+str(e))
 def csv_cell(v):
@@ -120,12 +125,19 @@ for r in csv.DictReader(open("accessories_data.csv")):
     assert r["lift"] in ACC_NAMES, f"missing display name for accessory {r['lift']}"
     acc.append(r)
 acc.sort(key=lambda r:(r["date"],r["lift"]))
+# Bodyweight: source of truth is bodyweight_data.csv (date, weight_lb).
+# To add a weigh-in: append one row to bodyweight_data.csv.
+bw=[]
+for r in _bw_raw:
+    bw.append({"date":r["date"],"weight_lb":num(r["weight_lb"])})
+bw.sort(key=lambda r:r["date"])
 html=(open("site/template.html").read().replace("__DATA__",json.dumps(data))
       .replace("__ACC_DATA__",json.dumps(acc))
       .replace("__ACC_NAMES__",json.dumps(ACC_NAMES))
       .replace("__ACTIVE_ACCESSORIES__",json.dumps(ACTIVE_ACCESSORIES))
       .replace("__VARIATIONS__",json.dumps(all_variations()))
-      .replace("__VARIATION_LABELS__",json.dumps(variation_label_map())))
+      .replace("__VARIATION_LABELS__",json.dumps(variation_label_map()))
+      .replace("__BW_DATA__",json.dumps(bw)))
 open("site/index.html","w").write(html)
 js=open("site/chart.umd.min.js").read().replace("</script","<\\/script")
 src='<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>'

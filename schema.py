@@ -1,8 +1,9 @@
 """Strict typed row schema for David's SBD site.
 
-Every row (SBD rows in build.py, accessory rows in accessories_data.csv)
-is parsed into a frozen Row model with explicit types. validate_rows()
-raises SchemaError listing every bad row; build.py calls it before writing
+Every row (SBD rows in build.py, accessory rows in accessories_data.csv,
+bodyweight rows in bodyweight_data.csv) is parsed into a frozen model with
+explicit types. validate_rows() and validate_bodyweight_rows() raise
+SchemaError listing every bad row; build.py calls them before writing
 anything. Standard library only — no extra CI dependency.
 
 The ordered variation lists are the single source of truth for:
@@ -302,6 +303,58 @@ def validate_rows(rows, kind, label):
             errs.append(
                 f"  {label} row {i}: duplicate of row {seen[row.key()]} "
                 f"(date, lift, weight, sets x reps, rpe, variation) = {row.key()}"
+            )
+        else:
+            seen[row.key()] = i
+        out.append(row)
+    if errs:
+        raise SchemaError(f"{len(errs)} bad row(s) in {label}:\n" + "\n".join(errs))
+    return out
+
+
+BW_COLUMNS = ["date", "weight_lb"]
+
+
+def _expect_bw_columns(raw: Mapping[str, Any]) -> None:
+    missing = [c for c in BW_COLUMNS if c not in raw]
+    if missing:
+        raise ValueError(f"missing columns {missing}")
+
+
+@dataclass(frozen=True)
+class BodyweightRow:
+    """One logged weigh-in. One row per date; weight_lb is the scale reading."""
+
+    date: str
+    weight_lb: float
+
+    def key(self):
+        return self.date
+
+    @classmethod
+    def parse(cls, raw: Any) -> "BodyweightRow":
+        if not isinstance(raw, Mapping):
+            raise ValueError(f"row must be a mapping, got {type(raw).__name__}")
+        _expect_bw_columns(raw)
+        return cls(
+            date=_iso_date(raw["date"]),
+            weight_lb=float(_num(raw["weight_lb"], "weight_lb")),
+        )
+
+
+def validate_bodyweight_rows(rows, label):
+    """rows: iterable of dicts with BW_COLUMNS. Returns [BodyweightRow]."""
+    out, errs, seen = [], [], {}
+    for i, r in enumerate(rows, 1):
+        try:
+            row = BodyweightRow.parse(r)
+        except (FieldError, ValueError) as e:
+            errs.append(f"  {label} row {i} ({(r or {}).get('date')!s}): {e}")
+            continue
+        if row.key() in seen:
+            errs.append(
+                f"  {label} row {i}: duplicate of row {seen[row.key()]} "
+                f"(date) = {row.key()}"
             )
         else:
             seen[row.key()] = i

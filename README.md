@@ -6,6 +6,7 @@ Training-log site for squat, bench, and deadlift, published at https://sbd.wtf.
 
 - Main lifts: the `rows` list in `build.py`
 - Accessories: `accessories_data.csv`. A new accessory also needs a display name in `ACC_NAMES` in `build.py` and an entry in `ACC_VARIATIONS` in `schema.py`.
+- Bodyweight: `bodyweight_data.csv` (`date`, `weight_lb`). Append one row to add a weigh-in.
 - Accessory charts: only lifts listed in `ACTIVE_ACCESSORIES` in `build.py` get a chart. All logged rows still appear under All sessions → Accessories.
 - Allowed lifts, variations, and sources: `schema.py`. Variation order in that file is also the chart marker order (first = default shape).
 
