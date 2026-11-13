@@ -671,28 +671,6 @@ function buildBodyweight(){
     card.appendChild(note);
   }
 
-  const tw=document.createElement("div");
-  tw.className="tw";
-  const table=document.createElement("table");
-  table.innerHTML=`<thead><tr><th>Date</th><th>Weight (lb)</th></tr></thead><tbody></tbody>`;
-  const tb=table.querySelector("tbody");
-  const newest=[...rows].sort((a,b)=>b.date.localeCompare(a.date));
-  if(!newest.length){
-    const tr=document.createElement("tr");
-    const td=document.createElement("td");
-    td.colSpan=2;td.className="notes";td.textContent="No weigh-ins yet.";
-    tr.appendChild(td);tb.appendChild(tr);
-  }else{
-    for(const r of newest){
-      const tr=document.createElement("tr");
-      [fmtLong(r.date),fmtLb(r.weight_lb)].forEach((v,i)=>{
-        const td=document.createElement("td");td.textContent=v;if(i===1)td.className="n";tr.appendChild(td);
-      });
-      tb.appendChild(tr);
-    }
-  }
-  tw.appendChild(table);
-  card.appendChild(tw);
   host.appendChild(card);
 }
 
