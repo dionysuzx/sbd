@@ -11,11 +11,13 @@ import type { Attachment } from 'svelte/attachments';
 
 Chart.register(LineController, LineElement, PointElement, LinearScale, Tooltip);
 
-export type LineChartConfiguration = ChartConfiguration<'line', { x: number; y: number }[]>;
+type ChartPoint = { x: number; y: number };
+
+export type LineChartConfiguration = ChartConfiguration<'line', ChartPoint[]>;
 
 export function lineChart(configure: () => LineChartConfiguration): Attachment<HTMLCanvasElement> {
 	return (canvas) => {
-		let chart: Chart<'line', { x: number; y: number }[]> | undefined;
+		let chart: Chart<'line', ChartPoint[]> | undefined;
 		$effect(() => {
 			const configuration = configure();
 			if (!chart) {

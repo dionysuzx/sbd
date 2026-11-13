@@ -2,7 +2,7 @@
 	import { bodyweightChartConfiguration } from '#lib/chart/bodyweight-chart.js';
 	import Legend, { type LegendEntry } from '#lib/chart/Legend.svelte';
 	import { lineChart } from '#lib/chart/line-chart.svelte.js';
-	import { seriesColor } from '#lib/chart/palette.js';
+	import { referenceLineColors, seriesColor } from '#lib/chart/palette.js';
 	import type { ReferenceLine } from '#lib/chart/plugins.js';
 	import { strokeScaleFor } from '#lib/chart/stroke-scale.js';
 	import type { Timeline } from '#lib/chart/timeline.js';
@@ -26,13 +26,13 @@
 		{
 			y: weightClasses.target.limitPounds,
 			label: describeWeightClass(weightClasses.target),
-			color: seriesColor(1),
+			color: referenceLineColors.target,
 			dash: [6, 4]
 		},
 		{
 			y: weightClasses.next.limitPounds,
 			label: describeWeightClass(weightClasses.next),
-			color: seriesColor(2),
+			color: referenceLineColors.next,
 			dash: [3, 3]
 		}
 	]);

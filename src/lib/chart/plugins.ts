@@ -74,8 +74,9 @@ export const milestoneMarker: Plugin<'line'> = {
 			ctx.lineTo(x + radius * Math.cos(angle), centerY + radius * Math.sin(angle));
 		}
 		ctx.closePath();
-		ctx.fillStyle = milestoneColors.star;
+		ctx.fillStyle = milestoneColors.starFill;
 		ctx.fill();
+		ctx.strokeStyle = milestoneColors.starOutline;
 		ctx.lineWidth = Math.max(1, scale.markerLine * 0.7);
 		ctx.stroke();
 		ctx.font = `600 ${scale.labelFont}px ${options.font}`;

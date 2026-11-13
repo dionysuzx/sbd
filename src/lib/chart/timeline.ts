@@ -49,7 +49,7 @@ export function timelineAxis(timeline: Timeline, scale: StrokeScale): AxisOption
 export function valueAxis(
 	text: string,
 	scale: StrokeScale,
-	range: { suggestedMin?: number; suggestedMax?: number; min?: number; max?: number }
+	range: { readonly suggestedMin: number; readonly suggestedMax: number }
 ): AxisOptions {
 	return {
 		...range,
