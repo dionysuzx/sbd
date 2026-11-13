@@ -61,3 +61,7 @@ date,lift,weight_lb,per_side_lb,sets,reps,rpe,variation,notes,source
 2026-11-10,triceps_pressdown,100,,1,16,,straight bar,Set 2.,trainer_log
 2026-11-10,triceps_pressdown,110,,1,16,,straight bar,Set 3.,trainer_log
 2026-11-10,bird_dog_row,20,,3,8,,reps per side,20 lb 3x8 per side.,trainer_log
+2026-11-12,dip,45,,1,10,7,added weight,"Top set. 45 lb plate added. RPE 7 (a little light vs the RPE 8 target). First weighted dip session; last confirmed was BW 3x15 on Oct 16.",trainer_log
+2026-11-12,dip,35,,1,12,,added weight,"Back-off after 45x10. 35 lb added for 12. RPE not reported.",trainer_log
+2026-11-12,pull_up,,,4,8,,unassisted,"Unassisted 4x8, solid. First logged unassisted session. RPE not reported.",trainer_log
+2026-11-12,back_extension,10,,3,11,,with plate,"3x11 at 10 lb. Makeup for Monday Nov 9 (missed). RPE not reported.",trainer_log

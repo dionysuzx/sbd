@@ -39,6 +39,9 @@ ACC_VARIATIONS = {
     "reverse_nordic": ("bodyweight", "banded", "not recorded"),
     "copenhagen": ("seconds per side", "not recorded"),
     "ir_pull_apart": ("banded", "not recorded"),
+    "dip": ("added weight",),
+    "pull_up": ("unassisted",),
+    "back_extension": ("with plate",),
 }
 
 # Optional display labels. Anything omitted is shown as the stored variation
@@ -56,11 +59,14 @@ VARIATION_LABELS = {
     ("ir_pull_apart", "banded"): "Banded",
     ("seated_cable_row", "narrow neutral V-handle"): "Narrow V-handle",
     ("seated_cable_row", "wide grip"): "Wide grip",
+    ("dip", "added weight"): "Added weight",
+    ("pull_up", "unassisted"): "Unassisted",
+    ("back_extension", "with plate"): "With plate",
 }
 
 # Bodyweight, banded, or timed-hold accessories may leave weight_lb blank.
 # For copenhagen, reps is the hold in seconds (variation "seconds per side").
-UNLOADED_ACCESSORIES = {"reverse_nordic", "copenhagen", "ir_pull_apart"}
+UNLOADED_ACCESSORIES = {"reverse_nordic", "copenhagen", "ir_pull_apart", "pull_up"}
 SOURCES = ("pre_trainer_csv", "pre_trainer_log_pdf", "trainer_log")
 KINDS = ("sbd", "acc")
 SQUAT_BAR_LB = 45  # squat total = 2 x per_side + bar
