@@ -17,25 +17,14 @@ describe('countdownTo', () => {
 });
 
 describe('describeCountdown', () => {
-	it('names only the fractional weeks remaining and the dotted meet date', () => {
+	it('names the fractional weeks remaining', () => {
 		expect(describeCountdown(meet, '2026-11-13' as CalendarDate)).toEqual({
 			kind: 'upcoming',
-			weeks: '4.1 weeks out',
-			date: '(26.12.12)'
+			weeks: '4.1 weeks out to'
 		});
 		expect(describeCountdown(meet, '2026-11-14' as CalendarDate)).toEqual({
 			kind: 'upcoming',
-			weeks: '4.0 weeks out',
-			date: '(26.12.12)'
-		});
-	});
-
-	it('derives the dotted date from the meet date', () => {
-		const later: Meet = { name: 'Other', date: '2027-01-03' as CalendarDate };
-		expect(describeCountdown(later, '2026-12-20' as CalendarDate)).toEqual({
-			kind: 'upcoming',
-			weeks: '2.0 weeks out',
-			date: '(27.01.03)'
+			weeks: '4.0 weeks out to'
 		});
 	});
 

@@ -10,7 +10,7 @@
 {#snippet meetName()}
 	{#if meet.url}
 		<a href={meet.url} target="_blank" rel="noopener noreferrer">
-			{meet.name}<span class="outbound" aria-hidden="true">↗</span>
+			<span class="name">{meet.name}</span><span class="outbound" aria-hidden="true">↗</span>
 		</a>
 	{:else}
 		{meet.name}
@@ -22,7 +22,8 @@
 		{#if label.kind === 'meet-day'}
 			Meet day: {@render meetName()}
 		{:else}
-			{label.weeks} · {@render meetName()} · {label.date}
+			{label.weeks}
+			{@render meetName()}
 		{/if}
 	</p>
 {/if}
@@ -31,29 +32,37 @@
 	p {
 		display: inline-block;
 		margin: 0 0 16px;
-		padding: 7px 12px;
+		padding: 8px 14px;
 		border-radius: 6px;
 		background: #111827;
-		color: #fff;
+		color: #e5e7eb;
 		font-size: 0.92rem;
-		font-weight: 600;
+		font-weight: 500;
+		line-height: 1.25;
 	}
 
 	a {
-		color: inherit;
+		color: #fff;
+		font-weight: 600;
 		text-decoration: none;
+		white-space: nowrap;
 	}
 
-	a:hover,
-	a:focus,
-	a:focus-visible {
+	a:hover .name,
+	a:focus .name,
+	a:focus-visible .name {
 		text-decoration: underline;
+		text-underline-offset: 0.18em;
+		text-decoration-thickness: 1px;
 	}
 
 	.outbound {
-		margin-left: 0.2em;
-		font-size: 0.72em;
-		font-weight: 500;
-		opacity: 0.7;
+		position: relative;
+		top: -0.14em;
+		margin-left: 0.28em;
+		font-size: 0.78em;
+		font-weight: 600;
+		line-height: 1;
+		opacity: 0.75;
 	}
 </style>

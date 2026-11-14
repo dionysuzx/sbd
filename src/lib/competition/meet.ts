@@ -12,8 +12,7 @@ export type Countdown =
 	| { readonly kind: 'over' };
 
 export type CountdownLabel =
-	| { readonly kind: 'upcoming'; readonly weeks: string; readonly date: string }
-	| { readonly kind: 'meet-day' };
+	{ readonly kind: 'upcoming'; readonly weeks: string } | { readonly kind: 'meet-day' };
 
 export function countdownTo(meet: Meet, today: CalendarDate): Countdown {
 	const days = daysBetween(today, meet.date);
@@ -21,20 +20,11 @@ export function countdownTo(meet: Meet, today: CalendarDate): Countdown {
 	return days === 0 ? { kind: 'meet-day' } : { kind: 'over' };
 }
 
-const dottedDate = (date: CalendarDate): string => {
-	const [year, month, day] = date.split('-');
-	return `${year.slice(-2)}.${month}.${day}`;
-};
-
 export function describeCountdown(meet: Meet, today: CalendarDate): CountdownLabel | undefined {
 	const countdown = countdownTo(meet, today);
 	switch (countdown.kind) {
 		case 'upcoming':
-			return {
-				kind: 'upcoming',
-				weeks: `${countdown.weeks.toFixed(1)} weeks out`,
-				date: `(${dottedDate(meet.date)})`
-			};
+			return { kind: 'upcoming', weeks: `${countdown.weeks.toFixed(1)} weeks out to` };
 		case 'meet-day':
 			return { kind: 'meet-day' };
 		case 'over':
