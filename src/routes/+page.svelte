@@ -5,6 +5,7 @@
 	import { timelineFrom } from '#lib/chart/timeline.js';
 	import Collapsible from '#lib/Collapsible.svelte';
 	import MeetCountdown from '#lib/competition/MeetCountdown.svelte';
+	import KaomojiChase from '#lib/KaomojiChase.svelte';
 	import WeekPlan from '#lib/plan/WeekPlan.svelte';
 	import { isCharted } from '#lib/program.js';
 	import ExerciseCard from '#lib/training/ExerciseCard.svelte';
@@ -87,6 +88,7 @@
 <main>
 	<h1>{title}</h1>
 	<MeetCountdown meet={program.meet} {today} />
+	<KaomojiChase />
 
 	<Collapsible title="Workout">
 		<WeekPlan weeks={data.weeks} meet={program.meet} {today} />
