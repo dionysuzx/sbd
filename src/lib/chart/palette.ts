@@ -2,7 +2,7 @@
 // 10 kg green, 2.5 kg black. White 5 kg plates are skipped so series stay
 // visible on the light background. After those five, further rep counts fall
 // back to gray, then darker stone shades, then wrap.
-export const plateColors = ['#C8102E', '#003DA5', '#FFCD00', '#00843D', '#1A1A1A'] as const;
+export const plateColors = ['#C8102E', '#003DA5', '#E5A800', '#00843D', '#1A1A1A'] as const;
 
 const fallbackPlateColors = ['#4B5563', '#374151', '#57534E'] as const;
 
