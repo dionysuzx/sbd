@@ -1313,5 +1313,82 @@
 				"note": "Unassisted 4x8, solid. First logged unassisted session. RPE not reported."
 			}
 		]
+	},
+	{
+		"date": "2026-11-14",
+		"exercise": "bench",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 5,
+				"load": 165,
+				"rpe": 4,
+				"variation": "paused",
+				"note": "pinky on rings grip"
+			}
+		]
+	},
+	{
+		"date": "2026-11-14",
+		"exercise": "deadlift",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 287.5,
+				"rpe": 6,
+				"variation": "conventional",
+				"note": "hook grip practice for meet"
+			},
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 309.5,
+				"rpe": 6.5,
+				"variation": "conventional",
+				"note": "hook grip, no straps; grip limiting"
+			},
+			{
+				"sets": 2,
+				"reps": 8,
+				"load": 276.5,
+				"rpe": 8,
+				"variation": "conventional",
+				"note": "belt + straps"
+			}
+		]
+	},
+	{
+		"date": "2026-11-14",
+		"exercise": "ir-pull-apart",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 12
+			}
+		]
+	},
+	{
+		"date": "2026-11-14",
+		"exercise": "lying-leg-curl",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 2,
+				"reps": 12,
+				"load": 35,
+				"rpe": 6,
+				"note": "Substitute for seated ham curl; gym has no seated machine."
+			},
+			{
+				"sets": 2,
+				"reps": 12,
+				"load": 45,
+				"rpe": 8
+			}
+		]
 	}
 ]
