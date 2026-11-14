@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { bodyweightChartConfiguration } from '#lib/chart/bodyweight-chart.js';
-	import Legend, { type LegendEntry } from '#lib/chart/Legend.svelte';
 	import { lineChart } from '#lib/chart/line-chart.svelte.js';
 	import { bodyweightColor, referenceLineColors } from '#lib/chart/palette.js';
 	import type { ReferenceLine } from '#lib/chart/plugins.js';
@@ -35,25 +34,12 @@
 		}
 	]);
 
-	const legend = $derived<LegendEntry[]>([
-		{ kind: 'line', label: 'Bodyweight', color: bodyweightColor },
-		...classLines.map(({ label, color, dash }): LegendEntry => ({
-			kind: 'line',
-			label,
-			color,
-			dash
-		}))
-	]);
-
 	const summary = $derived(summarizeBodyweight(weighIns, weightClasses.target));
 
 	const signed = (pounds: number) => `${pounds > 0 ? '+' : ''}${formatPounds(pounds)}`;
 </script>
 
 {#if summary}
-	<div class="legends">
-		<Legend entries={legend} />
-	</div>
 	<p class="summary">
 		<span>
 			Latest: <strong>{formatPounds(summary.latest.pounds)} lb</strong>
