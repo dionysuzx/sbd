@@ -6,7 +6,7 @@ import type { Session } from '#lib/training/session.js';
 import type { SetGroup } from '#lib/training/set-group.js';
 import type { LineChartConfiguration } from './line-chart.svelte.js';
 import { chartRadiusFor } from './marker-geometry.js';
-import { platePaints } from './palette.js';
+import { plateColors } from './palette.js';
 import { progressChartConfiguration } from './progress-chart.js';
 import type { StrokeScale } from './stroke-scale.js';
 import { timelineFrom } from './timeline.js';
@@ -167,17 +167,19 @@ describe('progress chart colors', () => {
 			])
 		);
 		expect(colors).toEqual({
-			'5 reps': platePaints[0].fill,
-			'8 reps': platePaints[1].fill,
-			'12 reps': platePaints[2].fill
+			'5 reps': plateColors[0],
+			'8 reps': plateColors[1],
+			'12 reps': plateColors[2]
 		});
 	});
 
-	it('gives the yellow series a darker unselected stroke', () => {
+	it('paints yellow with the same stroke treatment as the other plate colors', () => {
 		const twelve = chartOf(mixedReps).data.datasets.find((dataset) => dataset.label === '12 reps');
 		if (!twelve) throw new Error('missing 12-rep series');
-		expect(twelve.backgroundColor).toBe(platePaints[2].fill);
-		expect(twelve.pointBorderColor).toEqual([platePaints[2].stroke]);
-		expect(twelve).toMatchObject({ lineOutlineColor: platePaints[2].stroke });
+		expect(twelve.backgroundColor).toBe(plateColors[2]);
+		expect(twelve.borderColor).toBe(plateColors[2]);
+		expect(twelve.pointBackgroundColor).toBe(plateColors[2]);
+		expect(twelve.pointBorderColor).toEqual([plateColors[2]]);
+		expect(twelve).not.toHaveProperty('lineOutlineColor');
 	});
 });

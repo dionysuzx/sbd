@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Legend, { type LegendEntry } from '#lib/chart/Legend.svelte';
 	import { canHover, lineChart } from '#lib/chart/line-chart.svelte.js';
-	import { markerShape, platePaintsForCounts } from '#lib/chart/palette.js';
+	import { markerShape, plateColorsForCounts } from '#lib/chart/palette.js';
 	import { progressChartConfiguration } from '#lib/chart/progress-chart.js';
 	import { strokeScaleFor } from '#lib/chart/stroke-scale.js';
 	import type { Timeline } from '#lib/chart/timeline.js';
@@ -26,18 +26,14 @@
 	let chartWidth = $state(0);
 
 	const series = $derived(progressSeries(exercise, sessions));
-	const paints = $derived(platePaintsForCounts(series.map(({ count }) => count)));
+	const colors = $derived(plateColorsForCounts(series.map(({ count }) => count)));
 
 	const repEntries = $derived(
-		series.map(({ label, count }): LegendEntry => {
-			const paint = paints.get(count)!;
-			return {
-				kind: 'line',
-				label,
-				color: paint.fill,
-				stroke: paint.stroke === paint.fill ? undefined : paint.stroke
-			};
-		})
+		series.map(({ label, count }): LegendEntry => ({
+			kind: 'line',
+			label,
+			color: colors.get(count)!
+		}))
 	);
 
 	const variationEntries = $derived.by((): LegendEntry[] => {

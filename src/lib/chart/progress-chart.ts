@@ -5,8 +5,8 @@ import { summarizePoint, type ProgressPoint, type ProgressSeries } from '#lib/tr
 import type { SetGroup } from '#lib/training/set-group.js';
 import type { LineChartConfiguration } from './line-chart.svelte.js';
 import { chartRadiusFor, maxChartRadiusFactor } from './marker-geometry.js';
-import { markerShape, platePaintsForCounts, selectionOutline } from './palette.js';
-import { dodgeOverlappingPoints, milestoneMarker, outlinedLine } from './plugins.js';
+import { markerShape, plateColorsForCounts, selectionOutline } from './palette.js';
+import { dodgeOverlappingPoints, milestoneMarker } from './plugins.js';
 import type { StrokeScale } from './stroke-scale.js';
 import { timelineAxis, valueAxis, type Timeline } from './timeline.js';
 import { fontFamily } from './typography.js';
@@ -59,10 +59,9 @@ export function progressChartConfiguration(input: ProgressChartInput): LineChart
 		summarizePoint(pointAt(item.datasetIndex, item.dataIndex));
 	const markerExtent = largestMarkerExtent(scale);
 
-	const paints = platePaintsForCounts(series.map(({ count }) => count));
+	const colors = plateColorsForCounts(series.map(({ count }) => count));
 	const datasets = series.map(({ label, points, count }) => {
-		const paint = paints.get(count)!;
-		const color = paint.fill;
+		const color = colors.get(count)!;
 		const selected = points.map((point) => point.top === highlighted);
 		const shapes = points.map((point) =>
 			markerShape(variationIndex(exercise, point.top.variation))
@@ -76,9 +75,7 @@ export function progressChartConfiguration(input: ProgressChartInput): LineChart
 				circleRadius(scale, (selected[index] ? SELECTED_GROWTH : 0) + HOVER_GROWTH)
 			)
 		);
-		const borderColors = selected.map((isSelected) =>
-			isSelected ? selectionOutline : paint.stroke
-		);
+		const borderColors = selected.map((isSelected) => (isSelected ? selectionOutline : color));
 		const borderWidths = selected.map((isSelected) => markerBorder(isSelected, scale));
 		return {
 			label,
@@ -95,15 +92,14 @@ export function progressChartConfiguration(input: ProgressChartInput): LineChart
 			pointHoverRadius: hoverRadii,
 			pointHoverBorderColor: borderColors,
 			pointHoverBorderWidth: borderWidths,
-			pointHitRadius: 12,
-			lineOutlineColor: paint.stroke === paint.fill ? undefined : paint.stroke
+			pointHitRadius: 12
 		};
 	});
 
 	return {
 		type: 'line',
 		data: { datasets },
-		plugins: [dodgeOverlappingPoints, outlinedLine, milestoneMarker],
+		plugins: [dodgeOverlappingPoints, milestoneMarker],
 		options: {
 			maintainAspectRatio: false,
 			animation: false,

@@ -6,7 +6,6 @@
 				readonly kind: 'line';
 				readonly label: string;
 				readonly color: string;
-				readonly stroke?: string;
 				readonly dash?: readonly number[];
 		  }
 		| { readonly kind: 'marker'; readonly label: string; readonly shape: MarkerShape };
@@ -22,17 +21,20 @@
 	{#each entries as entry (entry.label)}
 		{#if entry.kind === 'line'}
 			<li>
-				<svg class="swatch" viewBox="0 0 24 8" preserveAspectRatio="none" aria-hidden="true">
-					{#if entry.stroke}
-						<line x1="0" y1="4" x2="24" y2="4" stroke={entry.stroke} stroke-width="8" />
-					{/if}
+				<svg
+					class="swatch"
+					style:color={entry.color}
+					viewBox="0 0 24 4"
+					preserveAspectRatio="none"
+					aria-hidden="true"
+				>
 					<line
 						x1="0"
-						y1="4"
+						y1="2"
 						x2="24"
-						y2="4"
-						stroke={entry.color}
-						stroke-width={entry.stroke ? 4 : 8}
+						y2="2"
+						stroke="currentColor"
+						stroke-width="4"
 						stroke-dasharray={entry.dash?.join(' ')}
 					/>
 				</svg>
