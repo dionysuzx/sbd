@@ -16,7 +16,7 @@
 
 	let { data }: PageProps = $props();
 
-	const title = "David's Knee & SBD Progress";
+	const title = "David's Knee & SBD Log";
 	const description = "David's squat, bench, deadlift, and knee-rehab training log.";
 
 	const mainLifts = Object.values(exercises).filter(
