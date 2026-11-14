@@ -1,0 +1,878 @@
+[
+	{
+		"start": "2026-11-09",
+		"phase": "build",
+		"days": [
+			{
+				"date": "2026-11-09",
+				"title": "Squat (low-bar, belted, heeled)",
+				"work": [
+					{
+						"exercise": "squat",
+						"sets": 1,
+						"reps": 5,
+						"rpe": 7,
+						"note": "Top set"
+					},
+					{
+						"exercise": "squat",
+						"sets": 2,
+						"reps": 8,
+						"rpe": "<=8",
+						"note": "Back-offs at 88–90% of today's top set"
+					}
+				]
+			},
+			{
+				"date": "2026-11-10",
+				"title": "PT + bench (moved this week)",
+				"work": [
+					{
+						"exercise": "bench",
+						"sets": 1,
+						"reps": 5,
+						"rpe": 7,
+						"note": "Top set"
+					},
+					{
+						"exercise": "bench",
+						"sets": 3,
+						"reps": 8,
+						"rpe": "<=8",
+						"note": "Back-offs at 88–90% of today's top set"
+					}
+				]
+			},
+			{
+				"date": "2026-11-11",
+				"title": "Upper accessories (this week only)",
+				"note": "Friday-style upper day: dips, pulldowns, CS row, RFE lunge, pullover, curls",
+				"work": []
+			},
+			{
+				"date": "2026-11-12",
+				"title": "Light upper",
+				"note": "Sunday-style light upper day @7–8",
+				"work": []
+			},
+			{
+				"date": "2026-11-13",
+				"title": "PT (rest)",
+				"note": "This week's PT is Friday",
+				"work": []
+			},
+			{
+				"date": "2026-11-14",
+				"title": "Deadlift (conventional, hook) + light bench",
+				"note": "Warm-up: PVC banded pre-DL cueing + ramping sets",
+				"work": [
+					{
+						"exercise": "deadlift",
+						"sets": 1,
+						"reps": 5,
+						"rpe": 7,
+						"note": "Top set; if RPE ≤6, take one more top set"
+					},
+					{
+						"exercise": "deadlift",
+						"sets": 2,
+						"reps": 8,
+						"rpe": "<=8",
+						"note": "Back-offs at 88–90% of the final top set"
+					},
+					{
+						"exercise": "bench",
+						"sets": 3,
+						"reps": 5,
+						"rpe": "5-6",
+						"note": "Light, technique practice only"
+					},
+					{
+						"exercise": "hamstring-curl",
+						"sets": 3,
+						"reps": 12,
+						"note": "2+ reps in reserve, no burnouts"
+					},
+					{
+						"exercise": "ir-pull-apart",
+						"sets": 3,
+						"reps": 12
+					}
+				]
+			},
+			{
+				"date": "2026-11-15",
+				"title": "Light upper (squat tomorrow)",
+				"work": [
+					{
+						"exercise": "chest-supported-row",
+						"sets": 3,
+						"reps": "8-12",
+						"rpe": "7-8"
+					},
+					{
+						"exercise": "straight-arm-pulldown",
+						"sets": 3,
+						"reps": "12-15",
+						"rpe": "7-8"
+					},
+					{
+						"exercise": "bird-dog-row",
+						"sets": 3,
+						"reps": 8,
+						"rpe": "7-8"
+					},
+					{
+						"exercise": "curl",
+						"sets": 3,
+						"reps": "12-15",
+						"rpe": "7-8"
+					}
+				]
+			}
+		]
+	},
+	{
+		"start": "2026-11-16",
+		"phase": "build",
+		"days": [
+			{
+				"date": "2026-11-16",
+				"title": "Squat (low-bar, belted, heeled)",
+				"note": "Warm-up: dailies + ramping sets",
+				"work": [
+					{
+						"exercise": "squat",
+						"sets": 1,
+						"reps": 1,
+						"rpe": "5-6",
+						"note": "Command single, full commands; last warm-up"
+					},
+					{
+						"exercise": "squat",
+						"sets": 1,
+						"reps": 5,
+						"rpe": 7,
+						"note": "Top set"
+					},
+					{
+						"exercise": "squat",
+						"sets": 2,
+						"reps": 8,
+						"rpe": "<=8",
+						"note": "Back-offs at 88–90% of today's top set (1 × 8 if needed)"
+					},
+					{
+						"exercise": "back-extension",
+						"sets": 3,
+						"reps": 12,
+						"rpe": 7,
+						"note": "Or 45° hip extension"
+					},
+					{
+						"exercise": "rfe-lunge",
+						"sets": 3,
+						"reps": 12,
+						"note": "With hand support"
+					},
+					{
+						"exercise": "lat-pullover",
+						"sets": 3,
+						"reps": 10,
+						"note": "In glute bridge"
+					},
+					{
+						"exercise": "reverse-nordic",
+						"sets": 3,
+						"reps": 5
+					},
+					{
+						"exercise": "copenhagen",
+						"sets": 3,
+						"seconds": 30,
+						"note": "Modified"
+					}
+				]
+			},
+			{
+				"date": "2026-11-17",
+				"title": "PT (rest)",
+				"note": "Dailies + Sina's rehab",
+				"work": []
+			},
+			{
+				"date": "2026-11-18",
+				"title": "Bench (comp pause, ring finger on rings)",
+				"note": "Warm-up: Sina's bench warm-up + ramping sets",
+				"work": [
+					{
+						"exercise": "bench",
+						"sets": 1,
+						"reps": 1,
+						"rpe": "5-6",
+						"note": "Command single, full commands"
+					},
+					{
+						"exercise": "bench",
+						"sets": 1,
+						"reps": 5,
+						"rpe": 7,
+						"note": "Top set"
+					},
+					{
+						"exercise": "bench",
+						"sets": 3,
+						"reps": 8,
+						"rpe": "<=8",
+						"note": "Back-offs at 88–90% of today's top set (2 × 8 if needed)"
+					},
+					{
+						"exercise": "seated-cable-row",
+						"sets": 3,
+						"reps": 12,
+						"note": "Wide grip"
+					},
+					{
+						"exercise": "triceps-pressdown",
+						"sets": 3,
+						"reps": "12-16"
+					},
+					{
+						"exercise": "bird-dog-row",
+						"sets": 3,
+						"reps": 8
+					}
+				]
+			},
+			{
+				"date": "2026-11-19",
+				"title": "PT (rest)",
+				"note": "Dailies + Sina's rehab",
+				"work": []
+			},
+			{
+				"date": "2026-11-20",
+				"title": "Bench volume + upper",
+				"note": "Warm-up: Sina's bench warm-up + ramping sets",
+				"work": [
+					{
+						"exercise": "bench",
+						"sets": 4,
+						"reps": 4,
+						"rpe": 7,
+						"note": "Paused, ~85% of Wednesday's top set; ring-finger grip"
+					},
+					{
+						"exercise": "dip",
+						"sets": 1,
+						"reps": "6-8",
+						"rpe": 8,
+						"note": "Top set"
+					},
+					{
+						"exercise": "dip",
+						"sets": 1,
+						"reps": 10,
+						"note": "Back-off"
+					},
+					{
+						"exercise": "pull-up",
+						"sets": 4,
+						"reps": "8-10",
+						"rpe": "8-9",
+						"note": "Or lat pulldown"
+					}
+				]
+			},
+			{
+				"date": "2026-11-21",
+				"title": "Deadlift (conventional, hook) + light bench",
+				"note": "Warm-up: PVC banded pre-DL cueing + ramping sets",
+				"work": [
+					{
+						"exercise": "deadlift",
+						"sets": 1,
+						"reps": 1,
+						"rpe": "5-6",
+						"note": "Command single, full commands"
+					},
+					{
+						"exercise": "deadlift",
+						"sets": 1,
+						"reps": 5,
+						"rpe": 7,
+						"note": "Top set"
+					},
+					{
+						"exercise": "deadlift",
+						"sets": 2,
+						"reps": 8,
+						"rpe": "<=8",
+						"note": "Back-offs at 88–90% of today's top set (1 × 8 if needed)"
+					},
+					{
+						"exercise": "bench",
+						"sets": 3,
+						"reps": 5,
+						"rpe": "5-6",
+						"note": "Light, technique practice only"
+					},
+					{
+						"exercise": "hamstring-curl",
+						"sets": 3,
+						"reps": 12,
+						"note": "2+ reps in reserve, no burnouts"
+					},
+					{
+						"exercise": "ir-pull-apart",
+						"sets": 3,
+						"reps": 12
+					}
+				]
+			},
+			{
+				"date": "2026-11-22",
+				"title": "Light upper (squat tomorrow)",
+				"work": [
+					{
+						"exercise": "chest-supported-row",
+						"sets": 3,
+						"reps": "8-12",
+						"rpe": "7-8"
+					},
+					{
+						"exercise": "straight-arm-pulldown",
+						"sets": 3,
+						"reps": "12-15",
+						"rpe": "7-8"
+					},
+					{
+						"exercise": "bird-dog-row",
+						"sets": 3,
+						"reps": 8,
+						"rpe": "7-8"
+					},
+					{
+						"exercise": "curl",
+						"sets": 3,
+						"reps": "12-15",
+						"rpe": "7-8"
+					}
+				]
+			}
+		]
+	},
+	{
+		"start": "2026-11-23",
+		"phase": "build",
+		"days": [
+			{
+				"date": "2026-11-23",
+				"title": "Squat (low-bar, belted, heeled)",
+				"note": "Warm-up: dailies + ramping sets",
+				"work": [
+					{
+						"exercise": "squat",
+						"sets": 1,
+						"reps": 1,
+						"rpe": "5-6",
+						"note": "Command single, full commands; last warm-up"
+					},
+					{
+						"exercise": "squat",
+						"sets": 1,
+						"reps": 5,
+						"rpe": 7,
+						"note": "Top set"
+					},
+					{
+						"exercise": "squat",
+						"sets": 2,
+						"reps": 8,
+						"rpe": "<=8",
+						"note": "Back-offs at 88–90% of today's top set"
+					},
+					{
+						"exercise": "back-extension",
+						"sets": 3,
+						"reps": 12,
+						"rpe": 7,
+						"note": "Or 45° hip extension"
+					},
+					{
+						"exercise": "rfe-lunge",
+						"sets": 3,
+						"reps": 12,
+						"note": "With hand support"
+					},
+					{
+						"exercise": "lat-pullover",
+						"sets": 3,
+						"reps": 10,
+						"note": "In glute bridge"
+					},
+					{
+						"exercise": "reverse-nordic",
+						"sets": 3,
+						"reps": 5
+					},
+					{
+						"exercise": "copenhagen",
+						"sets": 3,
+						"seconds": 30,
+						"note": "Modified"
+					}
+				]
+			},
+			{
+				"date": "2026-11-24",
+				"title": "PT (rest)",
+				"note": "Dailies + Sina's rehab",
+				"work": []
+			},
+			{
+				"date": "2026-11-25",
+				"title": "Bench (comp pause, ring finger on rings)",
+				"note": "Warm-up: Sina's bench warm-up + ramping sets",
+				"work": [
+					{
+						"exercise": "bench",
+						"sets": 1,
+						"reps": 1,
+						"rpe": "5-6",
+						"note": "Command single, full commands"
+					},
+					{
+						"exercise": "bench",
+						"sets": 1,
+						"reps": 5,
+						"rpe": 7,
+						"note": "Top set"
+					},
+					{
+						"exercise": "bench",
+						"sets": 3,
+						"reps": 8,
+						"rpe": "<=8",
+						"note": "Back-offs at 88–90% of today's top set"
+					},
+					{
+						"exercise": "seated-cable-row",
+						"sets": 3,
+						"reps": 12,
+						"note": "Wide grip"
+					},
+					{
+						"exercise": "triceps-pressdown",
+						"sets": 3,
+						"reps": "12-16"
+					},
+					{
+						"exercise": "bird-dog-row",
+						"sets": 3,
+						"reps": 8
+					}
+				]
+			},
+			{
+				"date": "2026-11-26",
+				"title": "Off (Thanksgiving)",
+				"work": []
+			},
+			{
+				"date": "2026-11-27",
+				"title": "Upper accessories",
+				"note": "Paused bench volume is dropped from here for the taper",
+				"work": [
+					{
+						"exercise": "dip",
+						"sets": 1,
+						"reps": "6-8",
+						"rpe": 8,
+						"note": "Top set"
+					},
+					{
+						"exercise": "dip",
+						"sets": 1,
+						"reps": 10,
+						"note": "Back-off"
+					},
+					{
+						"exercise": "pull-up",
+						"sets": 4,
+						"reps": "8-10",
+						"rpe": "8-9",
+						"note": "Or lat pulldown"
+					}
+				]
+			},
+			{
+				"date": "2026-11-28",
+				"title": "Deadlift (conventional, hook) + light bench",
+				"note": "Warm-up: PVC banded pre-DL cueing + ramping sets",
+				"work": [
+					{
+						"exercise": "deadlift",
+						"sets": 1,
+						"reps": 1,
+						"rpe": "5-6",
+						"note": "Command single, full commands"
+					},
+					{
+						"exercise": "deadlift",
+						"sets": 1,
+						"reps": 3,
+						"rpe": 7,
+						"note": "Top set; fatigue starts coming down"
+					},
+					{
+						"exercise": "deadlift",
+						"sets": 2,
+						"reps": 5,
+						"rpe": "<=8",
+						"note": "Back-offs at 88–90% of today's top set"
+					},
+					{
+						"exercise": "bench",
+						"sets": 3,
+						"reps": 5,
+						"rpe": "5-6",
+						"note": "Light, technique practice only"
+					},
+					{
+						"exercise": "hamstring-curl",
+						"sets": 3,
+						"reps": 12,
+						"note": "2+ reps in reserve, no burnouts"
+					},
+					{
+						"exercise": "ir-pull-apart",
+						"sets": 3,
+						"reps": 12
+					}
+				]
+			},
+			{
+				"date": "2026-11-29",
+				"title": "Light upper (squat tomorrow)",
+				"work": [
+					{
+						"exercise": "chest-supported-row",
+						"sets": 3,
+						"reps": "8-12",
+						"rpe": "7-8"
+					},
+					{
+						"exercise": "straight-arm-pulldown",
+						"sets": 3,
+						"reps": "12-15",
+						"rpe": "7-8"
+					},
+					{
+						"exercise": "bird-dog-row",
+						"sets": 3,
+						"reps": 8,
+						"rpe": "7-8"
+					},
+					{
+						"exercise": "curl",
+						"sets": 3,
+						"reps": "12-15",
+						"rpe": "7-8"
+					}
+				]
+			}
+		]
+	},
+	{
+		"start": "2026-11-30",
+		"phase": "taper",
+		"days": [
+			{
+				"date": "2026-11-30",
+				"title": "Squat (low-bar, belted, heeled)",
+				"note": "Warm-up: dailies + ramping sets",
+				"work": [
+					{
+						"exercise": "squat",
+						"sets": 1,
+						"reps": 1,
+						"rpe": "6-7",
+						"note": "Competition single with commands; sets openers"
+					},
+					{
+						"exercise": "squat",
+						"sets": 2,
+						"reps": 5,
+						"rpe": "6-7",
+						"note": "Back-offs at a load that feels RPE 6–7"
+					},
+					{
+						"exercise": "back-extension",
+						"sets": 3,
+						"reps": 12,
+						"rpe": 7,
+						"note": "Or 45° hip extension"
+					},
+					{
+						"exercise": "rfe-lunge",
+						"sets": 3,
+						"reps": 12,
+						"note": "With hand support"
+					},
+					{
+						"exercise": "lat-pullover",
+						"sets": 3,
+						"reps": 10,
+						"note": "In glute bridge"
+					},
+					{
+						"exercise": "reverse-nordic",
+						"sets": 3,
+						"reps": 5
+					},
+					{
+						"exercise": "copenhagen",
+						"sets": 3,
+						"seconds": 30,
+						"note": "Modified"
+					}
+				]
+			},
+			{
+				"date": "2026-12-01",
+				"title": "PT (rest)",
+				"note": "Dailies + Sina's rehab",
+				"work": []
+			},
+			{
+				"date": "2026-12-02",
+				"title": "Bench (comp pause, ring finger on rings)",
+				"note": "Warm-up: Sina's bench warm-up + ramping sets",
+				"work": [
+					{
+						"exercise": "bench",
+						"sets": 1,
+						"reps": 1,
+						"rpe": "6-7",
+						"note": "Competition single with commands; sets openers"
+					},
+					{
+						"exercise": "bench",
+						"sets": 2,
+						"reps": 5,
+						"rpe": "6-7",
+						"note": "Back-offs at a load that feels RPE 6–7"
+					},
+					{
+						"exercise": "seated-cable-row",
+						"sets": 3,
+						"reps": 12,
+						"note": "Wide grip"
+					},
+					{
+						"exercise": "triceps-pressdown",
+						"sets": 3,
+						"reps": "12-16"
+					},
+					{
+						"exercise": "bird-dog-row",
+						"sets": 3,
+						"reps": 8
+					}
+				]
+			},
+			{
+				"date": "2026-12-03",
+				"title": "PT (rest)",
+				"note": "Dailies + Sina's rehab",
+				"work": []
+			},
+			{
+				"date": "2026-12-04",
+				"title": "Upper accessories",
+				"work": [
+					{
+						"exercise": "dip",
+						"sets": 1,
+						"reps": "6-8",
+						"rpe": 8,
+						"note": "Top set"
+					},
+					{
+						"exercise": "dip",
+						"sets": 1,
+						"reps": 10,
+						"note": "Back-off"
+					},
+					{
+						"exercise": "pull-up",
+						"sets": 4,
+						"reps": "8-10",
+						"rpe": "8-9",
+						"note": "Or lat pulldown"
+					}
+				]
+			},
+			{
+				"date": "2026-12-05",
+				"title": "Deadlift (conventional, hook) + light bench",
+				"note": "Warm-up: PVC banded pre-DL cueing + ramping sets",
+				"work": [
+					{
+						"exercise": "deadlift",
+						"sets": 1,
+						"reps": 1,
+						"rpe": "<=6",
+						"note": "Command single, full commands"
+					},
+					{
+						"exercise": "deadlift",
+						"sets": 1,
+						"reps": "3-5",
+						"rpe": "<=6",
+						"note": "Last deadlift before the meet"
+					},
+					{
+						"exercise": "bench",
+						"sets": 2,
+						"reps": 5,
+						"rpe": 5,
+						"note": "Light, technique practice only"
+					},
+					{
+						"exercise": "hamstring-curl",
+						"sets": 2,
+						"reps": 12,
+						"note": "2+ reps in reserve, no burnouts"
+					},
+					{
+						"exercise": "ir-pull-apart",
+						"sets": 2,
+						"reps": 12
+					}
+				]
+			},
+			{
+				"date": "2026-12-06",
+				"title": "Light upper (squat tomorrow)",
+				"work": [
+					{
+						"exercise": "chest-supported-row",
+						"sets": 2,
+						"reps": "8-12",
+						"rpe": "7-8"
+					},
+					{
+						"exercise": "straight-arm-pulldown",
+						"sets": 2,
+						"reps": "12-15",
+						"rpe": "7-8"
+					},
+					{
+						"exercise": "bird-dog-row",
+						"sets": 2,
+						"reps": 8,
+						"rpe": "7-8"
+					},
+					{
+						"exercise": "curl",
+						"sets": 2,
+						"reps": "12-15",
+						"rpe": "7-8"
+					}
+				]
+			}
+		]
+	},
+	{
+		"start": "2026-12-07",
+		"phase": "meet-week",
+		"days": [
+			{
+				"date": "2026-12-07",
+				"title": "Squat + bench",
+				"work": [
+					{
+						"exercise": "squat",
+						"sets": 2,
+						"reps": 3,
+						"note": "50–60% of the Nov 30 single, commands"
+					},
+					{
+						"exercise": "bench",
+						"sets": 2,
+						"reps": 3,
+						"note": "50–60% of the Dec 2 single, commands"
+					}
+				]
+			},
+			{
+				"date": "2026-12-08",
+				"title": "PT (rest)",
+				"note": "PT if booked; otherwise rest",
+				"work": []
+			},
+			{
+				"date": "2026-12-09",
+				"title": "Bench",
+				"work": [
+					{
+						"exercise": "bench",
+						"sets": 2,
+						"reps": 3,
+						"note": "~50% of the Dec 2 single, commands; 15 minutes, then done"
+					}
+				]
+			},
+			{
+				"date": "2026-12-10",
+				"title": "Rest / travel",
+				"note": "Dailies",
+				"work": []
+			},
+			{
+				"date": "2026-12-11",
+				"title": "Rest / travel",
+				"note": "Dailies",
+				"work": []
+			},
+			{
+				"date": "2026-12-12",
+				"title": "Meet: PA King Prime Classic",
+				"note": "kg, 2.5 kg steps. No PR chasing; stopping after two attempts is fine",
+				"work": [
+					{
+						"exercise": "squat",
+						"sets": 3,
+						"reps": 1,
+						"note": "Attempts: opener ~6, second ~7, third ≤8"
+					},
+					{
+						"exercise": "bench",
+						"sets": 3,
+						"reps": 1,
+						"note": "Attempts: opener ~6, second ~7, third ≤8"
+					},
+					{
+						"exercise": "deadlift",
+						"sets": 3,
+						"reps": 1,
+						"note": "Attempts: opener ~6, second ~7, third ≤8"
+					}
+				]
+			},
+			{
+				"date": "2026-12-13",
+				"title": "Rest",
+				"work": []
+			}
+		]
+	},
+	{
+		"start": "2026-12-14",
+		"phase": "return",
+		"note": "Mon / Wed / Sat: usual exercises at ½–⅔ of the usual sets, RPE 5–6, no top sets. Normal block from Dec 21 if ready.",
+		"days": []
+	}
+]

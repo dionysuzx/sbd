@@ -5,6 +5,7 @@
 	import { timelineFrom } from '#lib/chart/timeline.js';
 	import Collapsible from '#lib/Collapsible.svelte';
 	import MeetCountdown from '#lib/competition/MeetCountdown.svelte';
+	import WeekPlan from '#lib/plan/WeekPlan.svelte';
 	import { isCharted } from '#lib/program.js';
 	import ExerciseCard from '#lib/training/ExerciseCard.svelte';
 	import { exercises, type Exercise } from '#lib/training/exercise.js';
@@ -86,6 +87,10 @@
 <main>
 	<h1>{title}</h1>
 	<MeetCountdown meet={program.meet} {today} />
+
+	<Collapsible title="Workout">
+		<WeekPlan weeks={data.weeks} meet={program.meet} {today} />
+	</Collapsible>
 
 	{#each mainLifts as exercise (exercise.id)}
 		{@render exerciseCard(exercise)}

@@ -16,7 +16,8 @@ export const exerciseIds = [
 	'ir-pull-apart',
 	'dip',
 	'pull-up',
-	'back-extension'
+	'back-extension',
+	'curl'
 ] as const;
 
 export type ExerciseId = (typeof exerciseIds)[number];
@@ -155,5 +156,6 @@ export const exercises: { readonly [Id in ExerciseId]: Exercise & { readonly id:
 	}),
 	dip: accessory('dip', 'Weighted dip', { load: 'added-to-bodyweight' }),
 	'pull-up': accessory('pull-up', 'Pull-up', { load: 'bodyweight' }),
-	'back-extension': accessory('back-extension', 'Back extension')
+	'back-extension': accessory('back-extension', 'Back extension'),
+	curl: accessory('curl', 'Curl')
 };

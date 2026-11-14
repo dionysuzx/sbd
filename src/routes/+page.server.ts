@@ -1,9 +1,11 @@
 import { z } from 'zod';
 import { localCalendarDate } from '#lib/calendar-date.js';
 import { ProgramFile } from '#lib/data-files/program.js';
+import { ProgramWeeks } from '#lib/data-files/program-weeks.js';
 import { TrainingLog } from '#lib/data-files/training-log.js';
 import { WeighIns } from '#lib/data-files/weigh-ins.js';
 import program from '../../data/program.json';
+import programWeeks from '../../data/program-weeks.json';
 import trainingLog from '../../data/training-log.json';
 import weighIns from '../../data/weigh-ins.json';
 import type { PageServerLoad } from './$types';
@@ -16,6 +18,7 @@ function parseDataFile<T>(schema: z.ZodType<T>, contents: unknown, file: string)
 
 export const load: PageServerLoad = () => ({
 	program: parseDataFile(ProgramFile, program, 'data/program.json'),
+	weeks: parseDataFile(ProgramWeeks, programWeeks, 'data/program-weeks.json'),
 	sessions: parseDataFile(TrainingLog, trainingLog, 'data/training-log.json'),
 	weighIns: parseDataFile(WeighIns, weighIns, 'data/weigh-ins.json'),
 	builtOn: localCalendarDate(new Date())
