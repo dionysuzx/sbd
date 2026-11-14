@@ -142,12 +142,8 @@ export const exercises: { readonly [Id in ExerciseId]: Exercise & { readonly id:
 		variations: [{ id: 'straight-bar', label: 'Straight bar' }]
 	}),
 	'lat-pulldown': accessory('lat-pulldown', 'Lat pulldown'),
-	'reverse-nordic': accessory('reverse-nordic', 'Reverse Nordic', {
-		load: 'bodyweight',
-		variations: [
-			{ id: 'unassisted', label: 'Bodyweight' },
-			{ id: 'band-assisted', label: 'Banded' }
-		]
+	'reverse-nordic': accessory('reverse-nordic', 'Banded reverse Nordic', {
+		load: 'band'
 	}),
 	copenhagen: accessory('copenhagen', 'Copenhagen', {
 		load: 'bodyweight',

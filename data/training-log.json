@@ -498,8 +498,7 @@
 			{
 				"sets": 3,
 				"reps": 5,
-				"variation": "unassisted",
-				"note": "Prescribed 3x5 bodyweight. Done as prescribed per David; exact reps/RPE not reported."
+				"note": "Prescribed 3x5. Done as prescribed per David; exact reps/RPE not reported."
 			}
 		]
 	},
@@ -652,7 +651,6 @@
 			{
 				"sets": 3,
 				"reps": 5,
-				"variation": "unassisted",
 				"note": "Prescribed 3x5. Done as prescribed per David; exact reps/RPE not reported."
 			}
 		]
@@ -851,8 +849,7 @@
 			{
 				"sets": 3,
 				"reps": 5,
-				"variation": "unassisted",
-				"note": "Confirmed ('i did all that'). Prescribed 3x5 bodyweight."
+				"note": "Confirmed ('i did all that'). Prescribed 3x5."
 			}
 		]
 	},
@@ -1089,7 +1086,6 @@
 			{
 				"sets": 3,
 				"reps": 5,
-				"variation": "band-assisted",
 				"note": "3 sets confirmed. Band used but not recorded (Sina's sheet is 3x5; no band named)."
 			}
 		]
