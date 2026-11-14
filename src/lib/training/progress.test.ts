@@ -31,6 +31,24 @@ const hamstringWarmup = TrainingLog.parse([
 	}
 ]);
 
+const hamstringCurls = TrainingLog.parse([
+	{
+		date: '2026-11-04',
+		exercise: 'hamstring-curl',
+		source: 'trainer-log',
+		setGroups: [{ sets: 2, reps: 12, load: 90, rpe: 6, variation: 'seated' }]
+	},
+	{
+		date: '2026-11-14',
+		exercise: 'hamstring-curl',
+		source: 'trainer-log',
+		setGroups: [
+			{ sets: 2, reps: 12, load: 35, rpe: 6, variation: 'lying' },
+			{ sets: 2, reps: 12, load: 45, rpe: 8, variation: 'lying' }
+		]
+	}
+]);
+
 describe('progressSeries', () => {
 	it('plots the heaviest working set per day, one series per rep count', () => {
 		const series = progressSeries(exercises.bench, bench);
@@ -42,6 +60,14 @@ describe('progressSeries', () => {
 
 	it('leaves warm-ups off the chart', () => {
 		expect(progressSeries(exercises['hamstring-curl'], hamstringWarmup)).toEqual([]);
+	});
+
+	it('plots seated and lying hamstring curls on the same series', () => {
+		const series = progressSeries(exercises['hamstring-curl'], hamstringCurls);
+		expect(series.map(({ label, points }) => [label, points.map((point) => point.value)])).toEqual([
+			['12 reps', [90, 45]]
+		]);
+		expect(series[0].points.map((point) => point.top.variation?.id)).toEqual(['seated', 'lying']);
 	});
 });
 

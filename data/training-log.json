@@ -1373,7 +1373,7 @@
 	},
 	{
 		"date": "2026-11-14",
-		"exercise": "lying-leg-curl",
+		"exercise": "hamstring-curl",
 		"source": "trainer-log",
 		"setGroups": [
 			{
@@ -1381,13 +1381,14 @@
 				"reps": 12,
 				"load": 35,
 				"rpe": 6,
-				"note": "Substitute for seated ham curl; gym has no seated machine."
+				"variation": "lying"
 			},
 			{
 				"sets": 2,
 				"reps": 12,
 				"load": 45,
-				"rpe": 8
+				"rpe": 8,
+				"variation": "lying"
 			}
 		]
 	}

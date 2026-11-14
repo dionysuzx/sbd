@@ -7,7 +7,6 @@ export const exerciseIds = [
 	'chest-supported-row',
 	'bird-dog-row',
 	'hamstring-curl',
-	'lying-leg-curl',
 	'seated-cable-row',
 	'triceps-pressdown',
 	'straight-arm-pulldown',
@@ -124,10 +123,12 @@ export const exercises: { readonly [Id in ExerciseId]: Exercise & { readonly id:
 	'bird-dog-row': accessory('bird-dog-row', 'Bird dog row', {
 		unilateral: true
 	}),
-	'hamstring-curl': accessory('hamstring-curl', 'Seated hamstring curl', {
-		variations: [{ id: 'seated', label: 'Seated' }]
+	'hamstring-curl': accessory('hamstring-curl', 'Hamstring curl', {
+		variations: [
+			{ id: 'seated', label: 'Seated' },
+			{ id: 'lying', label: 'Lying' }
+		]
 	}),
-	'lying-leg-curl': accessory('lying-leg-curl', 'Lying leg curl'),
 	'seated-cable-row': accessory('seated-cable-row', 'Seated cable row', {
 		variations: [
 			{ id: 'narrow-v-handle', label: 'Narrow V-handle' },
