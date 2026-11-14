@@ -2,7 +2,7 @@
 	import { bodyweightChartConfiguration } from '#lib/chart/bodyweight-chart.js';
 	import Legend, { type LegendEntry } from '#lib/chart/Legend.svelte';
 	import { lineChart } from '#lib/chart/line-chart.svelte.js';
-	import { referenceLineColors, seriesColor } from '#lib/chart/palette.js';
+	import { bodyweightColor, referenceLineColors } from '#lib/chart/palette.js';
 	import type { ReferenceLine } from '#lib/chart/plugins.js';
 	import { strokeScaleFor } from '#lib/chart/stroke-scale.js';
 	import type { Timeline } from '#lib/chart/timeline.js';
@@ -19,8 +19,6 @@
 	let { weighIns, weightClasses, timeline }: Props = $props();
 
 	let chartWidth = $state(0);
-
-	const bodyweightColor = seriesColor(0);
 
 	const classLines = $derived<ReferenceLine[]>([
 		{

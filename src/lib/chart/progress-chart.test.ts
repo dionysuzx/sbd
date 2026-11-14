@@ -5,6 +5,7 @@ import { progressSeries } from '#lib/training/progress.js';
 import type { Session } from '#lib/training/session.js';
 import type { SetGroup } from '#lib/training/set-group.js';
 import type { LineChartConfiguration } from './line-chart.svelte.js';
+import { platePaints } from './palette.js';
 import { progressChartConfiguration } from './progress-chart.js';
 import type { StrokeScale } from './stroke-scale.js';
 import { timelineFrom } from './timeline.js';
@@ -55,11 +56,36 @@ const curls = TrainingLog.parse([
 	}
 ]);
 
-const chartOf = (sessions: readonly Session[], highlighted: SetGroup | undefined = undefined) => {
+const mixedReps = TrainingLog.parse([
+	{
+		date: '2026-11-01',
+		exercise: 'bench',
+		source: 'trainer-log',
+		setGroups: [{ sets: 3, reps: 12, load: 165, variation: 'paused' }]
+	},
+	{
+		date: '2026-11-04',
+		exercise: 'bench',
+		source: 'trainer-log',
+		setGroups: [{ sets: 1, reps: 5, load: 205, variation: 'paused' }]
+	},
+	{
+		date: '2026-11-08',
+		exercise: 'bench',
+		source: 'trainer-log',
+		setGroups: [{ sets: 3, reps: 8, load: 185, variation: 'paused' }]
+	}
+]);
+
+const chartOf = (
+	sessions: readonly Session[],
+	highlighted: SetGroup | undefined = undefined,
+	series = progressSeries(sessions[0].exercise, sessions)
+) => {
 	const exercise = sessions[0].exercise;
 	return progressChartConfiguration({
 		exercise,
-		series: progressSeries(exercise, sessions),
+		series,
 		axisLabel: 'Weight (lb)',
 		timeline: timelineFrom(
 			sessions[0].date,
@@ -114,5 +140,32 @@ describe('progress chart markers', () => {
 		expect(lone.radii).toEqual([5]);
 		expect(selected.hoverRadii).toEqual([9, 7]);
 		expect(lone.hoverRadii).toEqual([7]);
+	});
+});
+
+describe('progress chart colors', () => {
+	it('colors series like kilo plates by rep count, not by array order', () => {
+		const series = progressSeries(mixedReps[0].exercise, mixedReps);
+		const byLabel = new Map(series.map((entry) => [entry.label, entry]));
+		const shuffled = [byLabel.get('12 reps')!, byLabel.get('5 reps')!, byLabel.get('8 reps')!];
+		const colors = Object.fromEntries(
+			chartOf(mixedReps, undefined, shuffled).data.datasets.map((dataset) => [
+				dataset.label,
+				dataset.backgroundColor
+			])
+		);
+		expect(colors).toEqual({
+			'5 reps': platePaints[0].fill,
+			'8 reps': platePaints[1].fill,
+			'12 reps': platePaints[2].fill
+		});
+	});
+
+	it('gives the yellow series a darker unselected stroke', () => {
+		const twelve = chartOf(mixedReps).data.datasets.find((dataset) => dataset.label === '12 reps');
+		if (!twelve) throw new Error('missing 12-rep series');
+		expect(twelve.backgroundColor).toBe(platePaints[2].fill);
+		expect(twelve.pointBorderColor).toEqual([platePaints[2].stroke]);
+		expect(twelve).toMatchObject({ lineOutlineColor: platePaints[2].stroke });
 	});
 });

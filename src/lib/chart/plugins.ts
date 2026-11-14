@@ -28,7 +28,35 @@ declare module 'chart.js' {
 		milestoneMarker?: MilestoneMarkerOptions | false;
 		referenceLines?: ReferenceLinesOptions | false;
 	}
+
+	interface ChartDatasetProperties<TType extends ChartType, TData> {
+		lineOutlineColor?: string;
+	}
 }
+
+export const outlinedLine: Plugin<'line'> = {
+	id: 'outlinedLine',
+	beforeDatasetDraw(chart, args) {
+		const color = chart.data.datasets[args.index].lineOutlineColor;
+		if (!color) return;
+		const points = args.meta.data as PointElement[];
+		if (points.length < 2) return;
+		const lineWidth = chart.data.datasets[args.index].borderWidth;
+		const ctx = chart.ctx;
+		ctx.save();
+		ctx.strokeStyle = color;
+		ctx.lineWidth = (typeof lineWidth === 'number' ? lineWidth : 2) + 2;
+		ctx.lineJoin = 'round';
+		ctx.lineCap = 'round';
+		ctx.beginPath();
+		ctx.moveTo(points[0].x, points[0].y);
+		for (let index = 1; index < points.length; index++) {
+			ctx.lineTo(points[index].x, points[index].y);
+		}
+		ctx.stroke();
+		ctx.restore();
+	}
+};
 
 export const dodgeOverlappingPoints: Plugin<'line'> = {
 	id: 'dodgeOverlappingPoints',
