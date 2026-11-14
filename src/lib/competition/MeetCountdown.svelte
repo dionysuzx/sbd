@@ -31,7 +31,7 @@
 <style>
 	p {
 		display: inline-block;
-		margin: 0;
+		margin: 0 0 16px;
 		padding: 8px 14px;
 		border-radius: 6px;
 		background: #111827;
