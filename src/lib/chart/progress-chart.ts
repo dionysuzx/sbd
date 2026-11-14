@@ -4,6 +4,7 @@ import { loadKindOf, variationIndex, type Exercise } from '#lib/training/exercis
 import { summarizePoint, type ProgressPoint, type ProgressSeries } from '#lib/training/progress.js';
 import type { SetGroup } from '#lib/training/set-group.js';
 import type { LineChartConfiguration } from './line-chart.svelte.js';
+import { chartRadiusFor, maxChartRadiusFactor } from './marker-geometry.js';
 import { markerShape, platePaintsForCounts, selectionOutline } from './palette.js';
 import { dodgeOverlappingPoints, milestoneMarker, outlinedLine } from './plugins.js';
 import type { StrokeScale } from './stroke-scale.js';
@@ -26,8 +27,8 @@ const MARKER_RADIUS = 5;
 const SELECTED_GROWTH = 2;
 const HOVER_GROWTH = 2;
 
-function markerRadius(scale: StrokeScale): number {
-	return MARKER_RADIUS * scale.point;
+function circleRadius(scale: StrokeScale, growth: number): number {
+	return (MARKER_RADIUS + growth) * scale.point;
 }
 
 function markerBorder(selected: boolean, scale: StrokeScale): number {
@@ -35,7 +36,7 @@ function markerBorder(selected: boolean, scale: StrokeScale): number {
 }
 
 function largestMarkerExtent(scale: StrokeScale): number {
-	const radius = (MARKER_RADIUS + SELECTED_GROWTH + HOVER_GROWTH) * scale.point;
+	const radius = circleRadius(scale, SELECTED_GROWTH + HOVER_GROWTH) * maxChartRadiusFactor;
 	return radius + markerBorder(true, scale);
 }
 
@@ -66,10 +67,15 @@ export function progressChartConfiguration(input: ProgressChartInput): LineChart
 		const shapes = points.map((point) =>
 			markerShape(variationIndex(exercise, point.top.variation))
 		);
-		const radii = points.map((_, index) => {
-			const radius = markerRadius(scale);
-			return selected[index] ? radius + SELECTED_GROWTH * scale.point : radius;
-		});
+		const radii = points.map((_, index) =>
+			chartRadiusFor(shapes[index], circleRadius(scale, selected[index] ? SELECTED_GROWTH : 0))
+		);
+		const hoverRadii = points.map((_, index) =>
+			chartRadiusFor(
+				shapes[index],
+				circleRadius(scale, (selected[index] ? SELECTED_GROWTH : 0) + HOVER_GROWTH)
+			)
+		);
 		const borderColors = selected.map((isSelected) =>
 			isSelected ? selectionOutline : paint.stroke
 		);
@@ -86,7 +92,7 @@ export function progressChartConfiguration(input: ProgressChartInput): LineChart
 			pointBorderColor: borderColors,
 			pointBorderWidth: borderWidths,
 			pointRadius: radii,
-			pointHoverRadius: radii.map((radius) => radius + HOVER_GROWTH * scale.point),
+			pointHoverRadius: hoverRadii,
 			pointHoverBorderColor: borderColors,
 			pointHoverBorderWidth: borderWidths,
 			pointHitRadius: 12,

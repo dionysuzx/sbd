@@ -5,6 +5,7 @@ import { progressSeries } from '#lib/training/progress.js';
 import type { Session } from '#lib/training/session.js';
 import type { SetGroup } from '#lib/training/set-group.js';
 import type { LineChartConfiguration } from './line-chart.svelte.js';
+import { chartRadiusFor } from './marker-geometry.js';
 import { platePaints } from './palette.js';
 import { progressChartConfiguration } from './progress-chart.js';
 import type { StrokeScale } from './stroke-scale.js';
@@ -123,11 +124,22 @@ describe('progress chart markers', () => {
 		]);
 	});
 
-	it('uses the same unselected size for circle and triangle markers', () => {
+	it('gives circle and triangle markers the same unselected area', () => {
 		const datasets = datasetRadii(chartOf(curls));
 		expect(datasets).toHaveLength(1);
 		expect(datasets[0].styles).toEqual(['circle', 'triangle']);
-		expect(datasets[0].radii).toEqual([5, 5]);
+		expect(datasets[0].radii[0]).toBe(5);
+		expect(datasets[0].radii[1]).toBeCloseTo(chartRadiusFor('triangle', 5));
+	});
+
+	it('applies equal-area sizing to selected and hover triangle markers', () => {
+		const highlighted = curls[1].setGroups[0];
+		const datasets = datasetRadii(chartOf(curls, highlighted));
+		expect(datasets[0].styles).toEqual(['circle', 'triangle']);
+		expect(datasets[0].radii[0]).toBe(5);
+		expect(datasets[0].radii[1]).toBeCloseTo(chartRadiusFor('triangle', 7));
+		expect(datasets[0].hoverRadii[0]).toBeCloseTo(chartRadiusFor('circle', 7));
+		expect(datasets[0].hoverRadii[1]).toBeCloseTo(chartRadiusFor('triangle', 9));
 	});
 
 	it('enlarges only the selected marker and grows further on hover', () => {
