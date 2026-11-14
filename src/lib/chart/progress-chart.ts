@@ -4,7 +4,7 @@ import { loadKindOf, variationIndex, type Exercise } from '#lib/training/exercis
 import { summarizePoint, type ProgressPoint, type ProgressSeries } from '#lib/training/progress.js';
 import type { SetGroup } from '#lib/training/set-group.js';
 import type { LineChartConfiguration } from './line-chart.svelte.js';
-import { markerShape, selectionOutline, seriesColor, type MarkerShape } from './palette.js';
+import { markerShape, selectionOutline, seriesColor } from './palette.js';
 import { dodgeOverlappingPoints, milestoneMarker } from './plugins.js';
 import type { StrokeScale } from './stroke-scale.js';
 import { timelineAxis, valueAxis, type Timeline } from './timeline.js';
@@ -22,13 +22,12 @@ export type ProgressChartInput = {
 	readonly onSelect: (point: ProgressPoint | undefined) => void;
 };
 
-const MARKER_RADIUS = { circle: 5, standout: 7 } as const;
+const MARKER_RADIUS = 5;
 const SELECTED_GROWTH = 2;
 const HOVER_GROWTH = 2;
 
-function markerRadius(shape: MarkerShape, onlyPoint: boolean, scale: StrokeScale): number {
-	const radius = onlyPoint || shape !== 'circle' ? MARKER_RADIUS.standout : MARKER_RADIUS.circle;
-	return radius * scale.point;
+function markerRadius(scale: StrokeScale): number {
+	return MARKER_RADIUS * scale.point;
 }
 
 function markerBorder(selected: boolean, scale: StrokeScale): number {
@@ -36,7 +35,7 @@ function markerBorder(selected: boolean, scale: StrokeScale): number {
 }
 
 function largestMarkerExtent(scale: StrokeScale): number {
-	const radius = (MARKER_RADIUS.standout + SELECTED_GROWTH + HOVER_GROWTH) * scale.point;
+	const radius = (MARKER_RADIUS + SELECTED_GROWTH + HOVER_GROWTH) * scale.point;
 	return radius + markerBorder(true, scale);
 }
 
@@ -65,8 +64,8 @@ export function progressChartConfiguration(input: ProgressChartInput): LineChart
 		const shapes = points.map((point) =>
 			markerShape(variationIndex(exercise, point.top.variation))
 		);
-		const radii = shapes.map((shape, index) => {
-			const radius = markerRadius(shape, points.length === 1, scale);
+		const radii = points.map((_, index) => {
+			const radius = markerRadius(scale);
 			return selected[index] ? radius + SELECTED_GROWTH * scale.point : radius;
 		});
 		const borderColors = selected.map((isSelected) => (isSelected ? selectionOutline : color));
