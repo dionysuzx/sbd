@@ -9,7 +9,7 @@ const Kilograms = z.number().positive();
 export const ProgramFile = z
 	.strictObject({
 		therapyStart: z.strictObject({ date: CalendarDate, label: z.string().min(1) }),
-		meet: z.strictObject({ name: z.string().min(1), date: CalendarDate }),
+		meet: z.strictObject({ name: z.string().min(1), date: CalendarDate, url: z.url() }),
 		weightClasses: z.strictObject({ target: Kilograms, next: Kilograms }),
 		currentAccessories: z
 			.array(z.enum(exerciseIds))

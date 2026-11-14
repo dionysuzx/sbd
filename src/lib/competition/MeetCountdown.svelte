@@ -1,19 +1,28 @@
 <script lang="ts">
-	import { formatWeekdayDate, type CalendarDate } from '#lib/calendar-date.js';
-	import { countdownTo, type Meet } from './meet.js';
+	import type { CalendarDate } from '#lib/calendar-date.js';
+	import { describeCountdown, type Meet } from './meet.js';
 
 	let { meet, today }: { meet: Meet; today: CalendarDate } = $props();
 
-	const countdown = $derived(countdownTo(meet, today));
+	const label = $derived(describeCountdown(meet, today));
 </script>
 
-{#if countdown.kind !== 'over'}
+{#snippet meetName()}
+	{#if meet.url}
+		<a href={meet.url} target="_blank" rel="noopener noreferrer">
+			{meet.name}<span class="outbound" aria-hidden="true">↗</span>
+		</a>
+	{:else}
+		{meet.name}
+	{/if}
+{/snippet}
+
+{#if label}
 	<p>
-		{#if countdown.kind === 'meet-day'}
-			Meet day: {meet.name}
+		{#if label.kind === 'meet-day'}
+			Meet day: {@render meetName()}
 		{:else}
-			{countdown.weeks.toFixed(1)} weeks out · {countdown.days}
-			{countdown.days === 1 ? 'day' : 'days'} to {meet.name} ({formatWeekdayDate(meet.date)})
+			{label.weeks} · {@render meetName()} · {label.date}
 		{/if}
 	</p>
 {/if}
@@ -28,5 +37,23 @@
 		color: #fff;
 		font-size: 0.92rem;
 		font-weight: 600;
+	}
+
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	a:hover,
+	a:focus,
+	a:focus-visible {
+		text-decoration: underline;
+	}
+
+	.outbound {
+		margin-left: 0.2em;
+		font-size: 0.72em;
+		font-weight: 500;
+		opacity: 0.7;
 	}
 </style>
