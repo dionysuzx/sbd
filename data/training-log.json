@@ -1387,5 +1387,69 @@
 				"variation": "lying"
 			}
 		]
+	},
+	{
+		"date": "2026-11-15",
+		"exercise": "chest-supported-row",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 2,
+				"reps": 12,
+				"load": 60,
+				"variation": "dumbbells",
+				"note": "60 lb dumbbells, 30-degree bench. Sets 1–2 of 12, all clean. RPE not reported."
+			},
+			{
+				"sets": 1,
+				"reps": 15,
+				"load": 60,
+				"rpe": 9,
+				"variation": "dumbbells",
+				"note": "Set 3, all clean. Next time 65."
+			}
+		]
+	},
+	{
+		"date": "2026-11-15",
+		"exercise": "straight-arm-pulldown",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 12,
+				"load": 110,
+				"rpe": 8,
+				"variation": "straight-bar"
+			}
+		]
+	},
+	{
+		"date": "2026-11-15",
+		"exercise": "bird-dog-row",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 8,
+				"load": 25,
+				"rpe": 6,
+				"note": "25 lb 3x8 per side."
+			}
+		]
+	},
+	{
+		"date": "2026-11-15",
+		"exercise": "curl",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 12,
+				"load": 25,
+				"rpe": 8,
+				"note": "25 lb dumbbells."
+			}
+		]
 	}
 ]
