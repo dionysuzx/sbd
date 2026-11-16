@@ -21,15 +21,14 @@ const issuesFor = (weeks: unknown) => {
 };
 
 describe('ProgramWeeks', () => {
-	it('accepts the committed plan from Nov 9 through the return week', () => {
+	it('accepts the committed plan from Nov 9 through meet week', () => {
 		const weeks = ProgramWeeks.parse(committedWeeks);
 		expect(weeks.map((planned) => planned.start)).toEqual([
 			'2026-11-09',
 			'2026-11-16',
 			'2026-11-23',
 			'2026-11-30',
-			'2026-12-07',
-			'2026-12-14'
+			'2026-12-07'
 		]);
 	});
 

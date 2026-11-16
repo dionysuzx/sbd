@@ -17,7 +17,12 @@ export const exerciseIds = [
 	'dip',
 	'pull-up',
 	'back-extension',
-	'curl'
+	'curl',
+	'leg-press',
+	'quad-extension',
+	'seated-pin-press',
+	'incline-dumbbell-press',
+	'back-supported-tricep-extension'
 ] as const;
 
 export type ExerciseId = (typeof exerciseIds)[number];
@@ -118,7 +123,10 @@ export const exercises: { readonly [Id in ExerciseId]: Exercise & { readonly id:
 		variations: [{ id: 'glute-bridge', label: 'In glute bridge' }]
 	}),
 	'chest-supported-row': accessory('chest-supported-row', 'Chest-supported row', {
-		variations: [{ id: 'dumbbells', label: 'With dumbbells' }]
+		variations: [
+			{ id: 'dumbbells', label: 'With dumbbells' },
+			{ id: 'prone-machine', label: 'Prone machine' }
+		]
 	}),
 	'bird-dog-row': accessory('bird-dog-row', 'Bird dog row', {
 		unilateral: true
@@ -156,5 +164,13 @@ export const exercises: { readonly [Id in ExerciseId]: Exercise & { readonly id:
 	dip: accessory('dip', 'Weighted dip', { load: 'added-to-bodyweight' }),
 	'pull-up': accessory('pull-up', 'Pull-up', { load: 'bodyweight' }),
 	'back-extension': accessory('back-extension', 'Back extension'),
-	curl: accessory('curl', 'Curl')
+	curl: accessory('curl', 'Curl'),
+	'leg-press': accessory('leg-press', 'Leg press'),
+	'quad-extension': accessory('quad-extension', 'Quad extension'),
+	'seated-pin-press': accessory('seated-pin-press', 'Seated pin press'),
+	'incline-dumbbell-press': accessory('incline-dumbbell-press', 'Incline dumbbell press'),
+	'back-supported-tricep-extension': accessory(
+		'back-supported-tricep-extension',
+		'Back-supported tricep extension'
+	)
 };

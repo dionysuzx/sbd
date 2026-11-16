@@ -4,17 +4,16 @@
 	"weightClasses": { "target": 93, "next": 105 },
 	"currentAccessories": [
 		"rfe-lunge",
-		"lat-pullover",
-		"reverse-nordic",
-		"copenhagen",
-		"seated-cable-row",
-		"triceps-pressdown",
-		"bird-dog-row",
+		"leg-press",
+		"quad-extension",
+		"seated-pin-press",
+		"incline-dumbbell-press",
 		"chest-supported-row",
-		"hamstring-curl",
-		"ir-pull-apart",
-		"dip",
+		"back-supported-tricep-extension",
+		"bird-dog-row",
 		"pull-up",
-		"back-extension"
+		"lat-pullover",
+		"hamstring-curl",
+		"curl"
 	]
 }
