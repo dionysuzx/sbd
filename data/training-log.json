@@ -1614,9 +1614,10 @@
 			},
 			{
 				"sets": 1,
-				"reps": 5,
+				"reps": 9,
 				"load": 110,
-				"rpe": 8
+				"rpe": 8,
+				"note": "Went to 9 reps to reach RPE 8 while getting the groove."
 			}
 		]
 	}
