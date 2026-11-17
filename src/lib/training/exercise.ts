@@ -22,7 +22,8 @@ export const exerciseIds = [
 	'quad-extension',
 	'seated-pin-press',
 	'incline-dumbbell-press',
-	'back-supported-tricep-extension'
+	'back-supported-tricep-extension',
+	'half-kneeling-pallof-press'
 ] as const;
 
 export type ExerciseId = (typeof exerciseIds)[number];
@@ -172,5 +173,10 @@ export const exercises: { readonly [Id in ExerciseId]: Exercise & { readonly id:
 	'back-supported-tricep-extension': accessory(
 		'back-supported-tricep-extension',
 		'Back-supported tricep extension'
+	),
+	'half-kneeling-pallof-press': accessory(
+		'half-kneeling-pallof-press',
+		'Half-kneeling Pallof press with rotation',
+		{ load: 'band', unilateral: true }
 	)
 };

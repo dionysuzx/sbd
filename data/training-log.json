@@ -1451,5 +1451,124 @@
 				"note": "25 lb dumbbells."
 			}
 		]
+	},
+	{
+		"date": "2026-11-16",
+		"exercise": "squat",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 2,
+				"load": 295,
+				"rpe": 7,
+				"variation": "low-bar-belted",
+				"note": "RPE 6.5–7 (logged as 7). Different gym, 45 lb bar, lb plates. Low-bar bothering wrists."
+			},
+			{
+				"sets": 1,
+				"reps": 2,
+				"load": 305,
+				"rpe": 7.5,
+				"variation": "low-bar-belted",
+				"note": "Top set. Slight loss of torso position on the doubles."
+			},
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 275,
+				"rpe": 8.5,
+				"variation": "low-bar-belted"
+			},
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 265,
+				"rpe": 7.5,
+				"variation": "low-bar-belted"
+			},
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 265,
+				"rpe": 7,
+				"variation": "low-bar-belted",
+				"note": "Perfect form."
+			}
+		]
+	},
+	{
+		"date": "2026-11-16",
+		"exercise": "rfe-lunge",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 8,
+				"load": 50,
+				"rpe": 6,
+				"note": "RPE estimated."
+			},
+			{
+				"sets": 1,
+				"reps": 12,
+				"load": 50,
+				"rpe": 7,
+				"note": "RPE estimated."
+			},
+			{
+				"sets": 1,
+				"reps": 8,
+				"load": 63,
+				"rpe": 7,
+				"note": "RPE estimated; could've gone heavier."
+			}
+		]
+	},
+	{
+		"date": "2026-11-16",
+		"exercise": "leg-press",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 8,
+				"load": 270,
+				"note": "Plates only, three 45s per side (270 lb plates; sled weight unknown). Too easy. Heels. Pressing to start the set slightly tweaks the knee. RPE not reported."
+			},
+			{
+				"sets": 2,
+				"reps": 8,
+				"load": 320,
+				"rpe": 8,
+				"note": "Plates only, three 45s + 25 per side (320 lb plates; sled weight unknown). Heels."
+			}
+		]
+	},
+	{
+		"date": "2026-11-16",
+		"exercise": "quad-extension",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 2,
+				"reps": 15,
+				"load": 70,
+				"rpe": 8,
+				"note": "Felt good on the knee for the first time in a long time."
+			}
+		]
+	},
+	{
+		"date": "2026-11-16",
+		"exercise": "half-kneeling-pallof-press",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 10,
+				"note": "Blue band. Band weight unknown. Per Sina's email."
+			}
+		]
 	}
 ]
