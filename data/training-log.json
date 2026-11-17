@@ -1570,5 +1570,48 @@
 				"note": "Blue band. Band weight unknown. Per Sina's email."
 			}
 		]
+	},
+	{
+		"date": "2026-11-17",
+		"exercise": "bench",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 5,
+				"load": 225,
+				"rpe": 8,
+				"variation": "paused",
+				"note": "Sets 1–3 of the 4x5 @ 225. Sets 2–3 RPE 8 per David. 205 warm-up single flew (not logged). After PT."
+			},
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 225,
+				"rpe": 9,
+				"variation": "paused",
+				"note": "Set 4 of the 4x5."
+			}
+		]
+	},
+	{
+		"date": "2026-11-17",
+		"exercise": "seated-pin-press",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 115,
+				"rpe": 9,
+				"note": "Seated overhead press from pins at nose-to-eyebrow height, no backrest, belted. Filmed for Sina."
+			},
+			{
+				"sets": 2,
+				"reps": 5,
+				"load": 105,
+				"rpe": 8
+			}
+		]
 	}
 ]
