@@ -1607,9 +1607,15 @@
 				"note": "Seated overhead press from pins at nose-to-eyebrow height, no backrest, belted. Filmed for Sina."
 			},
 			{
-				"sets": 2,
+				"sets": 1,
 				"reps": 5,
 				"load": 105,
+				"rpe": 8
+			},
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 110,
 				"rpe": 8
 			}
 		]
