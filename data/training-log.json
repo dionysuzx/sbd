@@ -1620,5 +1620,40 @@
 				"note": "Went to 9 reps to reach RPE 8 while getting the groove."
 			}
 		]
+	},
+	{
+		"date": "2026-11-17",
+		"exercise": "back-supported-tricep-extension",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 17,
+				"load": 80,
+				"rpe": 9,
+				"note": "Evening, back at the gym after dinner. RPE assumed at target (9); David didn't report RPE."
+			},
+			{
+				"sets": 1,
+				"reps": 20,
+				"load": 60,
+				"rpe": 9,
+				"note": "Slow tempo; felt much better than 80. RPE assumed at target (9); David didn't report RPE."
+			}
+		]
+	},
+	{
+		"date": "2026-11-17",
+		"exercise": "bird-dog-row",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 8,
+				"load": 30,
+				"rpe": 9,
+				"note": "Reps assumed at prescribed 3x8/side and RPE assumed at target (9); David said they went well."
+			}
+		]
 	}
 ]
