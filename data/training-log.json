@@ -1683,5 +1683,26 @@
 				"note": "Hammer Strength prone row machine, hammer grip; load per side (machine, not comparable to DB rows); RPE assumed at target (9)."
 			}
 		]
+	},
+	{
+		"date": "2026-11-17",
+		"exercise": "incline-dumbbell-press",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 6,
+				"load": 75,
+				"rpe": 9,
+				"note": "30-degree bench. Reps assumed at prescribed 6; RPE assumed at target (9); load per dumbbell."
+			},
+			{
+				"sets": 2,
+				"reps": 6,
+				"load": 80,
+				"rpe": 9,
+				"note": "30-degree bench. Reps assumed at prescribed 6; RPE assumed at target (9); load per dumbbell."
+			}
+		]
 	}
 ]
