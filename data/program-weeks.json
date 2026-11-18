@@ -140,7 +140,6 @@
 			{
 				"date": "2026-11-16",
 				"title": "Squat",
-				"note": "Abs.",
 				"work": [
 					{
 						"exercise": "squat",
@@ -169,6 +168,12 @@
 						"exercise": "quad-extension",
 						"sets": 2,
 						"reps": 15
+					},
+					{
+						"exercise": "half-kneeling-pallof-press",
+						"sets": 3,
+						"reps": 10,
+						"note": "Sina (Nov 16) chose this for abs; sets/reps are Trainer's until she confirms. Rotate over the front knee; stand up slowly between sides."
 					}
 				]
 			},
@@ -217,7 +222,6 @@
 			{
 				"date": "2026-11-19",
 				"title": "Deadlift",
-				"note": "Abs.",
 				"work": [
 					{
 						"exercise": "deadlift",
@@ -245,6 +249,12 @@
 						"sets": 2,
 						"reps": 20,
 						"note": "Bicep pump"
+					},
+					{
+						"exercise": "half-kneeling-pallof-press",
+						"sets": 3,
+						"reps": 10,
+						"note": "Sina (Nov 16) chose this for abs; sets/reps are Trainer's until she confirms. Rotate over the front knee; stand up slowly between sides."
 					}
 				]
 			},
@@ -257,7 +267,6 @@
 			{
 				"date": "2026-11-21",
 				"title": "SBD",
-				"note": "Abs.",
 				"work": [
 					{
 						"exercise": "squat",
@@ -275,6 +284,12 @@
 						"exercise": "deadlift",
 						"sets": 3,
 						"reps": 2
+					},
+					{
+						"exercise": "half-kneeling-pallof-press",
+						"sets": 3,
+						"reps": 10,
+						"note": "Sina (Nov 16) chose this for abs; sets/reps are Trainer's until she confirms. Rotate over the front knee; stand up slowly between sides."
 					}
 				]
 			},
@@ -293,7 +308,6 @@
 			{
 				"date": "2026-11-23",
 				"title": "Squat",
-				"note": "Abs.",
 				"work": [
 					{
 						"exercise": "squat",
@@ -322,6 +336,12 @@
 						"exercise": "quad-extension",
 						"sets": 2,
 						"reps": 15
+					},
+					{
+						"exercise": "half-kneeling-pallof-press",
+						"sets": 3,
+						"reps": 10,
+						"note": "Sina (Nov 16) chose this for abs; sets/reps are Trainer's until she confirms. Rotate over the front knee; stand up slowly between sides."
 					}
 				]
 			},
@@ -370,7 +390,6 @@
 			{
 				"date": "2026-11-26",
 				"title": "Deadlift",
-				"note": "Abs.",
 				"work": [
 					{
 						"exercise": "deadlift",
@@ -398,6 +417,12 @@
 						"sets": 2,
 						"reps": 20,
 						"note": "Bicep pump"
+					},
+					{
+						"exercise": "half-kneeling-pallof-press",
+						"sets": 3,
+						"reps": 10,
+						"note": "Sina (Nov 16) chose this for abs; sets/reps are Trainer's until she confirms. Rotate over the front knee; stand up slowly between sides."
 					}
 				]
 			},
@@ -410,7 +435,6 @@
 			{
 				"date": "2026-11-28",
 				"title": "SBD",
-				"note": "Abs.",
 				"work": [
 					{
 						"exercise": "squat",
@@ -428,6 +452,12 @@
 						"exercise": "deadlift",
 						"sets": 3,
 						"reps": 2
+					},
+					{
+						"exercise": "half-kneeling-pallof-press",
+						"sets": 3,
+						"reps": 10,
+						"note": "Sina (Nov 16) chose this for abs; sets/reps are Trainer's until she confirms. Rotate over the front knee; stand up slowly between sides."
 					}
 				]
 			},
@@ -446,7 +476,6 @@
 			{
 				"date": "2026-11-30",
 				"title": "Squat",
-				"note": "Abs.",
 				"work": [
 					{
 						"exercise": "squat",
@@ -475,6 +504,12 @@
 						"exercise": "quad-extension",
 						"sets": 2,
 						"reps": 15
+					},
+					{
+						"exercise": "half-kneeling-pallof-press",
+						"sets": 3,
+						"reps": 10,
+						"note": "Sina (Nov 16) chose this for abs; sets/reps are Trainer's until she confirms. Rotate over the front knee; stand up slowly between sides."
 					}
 				]
 			},
@@ -523,7 +558,6 @@
 			{
 				"date": "2026-12-03",
 				"title": "Deadlift",
-				"note": "Abs.",
 				"work": [
 					{
 						"exercise": "deadlift",
@@ -551,6 +585,12 @@
 						"sets": 2,
 						"reps": 20,
 						"note": "Bicep pump"
+					},
+					{
+						"exercise": "half-kneeling-pallof-press",
+						"sets": 3,
+						"reps": 10,
+						"note": "Sina (Nov 16) chose this for abs; sets/reps are Trainer's until she confirms. Rotate over the front knee; stand up slowly between sides."
 					}
 				]
 			},
@@ -563,7 +603,6 @@
 			{
 				"date": "2026-12-05",
 				"title": "SBD",
-				"note": "Abs.",
 				"work": [
 					{
 						"exercise": "squat",
@@ -582,6 +621,12 @@
 						"sets": 1,
 						"reps": 1,
 						"note": "Then 2–3 × 2"
+					},
+					{
+						"exercise": "half-kneeling-pallof-press",
+						"sets": 3,
+						"reps": 10,
+						"note": "Sina (Nov 16) chose this for abs; sets/reps are Trainer's until she confirms. Rotate over the front knee; stand up slowly between sides."
 					}
 				]
 			},
