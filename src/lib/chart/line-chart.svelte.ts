@@ -1,15 +1,6 @@
-import {
-	Chart,
-	LinearScale,
-	LineController,
-	LineElement,
-	PointElement,
-	Tooltip,
-	type ChartConfiguration
-} from 'chart.js';
+import type { ChartConfiguration } from 'chart.js';
 import type { Attachment } from 'svelte/attachments';
-
-Chart.register(LineController, LineElement, PointElement, LinearScale, Tooltip);
+import { Chart } from './line-element.js';
 
 type ChartPoint = { x: number; y: number };
 
