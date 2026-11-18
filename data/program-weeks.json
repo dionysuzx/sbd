@@ -192,10 +192,9 @@
 						"reps": 6
 					},
 					{
-						"exercise": "chest-supported-row",
+						"exercise": "hammer-strength-prone-row",
 						"sets": 3,
-						"reps": "8-10",
-						"note": "Prone machine"
+						"reps": "8-10"
 					},
 					{
 						"exercise": "back-supported-tricep-extension",
@@ -346,10 +345,9 @@
 						"reps": 6
 					},
 					{
-						"exercise": "chest-supported-row",
+						"exercise": "hammer-strength-prone-row",
 						"sets": 3,
-						"reps": "8-10",
-						"note": "Prone machine"
+						"reps": "8-10"
 					},
 					{
 						"exercise": "back-supported-tricep-extension",
@@ -500,10 +498,9 @@
 						"reps": 6
 					},
 					{
-						"exercise": "chest-supported-row",
+						"exercise": "hammer-strength-prone-row",
 						"sets": 3,
-						"reps": "8-10",
-						"note": "Prone machine"
+						"reps": "8-10"
 					},
 					{
 						"exercise": "back-supported-tricep-extension",

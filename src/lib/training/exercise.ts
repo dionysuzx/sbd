@@ -23,7 +23,8 @@ export const exerciseIds = [
 	'seated-pin-press',
 	'incline-dumbbell-press',
 	'back-supported-tricep-extension',
-	'half-kneeling-pallof-press'
+	'half-kneeling-pallof-press',
+	'hammer-strength-prone-row'
 ] as const;
 
 export type ExerciseId = (typeof exerciseIds)[number];
@@ -124,10 +125,7 @@ export const exercises: { readonly [Id in ExerciseId]: Exercise & { readonly id:
 		variations: [{ id: 'glute-bridge', label: 'In glute bridge' }]
 	}),
 	'chest-supported-row': accessory('chest-supported-row', 'Chest-supported row', {
-		variations: [
-			{ id: 'dumbbells', label: 'With dumbbells' },
-			{ id: 'prone-machine', label: 'Prone machine' }
-		]
+		variations: [{ id: 'dumbbells', label: 'With dumbbells' }]
 	}),
 	'bird-dog-row': accessory('bird-dog-row', 'Bird dog row', {
 		unilateral: true
@@ -178,5 +176,8 @@ export const exercises: { readonly [Id in ExerciseId]: Exercise & { readonly id:
 		'half-kneeling-pallof-press',
 		'Half-kneeling Pallof press with rotation',
 		{ load: 'band', unilateral: true }
-	)
+	),
+	'hammer-strength-prone-row': accessory('hammer-strength-prone-row', 'Hammer Strength prone row', {
+		unilateral: true
+	})
 };

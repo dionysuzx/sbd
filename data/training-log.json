@@ -1655,5 +1655,33 @@
 				"note": "Reps assumed at prescribed 3x8/side and RPE assumed at target (9); David said they went well."
 			}
 		]
+	},
+	{
+		"date": "2026-11-17",
+		"exercise": "hammer-strength-prone-row",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 10,
+				"load": 115,
+				"rpe": 9,
+				"note": "Hammer Strength prone row machine, hammer grip; load per side (machine, not comparable to DB rows); RPE assumed at target (9)."
+			},
+			{
+				"sets": 1,
+				"reps": 12,
+				"load": 115,
+				"rpe": 9,
+				"note": "Hammer Strength prone row machine, hammer grip; load per side (machine, not comparable to DB rows); RPE assumed at target (9)."
+			},
+			{
+				"sets": 1,
+				"reps": 8,
+				"load": 135,
+				"rpe": 9,
+				"note": "Hammer Strength prone row machine, hammer grip; load per side (machine, not comparable to DB rows); RPE assumed at target (9)."
+			}
+		]
 	}
 ]
