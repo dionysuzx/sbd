@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { formatWeekdayDate, type CalendarDate } from '#lib/calendar-date.js';
 	import type { Meet } from '#lib/competition/meet.js';
+	import LinkedText from './LinkedText.svelte';
 	import {
 		describeDose,
 		describeRpe,
@@ -40,7 +41,7 @@
 	</nav>
 
 	{#if week.note}
-		<p class="week-note">{week.note}</p>
+		<p class="week-note"><LinkedText text={week.note} /></p>
 	{/if}
 
 	<ol>
@@ -52,7 +53,7 @@
 					{#if day.date === today}<span class="badge">Today</span>{/if}
 				</p>
 				{#if day.note}
-					<p class="note">{day.note}</p>
+					<p class="note"><LinkedText text={day.note} /></p>
 				{/if}
 				{#if day.work.length > 0}
 					<ul>
@@ -62,7 +63,7 @@
 								<span class="dose">
 									{describeDose(item)}{#if item.rpe}&nbsp;{describeRpe(item.rpe)}{/if}
 								</span>
-								{#if item.note}<span class="note">{item.note}</span>{/if}
+								{#if item.note}<span class="note"><LinkedText text={item.note} /></span>{/if}
 							</li>
 						{/each}
 					</ul>
@@ -156,6 +157,7 @@
 	.note {
 		color: var(--muted);
 		font-size: 0.86rem;
+		overflow-wrap: anywhere;
 	}
 
 	.week-note {
