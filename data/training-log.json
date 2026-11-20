@@ -1704,5 +1704,113 @@
 				"note": "30-degree bench. Reps assumed at prescribed 6; RPE assumed at target (9); load per dumbbell."
 			}
 		]
+	},
+	{
+		"date": "2026-11-19",
+		"exercise": "deadlift",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 319.5,
+				"rpe": 7,
+				"variation": "conventional",
+				"note": "145 kg (2 red + green + black/side). Rep 1 ~RPE 8.5, hard off the floor; reps 2-5 ~RPE 6.5. Slack not fully pulled out on rep 1."
+			},
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 325,
+				"rpe": 9,
+				"variation": "conventional",
+				"note": "147.5 kg, hook grip, no straps. Pulled slack out properly: much better form but slower and harder. Grip nearly failed on last rep; maybe 0-1 more rep (estimated ~RPE 9)."
+			},
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 325,
+				"rpe": 8,
+				"variation": "conventional",
+				"note": "147.5 kg with straps, focused on hinge/slack. RPE assumed at target (not reported)."
+			},
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 220,
+				"rpe": 5,
+				"variation": "conventional",
+				"note": "100 kg light back-off to groove form. RPE assumed at target (not reported)."
+			}
+		]
+	},
+	{
+		"date": "2026-11-19",
+		"exercise": "pull-up",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 8,
+				"rpe": 8,
+				"note": "+5 lb added. RPE assumed at target (not reported)."
+			}
+		]
+	},
+	{
+		"date": "2026-11-19",
+		"exercise": "straight-arm-pulldown",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 10,
+				"load": 100,
+				"rpe": 8,
+				"variation": "straight-bar",
+				"note": "Done for Sina's lat pullover."
+			}
+		]
+	},
+	{
+		"date": "2026-11-19",
+		"exercise": "hamstring-curl",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 2,
+				"reps": 20,
+				"load": 35,
+				"rpe": 8,
+				"variation": "lying",
+				"note": "RPE assumed at target (not reported)."
+			}
+		]
+	},
+	{
+		"date": "2026-11-19",
+		"exercise": "curl",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 2,
+				"reps": 20,
+				"load": 20,
+				"rpe": 8,
+				"note": "RPE assumed at target (not reported)."
+			}
+		]
+	},
+	{
+		"date": "2026-11-19",
+		"exercise": "half-kneeling-pallof-press",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 10,
+				"note": "Per side. Sets at 30, 40, then 50 lb; felt good. RPE not reported."
+			}
+		]
 	}
 ]
