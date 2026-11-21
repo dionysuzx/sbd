@@ -54,7 +54,7 @@ describe('TrainingLog', () => {
 
 	it('rejects a variation the exercise does not have', () => {
 		expect(issuesFor([squat({ variation: 'front' })])).toEqual([
-			'Squat has no variation "front" (allowed: high-bar, low-bar-belted)'
+			'Squat has no variation "front" (allowed: high-bar, low-bar-belted, paused)'
 		]);
 	});
 

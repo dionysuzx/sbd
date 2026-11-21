@@ -1812,5 +1812,105 @@
 				"note": "Per side. Sets at 30, 40, then 50 lb; felt good. RPE not reported."
 			}
 		]
+	},
+	{
+		"date": "2026-11-21",
+		"exercise": "squat",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 1,
+				"load": 275,
+				"rpe": 6,
+				"variation": "paused",
+				"warmup": true,
+				"note": "Belted, 2-second pause. Ramp single, easy. RPE assumed (~6)."
+			},
+			{
+				"sets": 1,
+				"reps": 1,
+				"load": 295,
+				"rpe": 7.5,
+				"variation": "paused",
+				"note": "Belted, 2-second pause."
+			},
+			{
+				"sets": 1,
+				"reps": 1,
+				"load": 315,
+				"rpe": 8,
+				"variation": "paused",
+				"note": "Belted, 2-second solid pause, no form breakdown."
+			}
+		]
+	},
+	{
+		"date": "2026-11-21",
+		"exercise": "bench",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 2,
+				"load": 235,
+				"rpe": 6.5,
+				"variation": "paused",
+				"note": "Pinky on rings grip."
+			},
+			{
+				"sets": 1,
+				"reps": 2,
+				"load": 245,
+				"rpe": 7.5,
+				"variation": "paused"
+			},
+			{
+				"sets": 1,
+				"reps": 2,
+				"load": 250,
+				"rpe": 8.5,
+				"variation": "paused"
+			}
+		]
+	},
+	{
+		"date": "2026-11-21",
+		"exercise": "deadlift",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 2,
+				"load": 319.5,
+				"rpe": 8,
+				"variation": "conventional",
+				"note": "145 kg (2 red + green + black/side), hook grip, no straps. First double."
+			},
+			{
+				"sets": 1,
+				"reps": 2,
+				"load": 319.5,
+				"rpe": 8,
+				"variation": "conventional",
+				"note": "145 kg, hook grip, no straps. RPE assumed at 8 (not reported)."
+			},
+			{
+				"sets": 1,
+				"reps": 2,
+				"load": 319.5,
+				"rpe": 8.5,
+				"variation": "conventional",
+				"note": "145 kg, hook grip, no straps. Last double; great form."
+			},
+			{
+				"sets": 2,
+				"reps": 3,
+				"load": 242.5,
+				"rpe": 7,
+				"variation": "paused",
+				"note": "110 kg (red + yellow/side). 2-second pause 1-2 inches off the floor after pulling slack. Felt great; want to keep these. RPE assumed at target (7)."
+			}
+		]
 	}
 ]

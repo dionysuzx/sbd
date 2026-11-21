@@ -106,7 +106,8 @@ export const exercises: { readonly [Id in ExerciseId]: Exercise & { readonly id:
 		'Squat',
 		[
 			{ id: 'high-bar', label: 'High-bar' },
-			{ id: 'low-bar-belted', label: 'Low-bar (belted)' }
+			{ id: 'low-bar-belted', label: 'Low-bar (belted)' },
+			{ id: 'paused', label: 'Paused' }
 		],
 		'plates-per-side'
 	),
@@ -114,7 +115,10 @@ export const exercises: { readonly [Id in ExerciseId]: Exercise & { readonly id:
 		{ id: 'paused', label: 'Comp standard' },
 		{ id: 'touch-and-go', label: 'Touch-and-go' }
 	]),
-	deadlift: mainLift('deadlift', 'Deadlift', [{ id: 'conventional', label: 'Conventional' }]),
+	deadlift: mainLift('deadlift', 'Deadlift', [
+		{ id: 'conventional', label: 'Conventional' },
+		{ id: 'paused', label: 'Paused' }
+	]),
 	'rfe-lunge': accessory('rfe-lunge', 'RFE lunge', {
 		variations: [
 			{ id: 'hand-support', label: 'With hand support' },

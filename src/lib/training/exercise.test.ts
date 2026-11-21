@@ -24,3 +24,33 @@ describe('reverse Nordic', () => {
 		expect(exercise.variations).toEqual([]);
 	});
 });
+
+describe('squat', () => {
+	it('has high-bar, low-bar belted, and paused variations', () => {
+		expect(exercises.squat.variations.map((variation) => variation.id)).toEqual([
+			'high-bar',
+			'low-bar-belted',
+			'paused'
+		]);
+	});
+});
+
+describe('deadlift', () => {
+	const deadlift = exercises.deadlift;
+
+	it('is one exercise with conventional and paused variations', () => {
+		expect(deadlift.variations.map((variation) => variation.id)).toEqual([
+			'conventional',
+			'paused'
+		]);
+	});
+
+	it('uses a circle for conventional and a triangle for paused', () => {
+		expect(markerShape(variationIndex(deadlift, findVariation(deadlift, 'conventional')))).toBe(
+			'circle'
+		);
+		expect(markerShape(variationIndex(deadlift, findVariation(deadlift, 'paused')))).toBe(
+			'triangle'
+		);
+	});
+});
