@@ -131,15 +131,15 @@ describe('ProgramWeeks', () => {
 		});
 	});
 
-	it("uses Sina's week shape: squat, bench, off, deadlift, off, SBD, rest", () => {
+	it("uses Sina's week shape: squat, bench, rest, deadlift, rest, SBD, rest", () => {
 		const planned = ProgramWeeks.parse(committedWeeks);
 		for (const start of ['2026-11-16', '2026-11-23', '2026-11-30'] as const) {
 			expect(planned.find((week) => week.start === start)!.days.map((day) => day.title)).toEqual([
 				'Squat',
 				'Comp bench',
-				'Off',
+				'Rest',
 				'Deadlift',
-				'Off',
+				'Rest',
 				'SBD',
 				'Rest'
 			]);
