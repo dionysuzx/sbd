@@ -130,4 +130,19 @@ describe('ProgramWeeks', () => {
 			'2026-12-05 Deadlift 1×1': '@7.5–8'
 		});
 	});
+
+	it("uses Sina's week shape: squat, bench, off, deadlift, off, SBD, rest", () => {
+		const planned = ProgramWeeks.parse(committedWeeks);
+		for (const start of ['2026-11-16', '2026-11-23', '2026-11-30'] as const) {
+			expect(planned.find((week) => week.start === start)!.days.map((day) => day.title)).toEqual([
+				'Squat',
+				'Comp bench',
+				'Off',
+				'Deadlift',
+				'Off',
+				'SBD',
+				'Rest'
+			]);
+		}
+	});
 });
