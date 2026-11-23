@@ -8,7 +8,13 @@ export type CountRange = { readonly min: Count; readonly max: Count };
 export type RpeTarget =
 	| { readonly kind: 'exact'; readonly rpe: Rpe }
 	| { readonly kind: 'range'; readonly from: Rpe; readonly to: Rpe }
-	| { readonly kind: 'at-most'; readonly rpe: Rpe };
+	| { readonly kind: 'at-most'; readonly rpe: Rpe }
+	| { readonly kind: 'cue'; readonly label: string };
+
+export type WeekIntensity = {
+	readonly mainLifts?: RpeTarget;
+	readonly bench?: RpeTarget;
+};
 
 export type Prescription = {
 	readonly exercise: Exercise;
@@ -36,6 +42,7 @@ export type TrainingWeek = {
 	readonly start: CalendarDate;
 	readonly phase: Phase;
 	readonly note?: string;
+	readonly intensity?: WeekIntensity;
 	readonly days: readonly PlannedDay[];
 };
 
@@ -97,5 +104,7 @@ export function describeRpe(target: RpeTarget): string {
 			return `@${target.from}–${target.to}`;
 		case 'at-most':
 			return `@≤${target.rpe}`;
+		case 'cue':
+			return target.label;
 	}
 }

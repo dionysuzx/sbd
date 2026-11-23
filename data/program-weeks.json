@@ -136,6 +136,9 @@
 		"start": "2026-11-16",
 		"phase": "build",
 		"note": "Sina Gartner's program \"David's 4 Weeks\". Daily knee rehab continues: TA/IO bracing, hooklying march, prone hip CARs, hip airplanes.",
+		"intensity": {
+			"mainLifts": "7.5-8"
+		},
 		"days": [
 			{
 				"date": "2026-11-16",
@@ -145,14 +148,13 @@
 						"exercise": "squat",
 						"sets": 1,
 						"reps": 2,
-						"rpe": 8,
-						"note": "Trainer's: top double"
+						"note": "Top double"
 					},
 					{
 						"exercise": "squat",
 						"sets": 3,
 						"reps": 5,
-						"note": "Trainer's: ~88–90% of today's double, capped by RPE"
+						"note": "~88–90% of today's double, capped by RPE"
 					},
 					{
 						"exercise": "rfe-lunge",
@@ -304,6 +306,10 @@
 		"start": "2026-11-23",
 		"phase": "build",
 		"note": "Sina Gartner's program \"David's 4 Weeks\". Daily knee rehab continues: TA/IO bracing, hooklying march, prone hip CARs, hip airplanes.",
+		"intensity": {
+			"mainLifts": 8.5,
+			"bench": "close to failure"
+		},
 		"days": [
 			{
 				"date": "2026-11-23",
@@ -313,14 +319,13 @@
 						"exercise": "squat",
 						"sets": 2,
 						"reps": 2,
-						"rpe": 8,
-						"note": "Trainer's: top double"
+						"note": "Top double"
 					},
 					{
 						"exercise": "squat",
 						"sets": 2,
 						"reps": 5,
-						"note": "Trainer's: ~88–90% of today's double, capped by RPE"
+						"note": "~88–90% of today's double, capped by RPE"
 					},
 					{
 						"exercise": "rfe-lunge",
@@ -472,6 +477,9 @@
 		"start": "2026-11-30",
 		"phase": "build",
 		"note": "Sina Gartner's program \"David's 4 Weeks\". Daily knee rehab continues: TA/IO bracing, hooklying march, prone hip CARs, hip airplanes.",
+		"intensity": {
+			"mainLifts": "7.5-8"
+		},
 		"days": [
 			{
 				"date": "2026-11-30",
@@ -481,14 +489,13 @@
 						"exercise": "squat",
 						"sets": 3,
 						"reps": 2,
-						"rpe": 8,
-						"note": "Trainer's: top double"
+						"note": "Top double"
 					},
 					{
 						"exercise": "squat",
 						"sets": 1,
 						"reps": 5,
-						"note": "Trainer's: ~88–90% of today's double, capped by RPE"
+						"note": "~88–90% of today's double, capped by RPE"
 					},
 					{
 						"exercise": "rfe-lunge",

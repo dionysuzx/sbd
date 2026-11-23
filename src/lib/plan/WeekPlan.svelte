@@ -2,6 +2,7 @@
 	import { formatWeekdayDate, type CalendarDate } from '#lib/calendar-date.js';
 	import type { Meet } from '#lib/competition/meet.js';
 	import LinkedText from './LinkedText.svelte';
+	import { describeIntensity } from './intensity.js';
 	import {
 		describeDose,
 		describeRpe,
@@ -42,6 +43,9 @@
 
 	{#if week.note}
 		<p class="week-note"><LinkedText text={week.note} /></p>
+	{/if}
+	{#if week.intensity}
+		<p class="week-note">{describeIntensity(week.intensity)}</p>
 	{/if}
 
 	<ol>

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import committedWeeks from '../../../data/program-weeks.json';
+import { describeRpe } from '#lib/plan/training-week.js';
 import { ProgramWeeks } from './program-weeks.js';
 
 const week = (overrides: Record<string, unknown> = {}) => ({
@@ -77,5 +78,56 @@ describe('ProgramWeeks', () => {
 		expect(issuesFor([withRpe('8-7')])).not.toEqual([]);
 		expect(issuesFor([withRpe('hard')])).not.toEqual([]);
 		expect(issuesFor([withRpe('<=8')])).toEqual([]);
+		expect(issuesFor([withRpe('close to failure')])).toEqual([]);
+	});
+
+	it("applies Sina's weekly RPE targets on the committed meet plan", () => {
+		const planned = ProgramWeeks.parse(committedWeeks);
+		const shown = (start: string) =>
+			Object.fromEntries(
+				planned
+					.find((week) => week.start === start)!
+					.days.flatMap((day) =>
+						day.work.map((item) => [
+							`${day.date} ${item.exercise.name} ${item.sets}×${item.effort.count.min}${item.effort.count.max === item.effort.count.min ? '' : `–${item.effort.count.max}`}`,
+							item.rpe && describeRpe(item.rpe)
+						])
+					)
+			);
+
+		expect(shown('2026-11-16')).toMatchObject({
+			'2026-11-16 Squat 1×2': '@7.5–8',
+			'2026-11-16 Squat 3×5': '@7.5–8',
+			'2026-11-16 RFE lunge 3×8': '@7–8',
+			'2026-11-16 Leg press 3×8': '@7–8',
+			'2026-11-16 Quad extension 2×15': '@7–8',
+			'2026-11-16 Half-kneeling Pallof press with rotation 3×10': undefined,
+			'2026-11-17 Bench 4×5': '@7.5–8',
+			'2026-11-17 Incline dumbbell press 3×6': '@9',
+			'2026-11-19 Deadlift 3×5': '@7.5–8',
+			'2026-11-21 Squat 3×1': '@7.5–8',
+			'2026-11-21 Bench 3×2': '@7.5–8',
+			'2026-11-21 Deadlift 3×2': '@7.5–8'
+		});
+		expect(shown('2026-11-23')).toMatchObject({
+			'2026-11-23 Squat 2×2': '@8.5',
+			'2026-11-23 Squat 2×5': '@8.5',
+			'2026-11-24 Bench 4×5': 'close to failure',
+			'2026-11-26 Deadlift 3×5': '@8.5',
+			'2026-11-28 Squat 3×1': '@8.5',
+			'2026-11-28 Bench 3×2': 'close to failure',
+			'2026-11-28 Deadlift 3×2': '@8.5',
+			'2026-11-23 RFE lunge 3×8': '@7–8',
+			'2026-11-24 Incline dumbbell press 3×6': '@9'
+		});
+		expect(shown('2026-11-30')).toMatchObject({
+			'2026-11-30 Squat 3×2': '@7.5–8',
+			'2026-11-30 Squat 1×5': '@7.5–8',
+			'2026-12-01 Bench 4×5': '@7.5–8',
+			'2026-12-03 Deadlift 3×5': '@7.5–8',
+			'2026-12-05 Squat 3×1': '@7.5–8',
+			'2026-12-05 Bench 3×2': '@7.5–8',
+			'2026-12-05 Deadlift 1×1': '@7.5–8'
+		});
 	});
 });

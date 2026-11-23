@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { daysBetween, dayNumber, isMonday } from '#lib/calendar-date.js';
+import { plannedRpe } from '#lib/plan/intensity.js';
 import {
 	containsDate,
 	phases,
@@ -7,7 +8,8 @@ import {
 	type PlannedDay,
 	type Prescription,
 	type RpeTarget,
-	type TrainingWeek
+	type TrainingWeek,
+	type WeekIntensity
 } from '#lib/plan/training-week.js';
 import { exerciseIds, exercises, isUnilateral, measureOf } from '#lib/training/exercise.js';
 import { CalendarDate, Count, Rpe } from './primitives.js';
@@ -28,6 +30,8 @@ const CountOrRange = z.union([
 		)
 ]);
 
+const RpeCue = z.literal('close to failure');
+
 const RpeTargetFile = z.union([
 	Rpe.transform((rpe): RpeTarget => ({ kind: 'exact', rpe })),
 	z
@@ -38,15 +42,25 @@ const RpeTargetFile = z.union([
 		.transform((rpe): RpeTarget => ({ kind: 'at-most', rpe })),
 	z
 		.string()
-		.regex(/^\d+(\.5)?-\d+(\.5)?$/, 'use an RPE like 7, "5-6", or "<=8"')
+		.regex(/^\d+(\.5)?-\d+(\.5)?$/, 'use an RPE like 7, "5-6", "<=8", or "close to failure"')
 		.transform((text) => text.split('-').map(Number))
 		.pipe(
 			z
 				.tuple([Rpe, Rpe])
 				.refine(([from, to]) => from < to, 'an RPE range must go from low to high')
 				.transform(([from, to]): RpeTarget => ({ kind: 'range', from, to }))
-		)
+		),
+	RpeCue.transform((label): RpeTarget => ({ kind: 'cue', label }))
 ]);
+
+const IntensityFile = z
+	.strictObject({
+		mainLifts: RpeTargetFile.optional(),
+		bench: RpeTargetFile.optional()
+	})
+	.refine((intensity) => intensity.mainLifts !== undefined || intensity.bench !== undefined, {
+		message: 'intensity needs a main-lift or bench target'
+	}) satisfies z.ZodType<WeekIntensity, unknown>;
 
 const PrescriptionFile = z
 	.strictObject({
@@ -88,11 +102,12 @@ const PlannedDayFile = z.strictObject({
 	work: z.array(PrescriptionFile)
 }) satisfies z.ZodType<PlannedDay, unknown>;
 
-const TrainingWeekFile = z
+const PlannedWeek = z
 	.strictObject({
 		start: CalendarDate.refine((date) => isMonday(dayNumber(date)), 'a week starts on a Monday'),
 		phase: z.enum(phases),
 		note: Note.optional(),
+		intensity: IntensityFile.optional(),
 		days: z.array(PlannedDayFile)
 	})
 	.superRefine((week, context) => {
@@ -113,7 +128,18 @@ const TrainingWeekFile = z
 				});
 			}
 		});
-	}) satisfies z.ZodType<TrainingWeek, unknown>;
+	});
+
+const TrainingWeekFile = PlannedWeek.transform((week): TrainingWeek => ({
+	...week,
+	days: week.days.map((day) => ({
+		...day,
+		work: day.work.map((item) => {
+			const rpe = plannedRpe(item.exercise, week.intensity, item.rpe);
+			return rpe === item.rpe ? item : { ...item, rpe };
+		})
+	}))
+}));
 
 export const ProgramWeeks = z
 	.array(TrainingWeekFile)

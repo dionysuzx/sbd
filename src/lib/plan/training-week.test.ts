@@ -50,7 +50,8 @@ describe('prescriptions', () => {
 						{ exercise: 'squat', sets: 2, reps: 8, rpe: '<=8' },
 						{ exercise: 'copenhagen', sets: 3, seconds: 30 },
 						{ exercise: 'bird-dog-row', sets: 3, reps: 8, rpe: '7-8' },
-						{ exercise: 'pull-up', sets: 4, reps: '8-10', rpe: 8.5 }
+						{ exercise: 'pull-up', sets: 4, reps: '8-10', rpe: 8.5 },
+						{ exercise: 'bench', sets: 4, reps: 5, rpe: 'close to failure' }
 					]
 				}
 			]
@@ -59,15 +60,22 @@ describe('prescriptions', () => {
 	const work = week.days[0]!.work;
 
 	it('describes sets and reps, per side and in seconds where the exercise needs it', () => {
-		expect(work.map(describeDose)).toEqual(['2 × 8', '3 × 30s/side', '3 × 8/side', '4 × 8–10']);
+		expect(work.map(describeDose)).toEqual([
+			'2 × 8',
+			'3 × 30s/side',
+			'3 × 8/side',
+			'4 × 8–10',
+			'4 × 5'
+		]);
 	});
 
-	it('describes RPE targets as exact, ranges, or caps', () => {
+	it('describes RPE targets as exact, ranges, caps, or cues', () => {
 		expect(work.map((item) => item.rpe && describeRpe(item.rpe))).toEqual([
 			'@≤8',
 			undefined,
 			'@7–8',
-			'@8.5'
+			'@8.5',
+			'close to failure'
 		]);
 	});
 });
