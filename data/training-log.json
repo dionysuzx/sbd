@@ -1912,5 +1912,98 @@
 				"note": "110 kg (red + yellow/side). 2-second pause 1-2 inches off the floor after pulling slack. Felt great; want to keep these. RPE assumed at target (7)."
 			}
 		]
+	},
+	{
+		"date": "2026-11-23",
+		"exercise": "squat",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 2,
+				"load": 325,
+				"rpe": 8,
+				"variation": "low-bar-belted",
+				"note": "Lifetime, smooth squat bar, lb plates."
+			},
+			{
+				"sets": 1,
+				"reps": 2,
+				"load": 335,
+				"rpe": 8,
+				"variation": "low-bar-belted",
+				"note": "Top set."
+			},
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 295,
+				"rpe": 9,
+				"variation": "low-bar-belted",
+				"note": "Smooth Lifetime bar knurling limited upper back/arms."
+			},
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 295,
+				"rpe": 8,
+				"variation": "low-bar-belted"
+			}
+		]
+	},
+	{
+		"date": "2026-11-23",
+		"exercise": "rfe-lunge",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 8,
+				"load": 70,
+				"rpe": 7.5,
+				"variation": "hand-support",
+				"note": "RPE assumed at target (7.5)."
+			}
+		]
+	},
+	{
+		"date": "2026-11-23",
+		"exercise": "leg-press",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 8,
+				"load": 320,
+				"rpe": 8,
+				"note": "Plates only, three 45s + 25 per side (320 lb plates; sled weight unknown). Next time 3 plates + 35 per side. RPE assumed at target (8)."
+			}
+		]
+	},
+	{
+		"date": "2026-11-23",
+		"exercise": "quad-extension",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 2,
+				"reps": 15,
+				"load": 70,
+				"rpe": 8,
+				"note": "New machine; same load as last time. RPE assumed at target (8)."
+			}
+		]
+	},
+	{
+		"date": "2026-11-23",
+		"exercise": "half-kneeling-pallof-press",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 10,
+				"note": "30 lb. Per side."
+			}
+		]
 	}
 ]
