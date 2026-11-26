@@ -182,6 +182,10 @@ export const exercises: { readonly [Id in ExerciseId]: Exercise & { readonly id:
 		{ load: 'band', unilateral: true }
 	),
 	'hammer-strength-prone-row': accessory('hammer-strength-prone-row', 'Hammer Strength prone row', {
-		unilateral: true
+		unilateral: true,
+		variations: [
+			{ id: 'wide-outer', label: 'Wide outer handles' },
+			{ id: 'neutral-inner', label: 'Neutral inner handles' }
+		]
 	})
 };

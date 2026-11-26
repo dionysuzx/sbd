@@ -1666,6 +1666,7 @@
 				"reps": 10,
 				"load": 115,
 				"rpe": 9,
+				"variation": "wide-outer",
 				"note": "Hammer Strength prone row machine, hammer grip; load per side (machine, not comparable to DB rows); RPE assumed at target (9)."
 			},
 			{
@@ -1673,6 +1674,7 @@
 				"reps": 12,
 				"load": 115,
 				"rpe": 9,
+				"variation": "wide-outer",
 				"note": "Hammer Strength prone row machine, hammer grip; load per side (machine, not comparable to DB rows); RPE assumed at target (9)."
 			},
 			{
@@ -1680,6 +1682,7 @@
 				"reps": 8,
 				"load": 135,
 				"rpe": 9,
+				"variation": "wide-outer",
 				"note": "Hammer Strength prone row machine, hammer grip; load per side (machine, not comparable to DB rows); RPE assumed at target (9)."
 			}
 		]
@@ -2003,6 +2006,145 @@
 				"sets": 3,
 				"reps": 10,
 				"note": "30 lb. Per side."
+			}
+		]
+	},
+	{
+		"date": "2026-11-25",
+		"exercise": "bench",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 230,
+				"rpe": 8.5,
+				"variation": "paused",
+				"note": "Session ~2h15m (estimated from chat timestamps ~6:10–8:25 PM ET; David didn't time it). Pinky on rings grip. Tired and subpar nutrition that day."
+			},
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 230,
+				"rpe": 8.5,
+				"variation": "paused",
+				"note": "Proper pause and strength."
+			},
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 230,
+				"rpe": 8.5,
+				"variation": "paused",
+				"note": "RPE 8.25 logged as 8.5."
+			},
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 235,
+				"rpe": 8.5,
+				"variation": "paused",
+				"note": "No spotter/safeties. RPE 8.25 logged as 8.5."
+			}
+		]
+	},
+	{
+		"date": "2026-11-25",
+		"exercise": "seated-pin-press",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 135,
+				"rpe": 9,
+				"note": "New setup this week: narrower grip just outside shoulder width (last week used bench grip), beltless, no backrest, pins ~nose-to-eyebrow height. 125x5 was very easy (David called it a warm-up; not logged as a work set). Loads aren't directly comparable to Nov 17 due to the grip/belt change."
+			},
+			{
+				"sets": 2,
+				"reps": 5,
+				"load": 135,
+				"rpe": 9,
+				"note": "Sets 2–3. RPE assumed at target (9)."
+			}
+		]
+	},
+	{
+		"date": "2026-11-25",
+		"exercise": "incline-dumbbell-press",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 6,
+				"load": 80,
+				"rpe": 8,
+				"note": "30-degree bench. Load per dumbbell. Felt very easy. Reps assumed at prescribed 6. Slight painless shoulder click when pausing slowly/out of groove; flagged for Sina."
+			},
+			{
+				"sets": 2,
+				"reps": 6,
+				"load": 85,
+				"rpe": 9,
+				"note": "30-degree bench. Load per dumbbell. Reps assumed at prescribed 6; RPE assumed at target (9)."
+			}
+		]
+	},
+	{
+		"date": "2026-11-25",
+		"exercise": "hammer-strength-prone-row",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 10,
+				"load": 115,
+				"rpe": 8,
+				"variation": "neutral-inner",
+				"note": "Inner vertical neutral handles (new; Nov 17 used the very wide outer handles). Load per side."
+			},
+			{
+				"sets": 2,
+				"reps": 8,
+				"load": 125,
+				"rpe": 9,
+				"variation": "neutral-inner",
+				"note": "Load per side. Reps assumed at prescribed 8; RPE assumed at target (9)."
+			}
+		]
+	},
+	{
+		"date": "2026-11-25",
+		"exercise": "back-supported-tricep-extension",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 16,
+				"load": 60,
+				"rpe": 9.5,
+				"note": "Angled bar attachment. Aimed for 20; lost it to the burn. RPE ~9.5."
+			},
+			{
+				"sets": 1,
+				"reps": 20,
+				"load": 50,
+				"rpe": 9,
+				"note": "Angled bar attachment. RPE assumed at target (9)."
+			}
+		]
+	},
+	{
+		"date": "2026-11-25",
+		"exercise": "bird-dog-row",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 8,
+				"load": 35,
+				"rpe": 9,
+				"note": "RPE assumed at target (9)."
 			}
 		]
 	}
