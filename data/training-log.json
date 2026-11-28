@@ -2147,5 +2147,101 @@
 				"note": "RPE assumed at target (9)."
 			}
 		]
+	},
+	{
+		"date": "2026-11-27",
+		"exercise": "half-kneeling-pallof-press",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 10,
+				"note": "Per side. Done before deadlifts while the platform was busy. Sets at 40, 50, then 60 lb; next time all 3 at 60. RPE not reported."
+			}
+		]
+	},
+	{
+		"date": "2026-11-27",
+		"exercise": "deadlift",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 325,
+				"rpe": 9,
+				"variation": "conventional",
+				"note": "147.5 kg (2 red + green + white/side), hook grip, no straps. Grip nearly slipped on rep 4; positioning felt off. Last warm-up 140 kg x2 at RPE 5 (not logged). Session duration unknown (David didn't track)."
+			},
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 314,
+				"rpe": 7.5,
+				"variation": "conventional",
+				"note": "142.5 kg (2 red + green + black/side) with straps. Felt ok; definitely could have done more reps. Positioning is the issue; cues feel like they hurt more than help. RPE assumed at 7.5 (David said it felt ok and he could have done more reps)."
+			},
+			{
+				"sets": 1,
+				"reps": 5,
+				"load": 314,
+				"rpe": 7.5,
+				"variation": "conventional",
+				"note": "142.5 kg with straps, no cue. RPE assumed at 7.5 (not reported)."
+			}
+		]
+	},
+	{
+		"date": "2026-11-27",
+		"exercise": "pull-up",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 8,
+				"note": "+10 lb added. Last 2 reps of set 3 dropped to bodyweight to finish 8. RPE not reported."
+			}
+		]
+	},
+	{
+		"date": "2026-11-27",
+		"exercise": "straight-arm-pulldown",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 3,
+				"reps": 8,
+				"load": 120,
+				"variation": "straight-bar",
+				"note": "Done for Sina's lat pullover. Felt light. RPE not reported."
+			}
+		]
+	},
+	{
+		"date": "2026-11-27",
+		"exercise": "hamstring-curl",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 2,
+				"reps": 20,
+				"load": 45,
+				"variation": "lying",
+				"note": "RPE not reported."
+			}
+		]
+	},
+	{
+		"date": "2026-11-27",
+		"exercise": "curl",
+		"source": "trainer-log",
+		"setGroups": [
+			{
+				"sets": 2,
+				"reps": 20,
+				"load": 25,
+				"note": "Load per dumbbell. RPE not reported."
+			}
+		]
 	}
 ]
